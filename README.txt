@@ -1,7 +1,7 @@
 Repository Framework CORE:
 http://192.168.32.49/gitserver/JMERP.git
 
-Repository WEB Site:
+Repository WEB Site (Temporary, hanya untuk research AngularJS+TypeScript):
 http://192.168.32.49/gitserver/JMERP.Web.git
 
 EventFlow CQRS+ES Framework:
