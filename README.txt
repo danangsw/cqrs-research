@@ -9,7 +9,7 @@ https://github.com/eventflow/EventFlow
 
 Useful articles related to EventFlow and DDD
 
-Many of the technical design decisions in EventFlow is based on articles. This section lists some of them. If you have a link with a relevant article, please share it by creating an issue with the link.
+Many of the technical design decisions in EventFlow is based on articles.
 
 Domain-Driven Design
 --------------------
