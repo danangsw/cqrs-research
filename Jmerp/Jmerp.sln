@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{C3E52D11-2688-45F9-B145-93212A09EE14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{50AD39A1-1DF5-4598-A954-209890356978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EDA5F276-3DFA-4330-8D94-88FC069A045F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{5E4A54F7-97AA-427C-9352-4F975501B922}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Jmerp.Web", "Applications\Jmerp.Web\Jmerp.Web.xproj", "{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping", "Domains\Jmerp.Example.Shipping\Jmerp.Example.Shipping.csproj", "{7A2DDC1C-0128-44C3-BEE8-E9211F515201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Common", "Frameworks\Jmerp.Common\Jmerp.Common.csproj", "{10BB28AC-EED8-40F4-9564-3362C020543A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Test", "Tests\Jmerp.Example.Shipping.Test\Jmerp.Example.Shipping.Test.csproj", "{B5E26988-D962-4906-9027-FFC92B2710D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Customer", "Domains\Jmerp.Example.Customer\Jmerp.Example.Customer.csproj", "{2E65EB85-386E-4CCE-AC60-55968E9F43FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Customer.Test", "Tests\Jmerp.Example.Customer.Test\Jmerp.Example.Customer.Test.csproj", "{52545E60-1BA9-40BC-A87C-C75BB39676B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2DDC1C-0128-44C3-BEE8-E9211F515201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2DDC1C-0128-44C3-BEE8-E9211F515201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2DDC1C-0128-44C3-BEE8-E9211F515201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2DDC1C-0128-44C3-BEE8-E9211F515201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10BB28AC-EED8-40F4-9564-3362C020543A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10BB28AC-EED8-40F4-9564-3362C020543A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10BB28AC-EED8-40F4-9564-3362C020543A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10BB28AC-EED8-40F4-9564-3362C020543A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E26988-D962-4906-9027-FFC92B2710D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E26988-D962-4906-9027-FFC92B2710D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E26988-D962-4906-9027-FFC92B2710D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E26988-D962-4906-9027-FFC92B2710D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E65EB85-386E-4CCE-AC60-55968E9F43FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E65EB85-386E-4CCE-AC60-55968E9F43FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E65EB85-386E-4CCE-AC60-55968E9F43FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E65EB85-386E-4CCE-AC60-55968E9F43FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{667C9B94-44B1-43CE-A1C3-77A9F0FC64B6} = {C3E52D11-2688-45F9-B145-93212A09EE14}
+		{7A2DDC1C-0128-44C3-BEE8-E9211F515201} = {50AD39A1-1DF5-4598-A954-209890356978}
+		{10BB28AC-EED8-40F4-9564-3362C020543A} = {5E4A54F7-97AA-427C-9352-4F975501B922}
+		{B5E26988-D962-4906-9027-FFC92B2710D1} = {EDA5F276-3DFA-4330-8D94-88FC069A045F}
+		{2E65EB85-386E-4CCE-AC60-55968E9F43FF} = {50AD39A1-1DF5-4598-A954-209890356978}
+		{52545E60-1BA9-40BC-A87C-C75BB39676B3} = {EDA5F276-3DFA-4330-8D94-88FC069A045F}
+	EndGlobalSection
+EndGlobal
