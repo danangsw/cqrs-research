@@ -17,11 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping", "D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Common", "Frameworks\Jmerp.Common\Jmerp.Common.csproj", "{10BB28AC-EED8-40F4-9564-3362C020543A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Test", "Tests\Jmerp.Example.Shipping.Test\Jmerp.Example.Shipping.Test.csproj", "{B5E26988-D962-4906-9027-FFC92B2710D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Tests", "Tests\Jmerp.Example.Shipping.Test\Jmerp.Example.Shipping.Tests.csproj", "{B5E26988-D962-4906-9027-FFC92B2710D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Customer", "Domains\Jmerp.Example.Customer\Jmerp.Example.Customer.csproj", "{2E65EB85-386E-4CCE-AC60-55968E9F43FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Customer.Test", "Tests\Jmerp.Example.Customer.Test\Jmerp.Example.Customer.Test.csproj", "{52545E60-1BA9-40BC-A87C-C75BB39676B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Customer.Tests", "Tests\Jmerp.Example.Customer.Test\Jmerp.Example.Customer.Tests.csproj", "{52545E60-1BA9-40BC-A87C-C75BB39676B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Queries.InMemory", "Domains\Jmerp.Example.Shipping.Queries.InMemory\Jmerp.Example.Shipping.Queries.InMemory.csproj", "{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFlow.TestHelpers", "Frameworks\Jmerp.EventFlow.TestHelpers\EventFlow.TestHelpers.csproj", "{E18DCC39-8B83-408D-95D1-4E74D94A516F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52545E60-1BA9-40BC-A87C-C75BB39676B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +76,7 @@ Global
 		{B5E26988-D962-4906-9027-FFC92B2710D1} = {EDA5F276-3DFA-4330-8D94-88FC069A045F}
 		{2E65EB85-386E-4CCE-AC60-55968E9F43FF} = {50AD39A1-1DF5-4598-A954-209890356978}
 		{52545E60-1BA9-40BC-A87C-C75BB39676B3} = {EDA5F276-3DFA-4330-8D94-88FC069A045F}
+		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA} = {50AD39A1-1DF5-4598-A954-209890356978}
+		{E18DCC39-8B83-408D-95D1-4E74D94A516F} = {5E4A54F7-97AA-427C-9352-4F975501B922}
 	EndGlobalSection
 EndGlobal
