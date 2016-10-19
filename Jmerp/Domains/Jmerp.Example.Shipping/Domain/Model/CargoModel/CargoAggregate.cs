@@ -28,7 +28,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel
         public void SetItinerary(Itinerary itinerary)
         {
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
-            Route.Specification().ThrowDomainErrorIfNotStatisfied(Itinerary);
+            Route.Specification().ThrowDomainErrorIfNotStatisfied(itinerary);
 
             Emit(new CargoItinerarySetEvent(itinerary));
         }
