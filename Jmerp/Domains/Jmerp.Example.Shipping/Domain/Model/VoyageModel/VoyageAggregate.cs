@@ -11,6 +11,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel
     {
         public VoyageAggregate(VoyageId id) : base(id)
         {
+            Register(_state);
         }
 
         private readonly VoyageState _state = new VoyageState();

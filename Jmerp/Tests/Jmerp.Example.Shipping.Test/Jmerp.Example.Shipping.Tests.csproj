@@ -76,10 +76,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationTests\Scenarios.cs" />
     <Compile Include="Moqs\Locations.cs" />
+    <Compile Include="Moqs\Routes.cs" />
     <Compile Include="Moqs\Voyages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\RouteSpecificationTest.cs" />
     <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecificationTests.cs" />
+    <Compile Include="UnitTests\ExternalServices\Routing\RoutingServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -100,9 +104,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IntegrationTests\" />
     <Folder Include="UnitTests\Domain\Model\LocationModel\" />
     <Folder Include="UnitTests\Domain\Model\VoyageModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

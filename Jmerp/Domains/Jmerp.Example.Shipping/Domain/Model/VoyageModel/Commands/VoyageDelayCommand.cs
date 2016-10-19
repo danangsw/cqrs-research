@@ -22,6 +22,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel.Commands
     {
         public override Task ExecuteAsync(VoyageAggregate aggregate, VoyageDelayCommand command, CancellationToken cancellationToken)
         {
+            aggregate.Delay(command.Delay);
             return Task.FromResult(0);
         }
     }
