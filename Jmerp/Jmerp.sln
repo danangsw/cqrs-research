@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Quer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventFlow.TestHelpers", "Frameworks\Jmerp.EventFlow.TestHelpers\EventFlow.TestHelpers.csproj", "{E18DCC39-8B83-408D-95D1-4E74D94A516F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jmerp.Example.Shipping.Queries.Mssql", "Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj", "{9500B65D-1A89-43DE-A666-CC634ABCDC69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E18DCC39-8B83-408D-95D1-4E74D94A516F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9500B65D-1A89-43DE-A666-CC634ABCDC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9500B65D-1A89-43DE-A666-CC634ABCDC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9500B65D-1A89-43DE-A666-CC634ABCDC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9500B65D-1A89-43DE-A666-CC634ABCDC69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +84,6 @@ Global
 		{52545E60-1BA9-40BC-A87C-C75BB39676B3} = {EDA5F276-3DFA-4330-8D94-88FC069A045F}
 		{F5451BEA-4445-4135-AB3E-EC68EBFE6ADA} = {50AD39A1-1DF5-4598-A954-209890356978}
 		{E18DCC39-8B83-408D-95D1-4E74D94A516F} = {5E4A54F7-97AA-427C-9352-4F975501B922}
+		{9500B65D-1A89-43DE-A666-CC634ABCDC69} = {50AD39A1-1DF5-4598-A954-209890356978}
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,7 @@ using Jmerp.Example.Shipping.Queries.InMemory.Cargos;
 using Jmerp.Example.Shipping.Queries.InMemory.Voyages;
 using System.Reflection;
 
+
 namespace Jmerp.Example.Shipping.Queries.InMemory
 {
     public static class QueriesConfig

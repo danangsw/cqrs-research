@@ -34,8 +34,24 @@
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EventFlow, Version=0.35.2247.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\EventFlow.0.35.2247\lib\net451\EventFlow.dll</HintPath>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DbUp, Version=3.3.5.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\dbup.3.3.5\lib\net35\DbUp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventFlow, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EventFlow.0.36.2315\lib\net451\EventFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventFlow.MsSql, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EventFlow.MsSql.0.36.2315\lib\net451\EventFlow.MsSql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventFlow.Sql, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EventFlow.Sql.0.36.2315\lib\net451\EventFlow.Sql.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="FluentAssertions, Version=4.15.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
@@ -76,7 +92,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\ScenarioHelper.cs" />
     <Compile Include="IntegrationTests\Scenarios.cs" />
+    <Compile Include="IntegrationTests\ScenariosMssql.cs" />
     <Compile Include="Moqs\Locations.cs" />
     <Compile Include="Moqs\Routes.cs" />
     <Compile Include="Moqs\Voyages.cs" />
@@ -101,6 +119,10 @@
     <ProjectReference Include="..\..\Frameworks\Jmerp.EventFlow.TestHelpers\EventFlow.TestHelpers.csproj">
       <Project>{E18DCC39-8B83-408D-95D1-4E74D94A516F}</Project>
       <Name>EventFlow.TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
+      <Project>{9500B65D-1A89-43DE-A666-CC634ABCDC69}</Project>
+      <Name>Jmerp.Example.Shipping.Queries.Mssql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
