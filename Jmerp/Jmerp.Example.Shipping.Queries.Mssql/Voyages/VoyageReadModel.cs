@@ -1,4 +1,5 @@
 ﻿using EventFlow.Aggregates;
+using EventFlow.MsSql.ReadStores.Attributes;
 using EventFlow.ReadStores;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Events;
@@ -15,13 +16,18 @@ namespace Jmerp.Example.Shipping.Queries.Mssql.Voyages
         IAmReadModelFor<VoyageAggregate, VoyageId, VoyageCreatedEvent>,
         IAmReadModelFor<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent>
     {
+        [MsSqlReadModelIdentityColumn]
         public VoyageId Id { get; private set; }
+        public int MsSqlReadModelVersionColumn { get; private set; }
+
+
         public Schedule Schedule { get; private set; }
 
         public void Apply(IReadModelContext context, IDomainEvent<VoyageAggregate, VoyageId, VoyageCreatedEvent> e)
         {
             Id = e.AggregateIdentity;
             Schedule = e.AggregateEvent.Schedule;
+            
         }
 
         public void Apply(IReadModelContext context, IDomainEvent<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent> domainEvent)

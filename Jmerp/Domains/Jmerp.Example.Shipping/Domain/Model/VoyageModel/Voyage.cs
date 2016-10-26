@@ -1,6 +1,8 @@
 ﻿using EventFlow.Entities;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.ValueObjects;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel
 {
@@ -15,6 +17,9 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel
 
             Schedule = schedule;
         }
+
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Index { get; set; }
 
         public Schedule Schedule { get; }
     }

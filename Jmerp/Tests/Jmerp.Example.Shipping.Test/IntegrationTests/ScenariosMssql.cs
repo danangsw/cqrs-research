@@ -14,6 +14,7 @@ using Jmerp.Example.Shipping.Domain.Model.CargoModel.ValueObjects;
 using Jmerp.Example.Shipping.Domain.Model.LocationModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Commands;
+using Jmerp.Example.Shipping.Queries.InMemory;
 using Jmerp.Example.Shipping.Queries.Mssql;
 using Jmerp.Example.Shipping.Tests.Helper;
 using Jmerp.Example.Shipping.Tests.Moqs;
@@ -52,6 +53,7 @@ namespace Jmerp.Example.Shipping.Tests.IntegrationTests
 
             var msSqlDatabaseMigrator = _resolver.Resolve<IMsSqlDatabaseMigrator>();
             EventFlowEventStoresMsSql.MigrateDatabase(msSqlDatabaseMigrator);
+
         }
 
         public void SetDown()

@@ -1,4 +1,5 @@
 ﻿using EventFlow.Aggregates;
+using EventFlow.MsSql.ReadStores.Attributes;
 using EventFlow.ReadStores;
 using Jmerp.Example.Shipping.Domain.Model.CargoModel;
 using Jmerp.Example.Shipping.Domain.Model.CargoModel.Events;
@@ -6,6 +7,8 @@ using Jmerp.Example.Shipping.Domain.Model.CargoModel.ValueObjects;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +19,12 @@ namespace Jmerp.Example.Shipping.Queries.Mssql.Cargos
         IAmReadModelFor<CargoAggregate, CargoId, CargoItinerarySetEvent>,
         IAmReadModelFor<CargoAggregate, CargoId, CargoBookedEvent>
     {
+
+        [MsSqlReadModelIdentityColumn]
         public CargoId Id { get; private set; }
+
+        public int MsSqlReadModelVersionColumn { get; private set; }
+
         public HashSet<VoyageId> DependentVoyageIds { get; } = new HashSet<VoyageId>();
         public Itinerary Itinerary { get; private set; }
         public Route Route { get; private set; }
