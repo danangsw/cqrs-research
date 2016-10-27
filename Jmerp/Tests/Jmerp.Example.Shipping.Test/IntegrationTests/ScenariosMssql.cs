@@ -53,6 +53,8 @@ namespace Jmerp.Example.Shipping.Tests.IntegrationTests
 
             var msSqlDatabaseMigrator = _resolver.Resolve<IMsSqlDatabaseMigrator>();
             EventFlowEventStoresMsSql.MigrateDatabase(msSqlDatabaseMigrator);
+            ShippingMigrator.Migrate();
+            
 
         }
 
@@ -62,6 +64,14 @@ namespace Jmerp.Example.Shipping.Tests.IntegrationTests
             con.Open();
             con.DropTableIfExist("SchemaVersions");
             con.DropTableIfExist("EventFlow");
+
+            con.DropTableIfExist("TransportLegs");
+            con.DropTableIfExist("CarrierMovements");
+            con.DropTableIfExist("ReadModel-Cargo");
+            con.DropTableIfExist("ReadModel-Voyage");
+
+            con.DropTableIfExist("__MigrationHistory");
+
             con.Close();
 
         }

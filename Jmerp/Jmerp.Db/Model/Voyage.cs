@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Jmerp.Db.Model
 {
-    public class Voyage : BaseEntity
+    public class Voyage : BaseEntity, IReadModelEntity
     {
         
         public string Id { get; set; }
+
+        public int? MsSqlReadModelVersionColumn { get; set; }
+
         public Schedule Schedule { get; set; }
 
     }

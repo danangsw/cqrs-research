@@ -12,6 +12,6 @@ namespace Jmerp.Db.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Index { get; set; }
-        public Nullable<int> MsSqlReadModelVersionColumn { get; set; }
+
     }
 }

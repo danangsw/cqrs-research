@@ -4,6 +4,10 @@ namespace Jmerp.Db
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Validation;
 
     public class JmrepContext : DbContext
     {
@@ -24,6 +28,22 @@ namespace Jmerp.Db
 
             modelBuilder.Entity<Cargo>().ToTable("ReadModel-Cargo");
             modelBuilder.Entity<Voyage>().ToTable("ReadModel-Voyage");
+        }
+
+        public virtual async Task CommitAsync()
+        {
+            await base.SaveChangesAsync();
+        }
+
+        
+        public virtual void Commit()
+        {
+            base.SaveChanges();
+        }
+
+        protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items)
+        {
+            return base.ValidateEntity(entityEntry, items);
         }
 
     }
