@@ -13,6 +13,8 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel
             Itinerary itenary) 
             : base(id)
         {
+            Route = route;
+            Itinerary = itenary;
         }
 
         public Route Route { get; }

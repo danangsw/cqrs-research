@@ -3,7 +3,7 @@ using FluentAssertions;
 using Jmerp.Example.Shipping.Domain.Model.CargoModel.ValueObjects;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.ExternalServices.Routing;
-using Jmerp.Example.Shipping.Tests.Moqs;
+using Jmerp.Example.Shipping.Tests.Mocks;
 using NUnit.Framework;
 
 namespace Jmerp.Example.Shipping.Tests.UnitTests.ExternalServices.Routing

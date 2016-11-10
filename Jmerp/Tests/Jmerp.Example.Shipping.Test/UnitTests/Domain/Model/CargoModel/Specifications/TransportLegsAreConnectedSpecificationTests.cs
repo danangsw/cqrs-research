@@ -4,7 +4,7 @@ using Jmerp.Example.Shipping.Domain.Model.CargoModel.Entities;
 using Jmerp.Example.Shipping.Domain.Model.CargoModel.Specifications;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Entities;
-using Jmerp.Example.Shipping.Tests.Moqs;
+using Jmerp.Example.Shipping.Tests.Mocks;
 using NUnit.Framework;
 
 namespace Jmerp.Example.Shipping.Tests.UnitTests.Domain.Model.CargoModel.Specifications

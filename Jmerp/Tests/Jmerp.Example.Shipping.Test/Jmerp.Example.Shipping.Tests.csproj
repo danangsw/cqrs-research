@@ -104,9 +104,9 @@
     <Compile Include="Helper\ScenarioHelper.cs" />
     <Compile Include="IntegrationTests\Scenarios.cs" />
     <Compile Include="IntegrationTests\ScenariosMssql.cs" />
-    <Compile Include="Moqs\Locations.cs" />
-    <Compile Include="Moqs\Routes.cs" />
-    <Compile Include="Moqs\Voyages.cs" />
+    <Compile Include="Mocks\Locations.cs" />
+    <Compile Include="Mocks\Routes.cs" />
+    <Compile Include="Mocks\Voyages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\RouteSpecificationTest.cs" />
     <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecificationTests.cs" />
@@ -128,6 +128,10 @@
     <ProjectReference Include="..\..\Frameworks\Jmerp.EventFlow.TestHelpers\EventFlow.TestHelpers.csproj">
       <Project>{E18DCC39-8B83-408D-95D1-4E74D94A516F}</Project>
       <Name>EventFlow.TestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Jmerp.Db\Jmerp.Db.csproj">
+      <Project>{0837de29-78b8-4b79-88d3-9f7ea89529aa}</Project>
+      <Name>Jmerp.Db</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
       <Project>{9500B65D-1A89-43DE-A666-CC634ABCDC69}</Project>

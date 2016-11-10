@@ -17,7 +17,7 @@ using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Commands;
 using Jmerp.Example.Shipping.Queries.InMemory;
 using Jmerp.Example.Shipping.Queries.Mssql;
 using Jmerp.Example.Shipping.Tests.Helper;
-using Jmerp.Example.Shipping.Tests.Moqs;
+using Jmerp.Example.Shipping.Tests.Mocks;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
