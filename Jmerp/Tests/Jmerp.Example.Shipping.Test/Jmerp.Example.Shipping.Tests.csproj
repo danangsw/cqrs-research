@@ -129,6 +129,10 @@
       <Project>{E18DCC39-8B83-408D-95D1-4E74D94A516F}</Project>
       <Name>EventFlow.TestHelpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Jmerp.Db\Jmerp.Db.csproj">
+      <Project>{0837de29-78b8-4b79-88d3-9f7ea89529aa}</Project>
+      <Name>Jmerp.Db</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
       <Project>{9500B65D-1A89-43DE-A666-CC634ABCDC69}</Project>
       <Name>Jmerp.Example.Shipping.Queries.Mssql</Name>

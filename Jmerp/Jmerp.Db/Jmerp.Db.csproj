@@ -60,10 +60,6 @@
     <Compile Include="Infrastructure\UnitOfWork.cs" />
     <Compile Include="JmerpMigrator.cs" />
     <Compile Include="JmrepContext.cs" />
-    <Compile Include="Migrations\201610270442405_intial.cs" />
-    <Compile Include="Migrations\201610270442405_intial.Designer.cs">
-      <DependentUpon>201610270442405_intial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BaseEntity.cs" />
     <Compile Include="Model\Cargo.cs" />
@@ -81,12 +77,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610270442405_intial.resx">
-      <DependentUpon>201610270442405_intial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

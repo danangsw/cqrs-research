@@ -28,3 +28,6 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 packages/
+
+Jmerp/Applications/Jmerp.Web/node_modules/
+Jmerp/Applications/Jmerp.Web/wwwroot/lib/

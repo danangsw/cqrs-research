@@ -18,7 +18,7 @@ namespace Jmerp.Example.Shipping.Tests.Helper
             int exist = Convert.ToInt32(tableCheck.ExecuteScalar());
             if (exist == 1)
             {
-                string sqlDrop = @"DROP TABLE " + tableName + ";";
+                string sqlDrop = @"DROP TABLE """ + tableName + @""";";
 
                 SqlCommand cmd = new SqlCommand(sqlDrop, con);
                 cmd.ExecuteNonQuery();

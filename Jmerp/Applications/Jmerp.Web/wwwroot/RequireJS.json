@@ -1,0 +1,51 @@
+﻿{
+  "paths": {
+    "jquery": "./../lib/jquery/jquery",
+    "bootstrap": "./../lib/bootstrap/js/bootstrap",
+    "app": "./app/appModule",
+    "controllers": "./app/controllers",
+    "services": "./app/services",
+    "models": "./app/models",
+    "infrastructure": "./app/infrastructure",
+    "angular": "./../lib/angular/angular",
+    "jquery.slimscroll": "./../lib/jquery-slimscroll/jquery.slimscroll",
+    "fastclick": "./../lib/fastclick/fastclick",
+    "icheck": "./../lib/icheck/icheck",
+    "adminlte": "./../lib/admin-lte/js/app",
+    "ui-bootstrap": "./../lib/angular-ui-bootstrap/ui-bootstrap",
+    "domReady": "./../lib/requirejs-domready/domReady",
+    "angular-validation": "./../lib/angular-validation/angular-validation",
+    "angular-validation-rule": "./app/infrastructure/validationRule",
+    "initcollections": "./app/vendor/collections/index",
+    "vendor": "./app/vendor"
+  },
+
+  "shim": {
+    "angular": {
+      "deps": [ "jquery" ],
+      "exports": "angular"
+    },
+    "bootstrap": {
+      "deps": [ "jquery" ]
+    },
+    "ui-bootstrap": {
+      "deps": [ "angular" ]
+    },
+    "jquery.slimscroll": {
+      "deps": [ "jquery" ]
+    },
+    "icheck": {
+      "deps": [ "jquery" ]
+    },
+    "adminlte": {
+      "deps": [ "jquery", "jquery.slimscroll", "fastclick", "icheck" ]
+    },
+    "angular-validation": {
+      "deps": [ "angular" ]
+    },
+    "angular-validation-rule": {
+      "deps": [ "angular-validation" ]
+    }
+  }
+
+}

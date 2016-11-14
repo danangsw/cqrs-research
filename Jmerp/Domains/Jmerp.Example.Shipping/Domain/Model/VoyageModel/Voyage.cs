@@ -18,9 +18,6 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel
             Schedule = schedule;
         }
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Index { get; set; }
-
         public Schedule Schedule { get; }
     }
 }
