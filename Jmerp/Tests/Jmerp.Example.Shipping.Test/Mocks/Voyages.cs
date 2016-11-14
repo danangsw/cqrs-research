@@ -3,7 +3,7 @@ using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.ValueObjects;
 using System.Collections.Generic;
 
-namespace Jmerp.Example.Shipping.Tests.Moqs
+namespace Jmerp.Example.Shipping.Tests.Mocks
 {
     public static class Voyages
     {

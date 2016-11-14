@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Jmerp.Example.Shipping.Tests.Moqs
+namespace Jmerp.Example.Shipping.Tests.Mocks
 {
     public static class Locations
     {
