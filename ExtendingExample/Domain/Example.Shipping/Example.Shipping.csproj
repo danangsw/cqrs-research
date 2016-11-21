@@ -48,9 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\BookingApplicationService.cs" />
     <Compile Include="Application\IBookingApplicationService.cs" />
     <Compile Include="Application\IScheduleApplicationService.cs" />
     <Compile Include="Application\ScheduleApplicationService.cs" />
+    <Compile Include="Domain\Model\CargoModel\Cargo.cs" />
+    <Compile Include="Domain\Model\CargoModel\CargoAggregate.cs" />
+    <Compile Include="Domain\Model\CargoModel\CargoId.cs" />
+    <Compile Include="Domain\Model\CargoModel\CargoState.cs" />
+    <Compile Include="Domain\Model\CargoModel\Commands\CargoBookCommand.cs" />
+    <Compile Include="Domain\Model\CargoModel\Commands\CargoSetItineraryCommand.cs" />
+    <Compile Include="Domain\Model\CargoModel\Entities\TransportLeg.cs" />
+    <Compile Include="Domain\Model\CargoModel\Entities\TransportLegId.cs" />
+    <Compile Include="Domain\Model\CargoModel\Events\CargoBookedEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Events\CargoItinerarySetEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Specifications\RouteSpecification.cs" />
+    <Compile Include="Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecification.cs" />
+    <Compile Include="Domain\Model\CargoModel\ValueObjects\Itinerary.cs" />
+    <Compile Include="Domain\Model\CargoModel\ValueObjects\Route.cs" />
     <Compile Include="Domain\Model\LocationModel\Events\LocationCreatedEvent.cs" />
     <Compile Include="Domain\Model\LocationModel\Location.cs" />
     <Compile Include="Domain\Model\LocationModel\LocationAggregate.cs" />
@@ -65,6 +80,8 @@
     <Compile Include="Domain\Model\VoyageModel\Events\CarrierMovementUpdatedEvent.cs" />
     <Compile Include="Domain\Model\VoyageModel\Events\VoyageCreatedEvent.cs" />
     <Compile Include="Domain\Model\VoyageModel\Events\VoyageScheduleUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\VoyageModel\Queries\GetAllVoyagesQuery.cs" />
+    <Compile Include="Domain\Model\VoyageModel\Queries\GetVoyagesQuery.cs" />
     <Compile Include="Domain\Model\VoyageModel\ScheduleBuilder.cs" />
     <Compile Include="Domain\Model\VoyageModel\ValueObjects\Schedule.cs" />
     <Compile Include="Domain\Model\VoyageModel\Voyage.cs" />
@@ -73,11 +90,16 @@
     <Compile Include="Domain\Model\VoyageModel\VoyageState.cs" />
     <Compile Include="Domain\Specs.cs" />
     <Compile Include="ExampleShipping.cs" />
+    <Compile Include="Extensions\CarrierMovementExtensions.cs" />
     <Compile Include="Extensions\DateTimeOffsetExtensions.cs" />
+    <Compile Include="ExternalServices\Routing\IRoutingService.cs" />
+    <Compile Include="ExternalServices\Routing\RoutingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Domain\Model\CargoModel\" />
+    <Folder Include="Domain\Model\CargoModel\Jobs\" />
+    <Folder Include="Domain\Model\CargoModel\Queries\" />
+    <Folder Include="Domain\Model\CargoModel\Subscribers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -69,6 +69,8 @@
     <Compile Include="Locations\LocationReadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Voyage\CarrierMovementReadModel.cs" />
+    <Compile Include="Voyage\QueryHandlers\GetAllVoyagesQueryHandler.cs" />
+    <Compile Include="Voyage\QueryHandlers\GetVoyagesQueryHandler.cs" />
     <Compile Include="Voyage\VoyageReadModel.cs" />
   </ItemGroup>
   <ItemGroup>
