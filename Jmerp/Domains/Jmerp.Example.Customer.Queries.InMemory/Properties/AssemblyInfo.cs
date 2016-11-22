@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Jmerp.Example.Customers")]
+[assembly: AssemblyTitle("Jmerp.Example.Customers.Queries.InMemory")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Jmerp.Example.Customers")]
+[assembly: AssemblyProduct("Jmerp.Example.Customers.Queries.InMemory")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2e65eb85-386e-4cce-ac60-55968e9f43ff")]
+[assembly: Guid("340e833c-630c-45b0-a00f-8e8c06765bb1")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52545E60-1BA9-40BC-A87C-C75BB39676B3}</ProjectGuid>
+    <ProjectGuid>{C83B3B0F-14D8-4217-9420-296AD052D895}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Jmerp.Example.Customer.Test</RootNamespace>
-    <AssemblyName>Jmerp.Example.Customer.Test</AssemblyName>
+    <RootNamespace>Jmerp.Example.Customers.Middlewares</RootNamespace>
+    <AssemblyName>Jmerp.Example.Customers.Middlewares</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventFlow, Version=0.37.2424.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EventFlow.0.37.2424\lib\net451\EventFlow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,11 +52,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Applications\GeneralInfoApplicationServices.cs" />
+    <Compile Include="Applications\IGeneralInfoApplicationServices.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Mappings\MapperConfiguration.cs" />
+    <Compile Include="Mappings\Profiles\CustomerDtoToDomainModelMappingProfile.cs" />
+    <Compile Include="Mappings\Profiles\CustomerDomainModelToDtoMappingProfile.cs" />
+    <Compile Include="Models\CustomerPM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Domains\Jmerp.Example.Customer.Queries.InMemory\Jmerp.Example.Customers.Queries.InMemory.csproj">
+      <Project>{340e833c-630c-45b0-a00f-8e8c06765bb1}</Project>
+      <Name>Jmerp.Example.Customers.Queries.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Domains\Jmerp.Example.Customer\Jmerp.Example.Customers.csproj">
+      <Project>{2e65eb85-386e-4cce-ac60-55968e9f43ff}</Project>
+      <Name>Jmerp.Example.Customers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Frameworks\Jmerp.Common\Jmerp.Commons.csproj">
+      <Project>{10bb28ac-eed8-40f4-9564-3362c020543a}</Project>
+      <Name>Jmerp.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mappings\Resolvers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
