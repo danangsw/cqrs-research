@@ -24,5 +24,18 @@ namespace Jmerp.Example.Shipping.Queries.Mssql
                 .UseMssqlReadModel<VoyageReadModel>()
                 .UseMssqlReadModel<CargoReadModel>();
         }
+
+        //public static IEventFlowOptions ConfigureShippingRepository(this IEventFlowOptions eventFlowOptions)
+        //{
+        //    return eventFlowOptions
+        //         .AddDefaults(Assembly)
+        //         .RegisterServices(sr =>
+        //         {
+        //             sr.Register<IDbFactory, DbFactory>();
+        //             sr.Register<IUnitOfWork, UnitOfWork>();
+        //             sr.Register<ICargoRepository, CargoRepository>();
+        //             sr.Register<IVoyageRepository, VoyageRepository>();
+        //         });
+        //}
     }
 }

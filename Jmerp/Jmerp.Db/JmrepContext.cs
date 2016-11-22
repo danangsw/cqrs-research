@@ -1,6 +1,5 @@
 namespace Jmerp.Db
 {
-    using Model;
     using System;
     using System.Data.Entity;
     using System.Linq;
@@ -8,6 +7,7 @@ namespace Jmerp.Db
     using System.Collections.Generic;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Validation;
+    using Model;
 
     public class JmrepContext : DbContext
     {

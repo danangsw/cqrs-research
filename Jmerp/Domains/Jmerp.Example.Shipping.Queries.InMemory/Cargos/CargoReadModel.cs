@@ -20,6 +20,7 @@ namespace Jmerp.Example.Shipping.Queries.InMemory.Cargos
 
         public void Apply(IReadModelContext context, IDomainEvent<CargoAggregate, CargoId, CargoBookedEvent> domainEvent)
         {
+
             Id = domainEvent.AggregateIdentity;
             Route = domainEvent.AggregateEvent.Route;
         }
