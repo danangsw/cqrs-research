@@ -15,7 +15,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel.Events
         public VoyageCreatedEvent(
             )
         {
-        }
 
+        }
     }
 }

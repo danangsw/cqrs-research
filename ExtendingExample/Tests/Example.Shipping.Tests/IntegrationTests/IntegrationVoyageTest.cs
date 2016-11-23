@@ -11,6 +11,7 @@ using Example.Db.Infrastructure;
 using Example.Shipping.Application;
 using Example.Shipping.Domain.Model.VoyageModel;
 using Example.Shipping.Domain.Model.VoyageModel.Commands;
+using Example.Shipping.Domain.Model.VoyageModel.ValueObjects;
 using Example.Shipping.Queries.Mssql;
 using NUnit.Framework;
 using System;
@@ -70,14 +71,23 @@ namespace Example.Shipping.Tests.IntegrationTests
                 .ConfigureAwait(true);
         }
 
-        public Task CreateVoyageAggregateAsync(Voyage voyage)
+        public async Task CreateVoyageAggregateAsync(Voyage voyage, Schedule schedule)
         {
-            return  _commandBus.PublishAsync(new VoyageCreateCommand(voyage.Id, voyage.Schedule), CancellationToken.None);
+            await _commandBus.PublishAsync(new VoyageCreateCommand(voyage.Id), CancellationToken.None);
+
+            foreach (var carrierMovement in schedule.CarrierMovements)
+            {
+                await _commandBus.PublishAsync(new ScheduleCarrierMovementAddCommand(voyage.Id, carrierMovement), CancellationToken.None);
+            }
+            
         }
 
         public Task CreateVoyageAggregatesAsync()
         {
-            return Task.WhenAll(Voyages.GetVoyages().Select(CreateVoyageAggregateAsync));
+            return Task.WhenAll(
+                Voyages.GetVoyages().Select(x => 
+                    CreateVoyageAggregateAsync(x, x.Schedule)
+                ));
         }
 
     }

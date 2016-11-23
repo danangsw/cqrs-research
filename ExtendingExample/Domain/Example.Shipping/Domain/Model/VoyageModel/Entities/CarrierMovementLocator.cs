@@ -13,7 +13,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel.Entities
     {
         public IEnumerable<string> GetReadModelIds(IDomainEvent domainEvent)
         {
-            var carrierMovementAddedEvent = domainEvent as IDomainEvent<VoyageAggregate, VoyageId, CarrierMovementCreatedEvent>;
+            var carrierMovementAddedEvent = domainEvent as IDomainEvent<VoyageAggregate, VoyageId, CarrierMovementAddedEvent>;
             if (carrierMovementAddedEvent != null)
             {
                 yield return carrierMovementAddedEvent.AggregateEvent.CarrierMovement.Id.Value;

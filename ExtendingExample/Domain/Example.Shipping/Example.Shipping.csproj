@@ -71,12 +71,13 @@
     <Compile Include="Domain\Model\LocationModel\LocationAggregate.cs" />
     <Compile Include="Domain\Model\LocationModel\LocationId.cs" />
     <Compile Include="Domain\Model\LocationModel\LocationState.cs" />
+    <Compile Include="Domain\Model\VoyageModel\Commands\ScheduleCarrierMovementAddCommand.cs" />
     <Compile Include="Domain\Model\VoyageModel\Commands\VoyageCreateCommand.cs" />
     <Compile Include="Domain\Model\VoyageModel\Commands\VoyageDelayCommand.cs" />
     <Compile Include="Domain\Model\VoyageModel\Entities\CarrierMovement.cs" />
     <Compile Include="Domain\Model\VoyageModel\Entities\CarrierMovementId.cs" />
     <Compile Include="Domain\Model\VoyageModel\Entities\CarrierMovementLocator.cs" />
-    <Compile Include="Domain\Model\VoyageModel\Events\CarrierMovementCreatedEvent.cs" />
+    <Compile Include="Domain\Model\VoyageModel\Events\CarrierMovementAddedEvent.cs" />
     <Compile Include="Domain\Model\VoyageModel\Events\CarrierMovementUpdatedEvent.cs" />
     <Compile Include="Domain\Model\VoyageModel\Events\VoyageCreatedEvent.cs" />
     <Compile Include="Domain\Model\VoyageModel\Events\VoyageScheduleUpdatedEvent.cs" />
