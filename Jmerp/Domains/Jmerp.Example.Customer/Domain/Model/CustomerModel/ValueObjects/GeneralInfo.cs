@@ -16,8 +16,13 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
             string email,
             string web)
         {
-            GeneralInfoSpecs.IsNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(organizationName);
-            GeneralInfoSpecs.IsNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(contactPerson);
+            GeneralInfoSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(organizationName);
+            GeneralInfoSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(contactPerson);
+            GeneralInfoSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(phone);
+            GeneralInfoSpecs.IsValidPhoneFaxlInput.ThrowDomainErrorIfNotStatisfied(phone);
+            GeneralInfoSpecs.IsValidPhoneFaxlInput.ThrowDomainErrorIfNotStatisfied(fax);
+            GeneralInfoSpecs.IsValidEmailInput.ThrowDomainErrorIfNotStatisfied(email);
+            GeneralInfoSpecs.IsValidUrlInput.ThrowDomainErrorIfNotStatisfied(web);
 
             OrganizationName = organizationName;
             ContactPerson = contactPerson;

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -38,8 +42,12 @@
       <HintPath>..\..\packages\EventFlow.0.37.2424\lib\net451\EventFlow.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="EventFlow.Autofac, Version=0.37.2424.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EventFlow.Autofac.0.37.2424\lib\net451\EventFlow.Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,13 +60,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\GeneralInfoApplicationServices.cs" />
-    <Compile Include="Applications\IGeneralInfoApplicationServices.cs" />
-    <Compile Include="Configuration.cs" />
+    <Compile Include="CustomerBootstrapper.cs" />
+    <Compile Include="CustomerServiceBootstrapper.cs" />
+    <Compile Include="Services\ICreateGeneralInfoApplicationServices.cs" />
     <Compile Include="Mappings\MapperConfiguration.cs" />
     <Compile Include="Mappings\Profiles\CustomerDtoToDomainModelMappingProfile.cs" />
     <Compile Include="Mappings\Profiles\CustomerDomainModelToDtoMappingProfile.cs" />
-    <Compile Include="Models\CustomerPM.cs" />
+    <Compile Include="Models\CustomerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +82,13 @@
       <Project>{10bb28ac-eed8-40f4-9564-3362c020543a}</Project>
       <Name>Jmerp.Commons</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Frameworks\Jmerp.EventFlow.TestHelpers\EventFlow.TestHelpers.csproj">
+      <Project>{e18dcc39-8b83-408d-95d1-4e74d94a516f}</Project>
+      <Name>EventFlow.TestHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

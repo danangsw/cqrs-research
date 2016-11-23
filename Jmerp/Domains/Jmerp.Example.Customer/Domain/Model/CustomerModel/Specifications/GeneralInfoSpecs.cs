@@ -9,7 +9,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications
     public static class GeneralInfoSpecs
     {
         public static ISpecification<GeneralInfo> IsValidInput { get; } = new IsValidInputSpecification();
-        public static ISpecification<string> IsNullOrEmptyInput { get; } = new IsNullOrEmptySpecification();
+        public static ISpecification<string> IsNotNullOrEmptyInput { get; } = new IsNotNullOrEmptyInputSpecification();
         public static ISpecification<string> IsValidEmailInput { get; } = new IsValidEmailInputSpecification();
         public static ISpecification<string> IsValidUrlInput { get; } = new IsValidUrlInputSpecification();
         public static ISpecification<string> IsValidPhoneFaxlInput { get; } = new IsValidPhoneFaxlInputSpecification();
@@ -60,7 +60,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications
             }
         }
 
-        private class IsNullOrEmptySpecification : Specification<string>
+        private class IsNotNullOrEmptyInputSpecification : Specification<string>
         {
             protected override IEnumerable<string> IsNotSatisfiedBecause(string obj)
             {

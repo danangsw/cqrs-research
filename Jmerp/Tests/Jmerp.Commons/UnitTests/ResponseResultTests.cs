@@ -14,8 +14,8 @@ namespace Jmerp.Commons.Tests.UnitTests
         public void Return_ErrorResponseResult()
         {
             //Arrange
-            var errors = new List<ResponseError>() { new ResponseError() { Code = "201", Description = "1 Some specs are not satisfied" },
-                new ResponseError() { Code = "203", Description = "2 Some specs are not satisfied" }};
+            var errors = new List<ResponseError>() { new ResponseError("201","1 Some specs are not satisfied"),
+                new ResponseError("203","2 Some specs are not satisfied")};
 
             //Act
             var result = ThingyErrorReturnService(errors.ToArray());
@@ -23,7 +23,7 @@ namespace Jmerp.Commons.Tests.UnitTests
             //Assert
             result.Succeeded.Should().BeFalse();
             result.Errors.Should().HaveCount(errors.Count);
-            result.ToString().Should().Contain("201");
+            result.ToString().Should().NotBeEmpty();
         }
 
         [Test]

@@ -43,6 +43,16 @@ namespace Jmerp.Commons
             return result;
         }
 
+        public static ResponseResult Failed(params string[] errors)
+        {
+            var result = new ResponseResult { Succeeded = false };
+            if (errors != null)
+            {
+                Array.ForEach(errors, item => { result._errors.Add(new ResponseError(item)); });
+            }
+            return result;
+        }
+
         /// <summary>
         /// Creates an <see cref="ResponseResult"/> indicating a succeed response operation, with a list of <paramref name="result"/> if applicable.
         /// </summary>
@@ -70,7 +80,7 @@ namespace Jmerp.Commons
         {
             return Succeeded ?
                    "Succeeded" :
-                   string.Format("{0} : {1}", "Failed", string.Join(",", Errors.Select(x => x.Code).ToList()));
+                   string.Format("{0} : {1}", "Failed", string.Join(",", Errors.Select(x => x.Description).ToList()));
         }
     }
 
@@ -85,7 +95,7 @@ namespace Jmerp.Commons
         /// <value>
         /// The code for this error.
         /// </value>
-        public string Code { get; set; } = "202";
+        public string Code { get; private set; } = "202";
 
         /// <summary>
         /// Gets or sets the description for this error.
@@ -93,6 +103,17 @@ namespace Jmerp.Commons
         /// <value>
         /// The description for this error.
         /// </value>
-        public string Description { get; set; }
+        public string Description { get; private set; }
+
+        public ResponseError(string description)
+        {
+            Description = description;
+        }
+
+        public ResponseError(string code, string description)
+        {
+            Description = description;
+            Code = code;
+        }
     }
 }

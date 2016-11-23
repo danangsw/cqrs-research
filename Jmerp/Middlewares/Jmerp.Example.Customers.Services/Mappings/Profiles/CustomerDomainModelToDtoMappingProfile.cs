@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 using Jmerp.Example.Customers.Middlewares.Models;
 
 namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
@@ -18,6 +19,7 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
         {
             // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)
             CreateMap<Customer, CustomerDto>();
+            CreateMap<GeneralInfo, GeneralInfoDto>();
         }
     }
 }
