@@ -35,5 +35,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel.Entities
         public LocationId ArrivalLocationId { get; }
         public DateTimeOffset DepartureTime { get; }
         public DateTimeOffset ArrivalTime { get; }
+
+        
     }
 }

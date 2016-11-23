@@ -11,7 +11,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel
 {
     public class VoyageState : AggregateState<VoyageAggregate, VoyageId, VoyageState>,
         IApply<VoyageCreatedEvent>,
-        IApply<CarrierMovementCreatedEvent>,
+        IApply<CarrierMovementAddedEvent>,
         IApply<CarrierMovementUpdatedEvent>,
         IApply<VoyageScheduleUpdatedEvent>
     {
@@ -22,7 +22,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel
             Schedule = Schedule.UpdateCarrierMovement(aggregateEvent.CarrierMovement);
         }
 
-        public void Apply(CarrierMovementCreatedEvent aggregateEvent)
+        public void Apply(CarrierMovementAddedEvent aggregateEvent)
         {
             Schedule = Schedule.AddCarrierMovement(aggregateEvent.CarrierMovement);
         }

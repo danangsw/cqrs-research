@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace Example.Shipping.Domain.Model.VoyageModel.Events
 {
     [EventVersion("CarrierMovementCreated", 1)]
-    public class CarrierMovementCreatedEvent : AggregateEvent<VoyageAggregate, VoyageId>
+    public class CarrierMovementAddedEvent : AggregateEvent<VoyageAggregate, VoyageId>
     {
-        public CarrierMovementCreatedEvent(
+        public CarrierMovementAddedEvent(
             CarrierMovement carrierMovement
         )
         {

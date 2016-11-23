@@ -29,9 +29,9 @@ namespace Example.Shipping.Domain.Model.VoyageModel
             Emit(new VoyageCreatedEvent());
         }
 
-        public void CreateSheduleCarrierMovement(CarrierMovement carrierMovement)
+        public void AddSheduleCarrierMovement(CarrierMovement carrierMovement)
         {
-            Emit(new CarrierMovementCreatedEvent(carrierMovement));
+            Emit(new CarrierMovementAddedEvent(carrierMovement));
         }
 
         public void UpdateScheduleCarrierMovement(CarrierMovement carrierMovement)
@@ -51,6 +51,8 @@ namespace Example.Shipping.Domain.Model.VoyageModel
             {
                 UpdateScheduleCarrierMovement(carrierMovement);
             });
+
+           
         }
     }
 }

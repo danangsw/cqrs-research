@@ -15,7 +15,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage
 {
     [Table("CarrierMovement")]
     public class CarrierMovementReadModel : IReadModel,
-        IAmReadModelFor<VoyageAggregate, VoyageId, CarrierMovementCreatedEvent>,
+        IAmReadModelFor<VoyageAggregate, VoyageId, CarrierMovementAddedEvent>,
         IAmReadModelFor<VoyageAggregate, VoyageId, CarrierMovementUpdatedEvent>
     {
 
@@ -29,7 +29,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage
 
 
 
-        public void Apply(IReadModelContext context, EventFlow.Aggregates.IDomainEvent<VoyageAggregate, VoyageId, CarrierMovementCreatedEvent> domainEvent)
+        public void Apply(IReadModelContext context, EventFlow.Aggregates.IDomainEvent<VoyageAggregate, VoyageId, CarrierMovementAddedEvent> domainEvent)
         {
             CargoId = domainEvent.AggregateIdentity.Value;
             var CarrierMovement = domainEvent.AggregateEvent.CarrierMovement;

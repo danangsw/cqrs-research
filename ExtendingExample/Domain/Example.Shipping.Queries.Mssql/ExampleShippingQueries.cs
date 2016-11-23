@@ -2,6 +2,7 @@
 using EventFlow.Extensions;
 using EventFlow.MsSql.Extensions;
 using Example.Shipping.Domain.Model.VoyageModel.Entities;
+using Example.Shipping.Queries.Mssql.Cargo;
 using Example.Shipping.Queries.Mssql.Locations;
 using Example.Shipping.Queries.Mssql.Voyage;
 using System;
@@ -25,6 +26,7 @@ namespace Example.Shipping.Queries.Mssql
                 .AddQueryHandlers(Assembly)
                 .UseMssqlReadModel<LocationReadModel>()
                 .UseMssqlReadModel<VoyageReadModel>()
+                .UseMssqlReadModel<CargoReadModel>()
                 .UseMssqlReadModel<CarrierMovementReadModel, CarrierMovementLocator>();
         }
 

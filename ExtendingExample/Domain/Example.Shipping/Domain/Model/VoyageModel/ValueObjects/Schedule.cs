@@ -10,7 +10,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel.ValueObjects
 {
     public class Schedule : ValueObject
     {
-
+        
         public Schedule() {
             CarrierMovements = new List<CarrierMovement>();
         }
