@@ -52,7 +52,7 @@ namespace Example.Shipping.Tests.IntegrationTests
         [TearDown]
         public void TearDown()
         {
-            //ExampleMigrator.Down();
+            ExampleMigrator.Down();
             _resolver.DisposeSafe(new ConsoleLog(), "");
         }
 

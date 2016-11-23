@@ -22,7 +22,7 @@ namespace Example.Db.Infrastructure
         {
             using (var dbExample = new ExampleContext())
             {
-                var migration = new initial();
+                var migration = new CustomScriptMigration();
                 migration.Down();               
                 dbExample.RunMigration(migration);
             }

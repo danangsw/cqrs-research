@@ -119,6 +119,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="IntegrationTests\IntegrationLocationTest.cs" />
+    <Compile Include="IntegrationTests\IntegrationTest.cs" />
     <Compile Include="IntegrationTests\IntegrationVoyageTest.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,18 +1,20 @@
 ﻿using EventFlow;
 using EventFlow.Aggregates;
 using EventFlow.Configuration;
-using EventFlow.Extensions;
-using EventFlow.Logs;
+using EventFlow.Core;
 using EventFlow.MsSql;
 using EventFlow.MsSql.EventStores;
 using EventFlow.MsSql.Extensions;
 using EventFlow.TestHelpers;
 using Example.Db.Infrastructure;
 using Example.Shipping.Application;
+using Example.Shipping.Domain.Model.CargoModel.ValueObjects;
+using Example.Shipping.Domain.Model.LocationModel;
 using Example.Shipping.Domain.Model.VoyageModel;
 using Example.Shipping.Domain.Model.VoyageModel.Commands;
 using Example.Shipping.Domain.Model.VoyageModel.ValueObjects;
 using Example.Shipping.Queries.Mssql;
+using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,11 +26,12 @@ using System.Threading.Tasks;
 namespace Example.Shipping.Tests.IntegrationTests
 {
     [Category(Categories.Integration)]
-    public class IntegrationVoyageTest : Test
+    public class IntegrationTest : Test
     {
         private IRootResolver _resolver;
         private IAggregateStore _aggregateStore;
         private ICommandBus _commandBus;
+
 
         [SetUp]
         public void SetUp()
@@ -50,27 +53,36 @@ namespace Example.Shipping.Tests.IntegrationTests
             _commandBus = _resolver.Resolve<ICommandBus>();
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            ExampleMigrator.Down();
-            _resolver.DisposeSafe(new ConsoleLog(), "");
-        }
-
 
         [Test]
         public async Task Simple()
         {
-            await CreateVoyageAggregatesAsync().ConfigureAwait(true);
+            //await CreateLocationAggregatesAsync().ConfigureAwait(false);
+            //await CreateVoyageAggregatesAsync().ConfigureAwait(true);
 
-            var voyage = _resolver.Resolve<IScheduleApplicationService>();
+            var route = new Route(
+                Locations.Tokyo,
+                Locations.Helsinki,
+                1.October(2008).At(11, 00),
+                6.November(2008).At(12, 00));
 
-            await voyage.DelayScheduleAsync(
-                Voyages.DallasToHelsinkiId,
-                TimeSpan.FromDays(7),
-                CancellationToken.None)
-                .ConfigureAwait(true);
+
+            var booking = _resolver.Resolve<IBookingApplicationService>();
+            await booking.BookCargoAsync(route, CancellationToken.None).ConfigureAwait(false);
+
+
+            //var voyage = _resolver.Resolve<IScheduleApplicationService>();
+
+            //await voyage.DelayScheduleAsync(
+            //    Voyages.DallasToHelsinkiId,
+            //    TimeSpan.FromDays(7),
+            //    CancellationToken.None)
+            //    .ConfigureAwait(true);
+
+
         }
+
+
 
         public async Task CreateVoyageAggregateAsync(Voyage voyage, Schedule schedule)
         {
@@ -80,15 +92,43 @@ namespace Example.Shipping.Tests.IntegrationTests
             {
                 await _commandBus.PublishAsync(new ScheduleCarrierMovementAddCommand(voyage.Id, carrierMovement), CancellationToken.None);
             }
-            
+
         }
 
         public Task CreateVoyageAggregatesAsync()
         {
             return Task.WhenAll(
-                Voyages.GetVoyages().Select(x => 
+                Voyages.GetVoyages().Select(x =>
                     CreateVoyageAggregateAsync(x, x.Schedule)
                 ));
+        }
+
+
+        public Task CreateLocationAggregatesAsync()
+        {
+            return Task.WhenAll(Locations.GetLocations().Select(CreateLocationAggregateAsync));
+        }
+
+        public Task CreateLocationAggregateAsync(Location location)
+        {
+            return UpdateAsync<LocationAggregate, LocationId>(location.Id, a => a.Create(location.Name));
+        }
+
+
+        private async Task UpdateAsync<TAggregate, TIdentity>(TIdentity id, Action<TAggregate> action)
+            where TAggregate : IAggregateRoot<TIdentity>
+            where TIdentity : IIdentity
+        {
+            await _aggregateStore.UpdateAsync<TAggregate, TIdentity>(
+                id,
+                SourceId.New,
+                (a, c) =>
+                {
+                    action(a);
+                    return Task.FromResult(0);
+                },
+                CancellationToken.None)
+                .ConfigureAwait(false);
         }
 
     }

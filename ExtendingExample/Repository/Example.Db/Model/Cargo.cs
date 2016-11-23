@@ -11,5 +11,9 @@ namespace Example.Db.Model
     [Table("Cargo")]
     public class Cargo : BaseAggregate
     {
+        public string OriginLocationId { get; set; }
+        public string DestinationLocationId { get; set; }
+        public DateTimeOffset DepartureTime { get; set; }
+        public DateTimeOffset ArrivalDeadline { get; set; }
     }
 }

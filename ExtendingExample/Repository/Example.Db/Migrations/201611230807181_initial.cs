@@ -12,6 +12,10 @@ namespace Example.Db.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
+                        OriginLocationId = c.String(),
+                        DestinationLocationId = c.String(),
+                        DepartureTime = c.DateTimeOffset(nullable: false, precision: 7),
+                        ArrivalDeadline = c.DateTimeOffset(nullable: false, precision: 7),
                         AggregateId = c.String(maxLength: 64),
                         LastAggregateSequenceNumber = c.Int(nullable: false),
                         CreateTime = c.DateTimeOffset(nullable: false, precision: 7),
