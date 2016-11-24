@@ -61,6 +61,7 @@
     <Compile Include="Domain\Model\CustomerModel\Entities\Address.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\AddressId.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\CustomerCreatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\GeneralInfoUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetAllCustomersQuery.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetCustomersQuery.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\CustomerSpecs.cs" />

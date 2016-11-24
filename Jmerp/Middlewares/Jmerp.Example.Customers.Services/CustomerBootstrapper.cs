@@ -1,9 +1,7 @@
 ﻿using EventFlow;
-using EventFlow.Extensions;
 using Jmerp.Example.Customers.Middlewares.Mappings;
 using Jmerp.Example.Customers.Middlewares.Services;
 using Jmerp.Example.Customers.Queries.InMemory;
-using System.Reflection;
 
 namespace Jmerp.Example.Customers.Middlewares
 {
@@ -13,7 +11,7 @@ namespace Jmerp.Example.Customers.Middlewares
 
         public static IEventFlowOptions CustomerBootstrapperConfiguration(this IEventFlowOptions options)
         {
-            MapperConfiguration.Configure();
+            CustomerMapperConfiguration.Configure();
 
             return options
                 //.AddDefaults(Assembly)
@@ -22,6 +20,7 @@ namespace Jmerp.Example.Customers.Middlewares
                 .RegisterServices(sr =>
                 {
                     sr.Register<ICreateGeneralInfoApplicationServices, CreateGeneralInfoApplicationServices>();
+                    sr.Register<IUpdateGeneralInfoApplicationServices, UpdateGeneralInfoApplicationServices>();
                 });
         }
     }

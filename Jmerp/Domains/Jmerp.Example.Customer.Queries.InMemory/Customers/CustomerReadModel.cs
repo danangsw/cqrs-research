@@ -8,7 +8,8 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 namespace Jmerp.Example.Customers.Queries.InMemory.Customers
 {
     public class CustomerReadModel : IReadModel,
-        IAmReadModelFor<CustomerAggregate, CustomerId, CustomerCreatedEvent>
+        IAmReadModelFor<CustomerAggregate, CustomerId, CustomerCreatedEvent>,
+        IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>
     {
         public CustomerId Id { get; private set; }
         public GeneralInfo GeneralInfo { get; private set; }
@@ -16,6 +17,11 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, CustomerCreatedEvent> domainEvent)
         {
             Id = domainEvent.AggregateIdentity;
+            GeneralInfo = domainEvent.AggregateEvent.GeneralInfo;
+        }
+
+        public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent> domainEvent)
+        {
             GeneralInfo = domainEvent.AggregateEvent.GeneralInfo;
         }
 

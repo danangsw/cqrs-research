@@ -10,7 +10,7 @@ using Jmerp.Example.Customers.Middlewares.Services;
 using Autofac;
 using Jmerp.Middlewares.Boostrappers;
 
-namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
+namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
 {
     [Category("Web Integration Test")]
     public class Scenarios
@@ -22,7 +22,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
         public void Setup()
         {
             _containerBuilder = new ContainerBuilder();
-            _container = _containerBuilder.MiddlewaresStartUp();
+            _container = _containerBuilder.BuildServices();
         }
 
         [TearDown]
@@ -36,17 +36,33 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
         {
             //Arrange
             var customer = CustomerDtoList.Customer_CS00001;
+            var generalInfoUpdate = CustomerGeneralInfos.GeneralInfo_CS00002;
 
             //Act
-            var services =  _container.Resolve<ICreateGeneralInfoApplicationServices>();
-            var response = await services.CreateAsync(customer, CancellationToken.None);
+            var servicesCreated =  _container.Resolve<ICreateGeneralInfoApplicationServices>();
+            var responseCreate = await servicesCreated.CreateAsync(customer, CancellationToken.None);
+            var responseCreateResult = ConvertResponse(responseCreate.Responses)?.ToList();
 
-            var responseResult = ConvertResponse(response.Responses)?.ToList();
+            var servicesUpdate = _container.Resolve<IUpdateGeneralInfoApplicationServices>();
+            var responseUpdate = await servicesUpdate.UpdateAsync(
+                customer.Id,
+                generalInfoUpdate.OrganizationName,
+                generalInfoUpdate.ContactPerson,
+                generalInfoUpdate.Phone,
+                generalInfoUpdate.Fax,
+                generalInfoUpdate.Email,
+                generalInfoUpdate.Web,
+                CancellationToken.None);
+            var responseUpdateResult = ConvertResponse(responseUpdate.Responses)?.ToList();
 
             //Assert
-            response.Succeeded.Should().BeTrue();
-            response.Errors.Should().HaveCount(0);
-            responseResult.Should().BeOfType(typeof(List<CustomerDto>));
+            responseCreate.Succeeded.Should().BeTrue();
+            responseCreate.Errors.Should().HaveCount(0);
+            responseCreateResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseUpdate.Succeeded.Should().BeTrue();
+            responseUpdate.Errors.Should().HaveCount(0);
+            responseUpdateResult.Should().BeOfType(typeof(List<CustomerDto>));
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

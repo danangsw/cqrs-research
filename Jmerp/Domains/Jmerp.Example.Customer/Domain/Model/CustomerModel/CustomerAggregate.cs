@@ -30,8 +30,28 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             Emit(new CustomerCreatedEvent(generalInfo));
         }
 
+        public void Update(
+            string organizationName,
+            string contactPerson,
+            string phone,
+            string fax,
+            string email,
+            string web)
+        {
+            var generalInfo = new GeneralInfo(organizationName,contactPerson,phone,fax,email,web);
+
+            Emit(new GeneralInfoUpdatedEvent(generalInfo));
+        }
+
         public void Apply(CustomerCreatedEvent e)
         {
+            GeneralInfo = e.GeneralInfo;
+        }
+
+        public void Apply(GeneralInfoUpdatedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+
             GeneralInfo = e.GeneralInfo;
         }
     }
