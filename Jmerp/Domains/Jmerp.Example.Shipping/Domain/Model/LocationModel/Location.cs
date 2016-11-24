@@ -13,6 +13,6 @@ namespace Jmerp.Example.Shipping.Domain.Model.LocationModel
             Name = name;
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
     }
 }

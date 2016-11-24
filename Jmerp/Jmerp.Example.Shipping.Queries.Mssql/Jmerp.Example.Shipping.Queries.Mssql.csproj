@@ -30,28 +30,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.3-beta1\lib\net451\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DbUp, Version=3.3.5.0, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
       <HintPath>..\packages\dbup.3.3.5\lib\net35\DbUp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EventFlow, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EventFlow.0.36.2315\lib\net451\EventFlow.dll</HintPath>
+    <Reference Include="EventFlow, Version=0.37.2424.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventFlow.0.37.2424\lib\net451\EventFlow.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EventFlow.MsSql, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EventFlow.MsSql.0.36.2315\lib\net451\EventFlow.MsSql.dll</HintPath>
+    <Reference Include="EventFlow.MsSql, Version=0.37.2424.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventFlow.MsSql.0.37.2424\lib\net451\EventFlow.MsSql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EventFlow.Sql, Version=0.36.2315.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EventFlow.Sql.0.36.2315\lib\net451\EventFlow.Sql.dll</HintPath>
+    <Reference Include="EventFlow.Sql, Version=0.37.2424.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventFlow.Sql.0.37.2424\lib\net451\EventFlow.Sql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -76,6 +76,7 @@
     <Compile Include="Voyages\VoyageReadModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
