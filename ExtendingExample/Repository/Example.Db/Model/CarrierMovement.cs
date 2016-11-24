@@ -14,7 +14,7 @@ namespace Example.Db.Model
     {
         [StringLength(64)]
         [Index(IsUnique = false, Order = 1)]
-        public string CargoId { get; set; }
+        public string VoyageId { get; set; }
         [StringLength(64)]
         [Index(IsUnique = true, Order = 2)]
         public string CarrierMovementId { get; set; }

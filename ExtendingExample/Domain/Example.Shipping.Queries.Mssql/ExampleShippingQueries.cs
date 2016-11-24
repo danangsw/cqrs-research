@@ -5,6 +5,7 @@ using Example.Shipping.Domain.Model.VoyageModel.Entities;
 using Example.Shipping.Queries.Mssql.Cargo;
 using Example.Shipping.Queries.Mssql.Locations;
 using Example.Shipping.Queries.Mssql.Voyage;
+using Example.Shipping.Queries.Mssql.Voyage.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,11 @@ namespace Example.Shipping.Queries.Mssql
             this IEventFlowOptions eventFlowOptions )
         {
             return eventFlowOptions
-                .RegisterServices(sr => sr.RegisterType(typeof(CarrierMovementLocator)))
+                .RegisterServices(sr => {
+                    sr.RegisterType(typeof(CarrierMovementLocator));
+                    sr.Register<IVoyageQueries, VoyageQueries>();
+                    sr.Register<ICarrierMovementQueries, CarrierMovementQueries>();
+                 })
                 .AddQueryHandlers(Assembly)
                 .UseMssqlReadModel<LocationReadModel>()
                 .UseMssqlReadModel<VoyageReadModel>()

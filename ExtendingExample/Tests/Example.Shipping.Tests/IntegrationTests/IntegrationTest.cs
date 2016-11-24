@@ -57,8 +57,8 @@ namespace Example.Shipping.Tests.IntegrationTests
         [Test]
         public async Task Simple()
         {
-            //await CreateLocationAggregatesAsync().ConfigureAwait(false);
-            //await CreateVoyageAggregatesAsync().ConfigureAwait(true);
+            await CreateLocationAggregatesAsync().ConfigureAwait(false);
+            await CreateVoyageAggregatesAsync().ConfigureAwait(true);
 
             var route = new Route(
                 Locations.Tokyo,
@@ -71,13 +71,13 @@ namespace Example.Shipping.Tests.IntegrationTests
             await booking.BookCargoAsync(route, CancellationToken.None).ConfigureAwait(false);
 
 
-            //var voyage = _resolver.Resolve<IScheduleApplicationService>();
+            var voyage = _resolver.Resolve<IScheduleApplicationService>();
 
-            //await voyage.DelayScheduleAsync(
-            //    Voyages.DallasToHelsinkiId,
-            //    TimeSpan.FromDays(7),
-            //    CancellationToken.None)
-            //    .ConfigureAwait(true);
+            await voyage.DelayScheduleAsync(
+                Voyages.DallasToHelsinkiId,
+                TimeSpan.FromDays(7),
+                CancellationToken.None)
+                .ConfigureAwait(true);
 
 
         }

@@ -29,7 +29,7 @@ namespace Example.Db.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        CargoId = c.String(maxLength: 64),
+                        VoyageId = c.String(maxLength: 64),
                         CarrierMovementId = c.String(maxLength: 64),
                         DepartureLocationId = c.String(),
                         ArrivalLocationId = c.String(),
@@ -37,7 +37,7 @@ namespace Example.Db.Migrations
                         ArrivalTime = c.DateTimeOffset(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.CargoId)
+                .Index(t => t.VoyageId)
                 .Index(t => t.CarrierMovementId, unique: true);
             
             CreateTable(
@@ -94,7 +94,7 @@ namespace Example.Db.Migrations
             DropIndex("dbo.TransportLeg", new[] { "CargoId" });
             DropIndex("dbo.Location", new[] { "AggregateId" });
             DropIndex("dbo.CarrierMovement", new[] { "CarrierMovementId" });
-            DropIndex("dbo.CarrierMovement", new[] { "CargoId" });
+            DropIndex("dbo.CarrierMovement", new[] { "VoyageId" });
             DropIndex("dbo.Cargo", new[] { "AggregateId" });
             DropTable("dbo.Voyage");
             DropTable("dbo.TransportLeg");
