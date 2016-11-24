@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EventFlow.Aggregates;
+using Example.Shipping.Domain.Model.VoyageModel.Entities;
 
 namespace Example.Shipping.Queries.Mssql.Voyage
 {
@@ -19,7 +20,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage
         IAmReadModelFor<VoyageAggregate, VoyageId, CarrierMovementUpdatedEvent>
     {
 
-        public string CargoId { get; set; }
+        public string VoyageId { get; set; }
         [MsSqlReadModelIdentityColumn]
         public string CarrierMovementId { get; set; }
         public string DepartureLocationId { get; set; }
@@ -31,7 +32,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage
 
         public void Apply(IReadModelContext context, EventFlow.Aggregates.IDomainEvent<VoyageAggregate, VoyageId, CarrierMovementAddedEvent> domainEvent)
         {
-            CargoId = domainEvent.AggregateIdentity.Value;
+            VoyageId = domainEvent.AggregateIdentity.Value;
             var CarrierMovement = domainEvent.AggregateEvent.CarrierMovement;
             CarrierMovementId = CarrierMovement.Id.Value;
             DepartureLocationId = CarrierMovement.DepartureLocationId.Value;
@@ -45,6 +46,17 @@ namespace Example.Shipping.Queries.Mssql.Voyage
             var CarrierMovement = domainEvent.AggregateEvent.CarrierMovement;
             DepartureTime = CarrierMovement.DepartureTime;
             ArrivalTime = CarrierMovement.ArrivalTime;
+        }
+
+        public Domain.Model.VoyageModel.Entities.CarrierMovement ToCarrierMovement()
+        {
+            return new Domain.Model.VoyageModel.Entities.CarrierMovement(
+                   new CarrierMovementId(CarrierMovementId),
+                   new Domain.Model.LocationModel.LocationId(DepartureLocationId),
+                   new Domain.Model.LocationModel.LocationId(ArrivalLocationId),
+                   DepartureTime,
+                   ArrivalTime
+              );
         }
     }
 }

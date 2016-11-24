@@ -31,15 +31,15 @@ namespace Example.Shipping.Application
             var cargoId = CargoId.New;
             await _commandBus.PublishAsync(new CargoBookCommand(cargoId, route), cancellationToken).ConfigureAwait(false);
 
-            //var itineraries = await _routingService.CalculateItinerariesAsync(route, cancellationToken).ConfigureAwait(false);
+            var itineraries = await _routingService.CalculateItinerariesAsync(route, cancellationToken).ConfigureAwait(false);
 
-            //var itinerary = itineraries.FirstOrDefault();
-            //if (itinerary == null)
-            //{
-            //    throw DomainError.With("Could not find itinerary");
-            //}
+            var itinerary = itineraries.FirstOrDefault();
+            if (itinerary == null)
+            {
+                throw DomainError.With("Could not find itinerary");
+            }
 
-            //await _commandBus.PublishAsync(new CargoSetItineraryCommand(cargoId, itinerary), cancellationToken).ConfigureAwait(false);
+            await _commandBus.PublishAsync(new CargoSetItineraryCommand(cargoId, itinerary), cancellationToken).ConfigureAwait(false);
 
             return cargoId;
         }

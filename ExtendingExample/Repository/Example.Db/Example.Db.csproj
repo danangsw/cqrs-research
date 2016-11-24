@@ -53,9 +53,9 @@
   <ItemGroup>
     <Compile Include="ExampleContext.cs" />
     <Compile Include="Infrastructure\ExampleMigrator.cs" />
-    <Compile Include="Migrations\201611230807181_initial.cs" />
-    <Compile Include="Migrations\201611230807181_initial.Designer.cs">
-      <DependentUpon>201611230807181_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201611240351363_initial.cs" />
+    <Compile Include="Migrations\201611240351363_initial.Designer.cs">
+      <DependentUpon>201611240351363_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\CustomScriptMigration.cs" />
@@ -79,8 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611230807181_initial.resx">
-      <DependentUpon>201611230807181_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611240351363_initial.resx">
+      <DependentUpon>201611240351363_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
