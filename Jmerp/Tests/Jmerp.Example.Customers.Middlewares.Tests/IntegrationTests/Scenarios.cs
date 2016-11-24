@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Jmerp.Example.Customers.Middlewares.Tests.Mocks;
 using System.Linq;
 using Jmerp.Example.Customers.Middlewares.Models;
-using Jmerp.Commons;
 using System.Collections.Generic;
 using System.Threading;
 using Jmerp.Example.Customers.Middlewares.Services;
@@ -38,6 +37,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
             //Arrange
             var customer = CustomerDtoList.Customer_CS00001;
 
+            //Act
             var services =  _container.Resolve<ICreateGeneralInfoApplicationServices>();
             var response = await services.CreateAsync(customer, CancellationToken.None);
 

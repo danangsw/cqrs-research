@@ -8,22 +8,30 @@ using Jmerp.Commons;
 using System.Collections.Generic;
 using System.Threading;
 using Jmerp.Example.Customers.Middlewares.Services;
+using EventFlow.Configuration;
+using EventFlow;
+using EventFlow.Extensions;
+using EventFlow.Logs;
 
-namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
+namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTest
 {
-    [Category("Integration")]
-    public class GeneralInfoScenarios
+    [Category("Unit Test")]
+    public class CreateGeneralInfoApplicationServicesTest
     {
+        private IRootResolver _resolver;
+
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
-            CustomerMiddlewaresBootstrapper.Build();
+            _resolver = EventFlowOptions.New
+                .CustomerBootstrapperConfiguration()
+                .CreateResolver();
         }
 
         [TearDown]
         public void TearDown()
         {
-            CustomerMiddlewaresBootstrapper.Dispose();
+            _resolver.DisposeSafe(new ConsoleLog(), "");
         }
 
         [Test]
@@ -33,24 +41,15 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.IntegrationTests
             var customer = CustomerDtoList.Customer_CS00001;
 
             //Act
-            var response = await CreateCustomerAggregateAsync(customer).ConfigureAwait(false);
+            var services = _resolver.Resolve<ICreateGeneralInfoApplicationServices>();
+            var response = await services.CreateAsync(customer, CancellationToken.None);
+
             var responseResult = ConvertResponse(response.Responses)?.ToList();
 
             //Assert
             response.Succeeded.Should().BeTrue();
             response.Errors.Should().HaveCount(0);
             responseResult.Should().BeOfType(typeof(List<CustomerDto>));
-        }
-
-        private Task CreateCustomerAggregateBulkAsync()
-        {
-            return Task.WhenAll(CustomerDtoList.GetCustomers().Select(CreateCustomerAggregateAsync));
-        }
-
-        private Task<ResponseResult> CreateCustomerAggregateAsync(CustomerDto customer)
-        {
-            var service = CustomerMiddlewaresBootstrapper.GetService<CreateGeneralInfoApplicationServices>();
-            return service.CreateAsync(customer, CancellationToken.None);
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

@@ -1,7 +1,9 @@
 ﻿using EventFlow;
+using EventFlow.Extensions;
 using Jmerp.Example.Customers.Middlewares.Mappings;
 using Jmerp.Example.Customers.Middlewares.Services;
 using Jmerp.Example.Customers.Queries.InMemory;
+using System.Reflection;
 
 namespace Jmerp.Example.Customers.Middlewares
 {
