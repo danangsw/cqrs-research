@@ -5,28 +5,25 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Commands
 {
-    public class CustomerCreateCommand : Command<CustomerAggregate, CustomerId>
+    public class GeneralInfoUpdateCommand : Command<CustomerAggregate, CustomerId>
     {
-        public GeneralInfo GeneralInfo { get; private set; }
-
-        public CustomerCreateCommand(
-          CustomerId id,
-          GeneralInfo generalInfo)
-          : base(id)
+        public GeneralInfoUpdateCommand(
+            CustomerId id
+            ) : base(id)
         {
-            GeneralInfo = generalInfo;
+
         }
     }
 
-    public class CustomerCreateCommandHandler :
+    public class GeneralInfoUpdateCommandHandler :
     CommandHandler<CustomerAggregate, CustomerId, CustomerCreateCommand>
     {
         public override Task ExecuteAsync(
-            CustomerAggregate aggregate, 
-            CustomerCreateCommand command, 
+            CustomerAggregate aggregate,
+            CustomerCreateCommand command,
             CancellationToken cancellationToken)
         {
-            aggregate.Create(command.GeneralInfo);
+            //aggregate.Create(command.GeneralInfo);
             return Task.FromResult(0);
         }
     }
