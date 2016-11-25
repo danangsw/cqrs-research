@@ -8,16 +8,17 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
     {
         public Address(
             AddressId id,
-            CustomerId customer,
+            CustomerId customerId,
             string addressType,
             string addressLine1,
             string addressLine2,
             string city,
             string stateProvince,
-            string postalCode
+            string postalCode,
+            bool setDefault = false
             ) : base(id)
         {
-            if (customer == null) throw new ArgumentNullException(nameof(customer));
+            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
             if (string.IsNullOrEmpty(addressType)) throw new ArgumentNullException(nameof(addressType));
             if (string.IsNullOrEmpty(addressLine1)) throw new ArgumentNullException(nameof(addressLine1));
             if (string.IsNullOrEmpty(addressLine2)) throw new ArgumentNullException(nameof(addressLine2));
@@ -25,21 +26,23 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
             if (string.IsNullOrEmpty(stateProvince)) throw new ArgumentNullException(nameof(stateProvince));
             if (string.IsNullOrEmpty(postalCode)) throw new ArgumentNullException(nameof(postalCode));
 
-            Customer = customer;
+            CustomerId = customerId;
             AddressType = addressType;
             AddressLine1 = addressLine1;
             AddressLine2 = addressLine2;
             City = city;
             StateProvince = stateProvince;
             PostalCode = postalCode;
+            SetDefault = setDefault;
         }
 
-        public CustomerId Customer { get; }
+        public CustomerId CustomerId { get; }
         public string AddressType { get; }
         public string AddressLine1 { get; }
         public string AddressLine2 { get; }
         public string City { get; }
         public string StateProvince { get; }
         public string PostalCode { get; }
+        public bool SetDefault { get; }
     }
 }

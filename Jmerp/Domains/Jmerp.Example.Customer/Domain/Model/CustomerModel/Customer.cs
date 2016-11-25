@@ -1,5 +1,6 @@
 ﻿using EventFlow.Entities;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
+using System;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
 {
@@ -11,9 +12,12 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             ) 
             : base(id)
         {
+            if (generalInfo == null) throw new ArgumentNullException(nameof(generalInfo));
+
             GeneralInfo = generalInfo;
         }
 
         public GeneralInfo GeneralInfo { get; private set; }
+        public AddressDetail AddressDetail { get; private set; }
     }
 }

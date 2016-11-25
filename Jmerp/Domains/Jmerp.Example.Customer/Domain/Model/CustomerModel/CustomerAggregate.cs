@@ -2,6 +2,7 @@
 using EventFlow.Exceptions;
 using EventFlow.Extensions;
 using Jmerp.Commons;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Events;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
@@ -15,8 +16,40 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
         IEmit<CustomerCreatedEvent>
     {
         public GeneralInfo GeneralInfo { get; private set; }
+        public AddressDetail AddressDetail { get; private set; }
+
         public CustomerAggregate(CustomerId id) : base(id)
         {
+        }
+
+        public void SetAddressDetail(
+            AddressDetail addressDetail)
+        {
+            Emit(new AddressDetailSetEvent(addressDetail));
+        }
+
+        public void AddAddress(
+            Address address)
+        {
+            
+        }
+
+        public void UpdateAddress(
+            Address address)
+        {
+           
+        }
+
+        public void SetAsDefaultShipping(
+            AddressId addressId)
+        {
+
+        }
+
+        public void SetAsDefaultMailing(
+            AddressId addressId)
+        {
+
         }
 
         public void Create(
