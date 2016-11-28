@@ -4,12 +4,12 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Events
 {
-    [EventVersion("AddressDetailSet", 1)]
-    public class AddressDetailSetEvent : AggregateEvent<CustomerAggregate, CustomerId>
+    [EventVersion("AddressAdded", 1)]
+    public class AddressAddedEvent : AggregateEvent<CustomerAggregate, CustomerId>
     {
-        public AddressDetail AddressDetail { get; }
+        public AddressDetail AddressDetail { get; private set; }
 
-        public AddressDetailSetEvent(AddressDetail addressDetail)
+        public AddressAddedEvent(AddressDetail addressDetail)
         {
             AddressDetail = addressDetail;
         }

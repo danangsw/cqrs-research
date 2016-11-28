@@ -60,6 +60,11 @@
     <Compile Include="Domain\Model\CustomerModel\Entities\AccountId.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\Address.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\AddressId.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingAddressUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingDefaultUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingAddressUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingDefaultUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\CustomerCreatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressDetailSetEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\GeneralInfoUpdatedEvent.cs" />

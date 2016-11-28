@@ -14,6 +14,8 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
         public CustomerId Id { get; private set; }
         public GeneralInfo GeneralInfo { get; private set; }
 
+        public AddressDetail AddressDetail { get; private set; }
+
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, CustomerCreatedEvent> domainEvent)
         {
             Id = domainEvent.AggregateIdentity;
@@ -25,11 +27,17 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
             GeneralInfo = domainEvent.AggregateEvent.GeneralInfo;
         }
 
+        public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AddressAddedEvent> domainEvent)
+        {
+            AddressDetail = domainEvent.AggregateEvent.AddressDetail;
+        }
+
         public Customer toCustomer()
         {
             return new Customer(
                 Id,
-                GeneralInfo);
+                GeneralInfo,
+                AddressDetail);
         }
     }
 }

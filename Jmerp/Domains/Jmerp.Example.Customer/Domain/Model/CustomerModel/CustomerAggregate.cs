@@ -23,15 +23,10 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
         }
 
         public void SetAddressDetail(
-            AddressDetail addressDetail)
+            List<Address> addresses)
         {
-            Emit(new AddressDetailSetEvent(addressDetail));
-        }
-
-        public void AddAddress(
-            Address address)
-        {
-            
+            var addressDetailNew = new AddressDetail(addresses);
+            Emit(new AddressDetailSetEvent(addressDetailNew));
         }
 
         public void UpdateAddress(
@@ -52,6 +47,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
 
         }
 
+        #region Customer Created
         public void Create(
             GeneralInfo generalInfo)
         {
@@ -63,6 +59,13 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             Emit(new CustomerCreatedEvent(generalInfo));
         }
 
+        public void Apply(CustomerCreatedEvent e)
+        {
+            GeneralInfo = e.GeneralInfo;
+        }
+        #endregion
+
+        #region General Info Updated
         public void Update(
             string organizationName,
             string contactPerson,
@@ -71,14 +74,9 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             string email,
             string web)
         {
-            var generalInfo = new GeneralInfo(organizationName,contactPerson,phone,fax,email,web);
+            var generalInfo = new GeneralInfo(organizationName, contactPerson, phone, fax, email, web);
 
             Emit(new GeneralInfoUpdatedEvent(generalInfo));
-        }
-
-        public void Apply(CustomerCreatedEvent e)
-        {
-            GeneralInfo = e.GeneralInfo;
         }
 
         public void Apply(GeneralInfoUpdatedEvent e)
@@ -87,5 +85,23 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
 
             GeneralInfo = e.GeneralInfo;
         }
+        #endregion
+
+        #region Address Detail Added
+        public void AddAddress(
+            List<Address> addresses)
+        {
+            var addressDetailNew = new AddressDetail(addresses);
+
+            Emit(new AddressAddedEvent(addressDetailNew));
+        }
+
+        public void Apply(AddressAddedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+
+            AddressDetail = e.AddressDetail;
+        }
+        #endregion
     }
 }

@@ -1,6 +1,8 @@
-﻿using EventFlow.ValueObjects;
+﻿using EventFlow.Extensions;
+using EventFlow.ValueObjects;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Helpers;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +16,15 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
         {
             var addressList = (addresses ?? Enumerable.Empty<Address>()).ToList();
 
-            if (!addressList.Any()) throw new ArgumentException(nameof(addresses));
+            AddressDetailSpecs.IsAnyList.ThrowDomainErrorIfNotStatisfied(addressList);
 
-            Addresses = addressList;
+            if (!Addresses.Any())
+                Addresses = new List<Address>();
+
+            Addresses.AddRange(addressList);
         }
 
-        public IReadOnlyList<Address> Addresses { get; private set; }
+        public List<Address> Addresses { get; private set; }
 
         public AddressDetail SetAsDefaultShippingAddress(AddressId addressId)
         {
