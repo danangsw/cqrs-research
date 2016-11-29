@@ -18,10 +18,14 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 
             AddressDetailSpecs.IsAnyList.ThrowDomainErrorIfNotStatisfied(addressList);
 
-            if (Addresses == null || Addresses.Any())
-                Addresses = new List<Address>();
+            Addresses = addressList;
+        }
 
-            Addresses.AddRange(addressList);
+        public AddressDetail Add(IEnumerable<Address> addresses)
+        {
+            var addressList = Addresses ?? new List<Address>();
+            addressList.AddRange(addresses);
+            return new AddressDetail(addressList);
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

@@ -64,7 +64,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             customerReadModel = customerQuery.ToList();
             var latestAddressDetail = customerReadModel?.FirstOrDefault()?.AddressDetail;
 
-            if (latestAddressDetail != addressDetail)
+            if (!latestAddressDetail.Addresses.Contains(addressList.FirstOrDefault()))
                 return ResponseResult.Failed("Failed created.");
 
             return ResponseResult.Succeed(

@@ -50,7 +50,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
 
     public static class CustomerAddressDetails
     {
-        public static readonly AddressDto AddressDto_CS00001 = new AddressDto() {
+        public static readonly AddressDto AddressDto1_CS00001 = new AddressDto() {
             //Id = null,
             CustomerId = CustomerDtoList.Customer_CS00001.Id,
             AddressType = CustomerAddressTypeConstants.ShippingAddress,
@@ -59,6 +59,30 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             City = "Jakarta Selatan",
             StateProvince = "DKI Jakarta",
             PostalCode = "120345",
+            SetDefault = false
+        };
+        public static readonly AddressDto AddressDto2_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressLine1 = "Jl. Mawar",
+            AddressLine2 = "Cilandak",
+            City = "Jakarta Selatan",
+            StateProvince = "DKI Jakarta",
+            PostalCode = "120345",
+            SetDefault = false
+        };
+        public static readonly AddressDto AddressDto3_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.ShippingAddress,
+            AddressLine1 = "Jl. Melati",
+            AddressLine2 = "Cinere",
+            City = "Depok",
+            StateProvince = "Jawa Barat",
+            PostalCode = "345678",
             SetDefault = false
         };
     }

@@ -57,9 +57,21 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
 
             var serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
             var responseAddAddress = await serviceAddAddress.AddAddressSync(
-                new List<AddressDto>() { CustomerAddressDetails.AddressDto_CS00001 },
+                new List<AddressDto>() { CustomerAddressDetails.AddressDto1_CS00001 },
                 CancellationToken.None);
             var responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
+
+            serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
+            responseAddAddress = await serviceAddAddress.AddAddressSync(
+                new List<AddressDto>() { CustomerAddressDetails.AddressDto2_CS00001 },
+                CancellationToken.None);
+            responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
+
+            serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
+            responseAddAddress = await serviceAddAddress.AddAddressSync(
+                new List<AddressDto>() { CustomerAddressDetails.AddressDto3_CS00001 },
+                CancellationToken.None);
+            responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
 
             //Assert
             responseCreate.Succeeded.Should().BeTrue();

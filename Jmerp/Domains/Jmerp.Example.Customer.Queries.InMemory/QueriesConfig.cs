@@ -1,6 +1,7 @@
 ﻿using EventFlow;
 using EventFlow.Extensions;
 using Jmerp.Example.Customers.Queries.InMemory.Customers;
+using Jmerp.Example.Customers.Queries.InMemory.Customers.ReadModelLocators;
 using System.Reflection;
 
 namespace Jmerp.Example.Customers.Queries.InMemory
@@ -15,6 +16,7 @@ namespace Jmerp.Example.Customers.Queries.InMemory
             return options
                 .AddQueryHandlers(Assembly)
                 .UseInMemoryReadStoreFor<CustomerReadModel>();
+                //.UseInMemoryReadStoreFor<CustomerReadModel, CustomerAddressReadModelLocator>();
         }
     }
 }

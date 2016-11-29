@@ -29,12 +29,6 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             Emit(new AddressDetailSetEvent(addressDetailNew));
         }
 
-        public void UpdateAddress(
-            Address address)
-        {
-           
-        }
-
         public void SetAsDefaultShipping(
             AddressId addressId)
         {
@@ -87,11 +81,32 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
         }
         #endregion
 
+        #region Address Detail Updated
+        public void UpdateAddress(Address address)
+        {
+            var updatedAddressDetail = AddressDetail.UpdateAddress(address);
+
+            Emit(new AddressUpdatedEvent(updatedAddressDetail));
+        }
+
+        public void Apply(AddressUpdatedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+
+            AddressDetail = e.AddressDetail;
+        }
+        #endregion
+
         #region Address Detail Added
         public void AddAddress(
             List<Address> addresses)
         {
             var addressDetailNew = new AddressDetail(addresses);
+
+            if (AddressDetail != null)
+            {
+                addressDetailNew = AddressDetail.Add(addresses);
+            }
 
             Emit(new AddressAddedEvent(addressDetailNew));
         }

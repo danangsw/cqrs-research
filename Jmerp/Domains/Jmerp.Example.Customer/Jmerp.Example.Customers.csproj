@@ -51,6 +51,7 @@
     <Compile Include="Application\CustomerApplicationService.cs" />
     <Compile Include="Application\ICustomersApplicationService.cs" />
     <Compile Include="CustomerConfiguration.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AddressUpdateCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressAddCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\GeneralInfoUpdateCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Customer.cs" />

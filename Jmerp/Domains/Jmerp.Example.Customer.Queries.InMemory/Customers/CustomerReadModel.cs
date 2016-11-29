@@ -1,5 +1,4 @@
-﻿using System;
-using EventFlow.Aggregates;
+﻿using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Events;
@@ -30,6 +29,7 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
 
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AddressAddedEvent> domainEvent)
         {
+            Id = domainEvent.AggregateIdentity;
             AddressDetail = domainEvent.AggregateEvent.AddressDetail;
         }
 
