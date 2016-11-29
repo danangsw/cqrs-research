@@ -51,6 +51,7 @@
     <Compile Include="Application\CustomerApplicationService.cs" />
     <Compile Include="Application\ICustomersApplicationService.cs" />
     <Compile Include="CustomerConfiguration.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AddressAddCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\GeneralInfoUpdateCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Customer.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\CustomerCreateCommand.cs" />
@@ -62,8 +63,10 @@
     <Compile Include="Domain\Model\CustomerModel\Entities\AddressId.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingAddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingDefaultUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressRemovedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingAddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingDefaultUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAddedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\CustomerCreatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressDetailSetEvent.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Domain\Model\CustomerModel\Helpers\CustomerConstant.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetAllCustomersQuery.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetCustomersQuery.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Specifications\AddressDetailSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\CustomerSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\GeneralInfoSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\ValueObjects\AccountingDetail.cs" />

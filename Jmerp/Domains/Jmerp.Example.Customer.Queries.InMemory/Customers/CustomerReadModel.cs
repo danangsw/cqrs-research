@@ -9,7 +9,8 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
 {
     public class CustomerReadModel : IReadModel,
         IAmReadModelFor<CustomerAggregate, CustomerId, CustomerCreatedEvent>,
-        IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>
+        IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>,
+        IAmReadModelFor<CustomerAggregate, CustomerId, AddressAddedEvent>
     {
         public CustomerId Id { get; private set; }
         public GeneralInfo GeneralInfo { get; private set; }

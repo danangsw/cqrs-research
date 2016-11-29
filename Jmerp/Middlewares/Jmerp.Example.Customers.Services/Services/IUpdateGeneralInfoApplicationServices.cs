@@ -29,15 +29,12 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             CancellationToken cancellationToken);
     }
 
-    public class UpdateGeneralInfoApplicationServices : IUpdateGeneralInfoApplicationServices
+    public class UpdateGeneralInfoApplicationServices : CustomerBasedServices, 
+        IUpdateGeneralInfoApplicationServices
     {
-        private ICommandBus _commandBus;
-        private IQueryProcessor _queryProcessor;
-
         public UpdateGeneralInfoApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
+            :base(commandBus, queryProcessor)
         {
-            _commandBus = commandBus;
-            _queryProcessor = queryProcessor;
         }
 
         public async Task<ResponseResult> UpdateAsync(
@@ -59,7 +56,6 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             if (strErrors.Count > 0) return ResponseResult.Failed(strErrors.ToArray());
 
             var customerIdentity = new CustomerId(customerId);
-            var customerSourceId = SourceId.New;
 
             var customerQuery = await ReadCustomerModel(customerIdentity);
             var customerReadModel = customerQuery.ToList();
@@ -68,7 +64,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 return ResponseResult.Failed("Customer is not found");
 
             await _commandBus.PublishAsync(
-                new GeneralInfoUpdateCommand(customerIdentity, customerSourceId, 
+                new GeneralInfoUpdateCommand(customerIdentity, _commandSourceId, 
                 organizationName, contactPerson, phone, fax, email, web), cancellationToken)
                 .ConfigureAwait(false);
 
@@ -81,13 +77,6 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)
                 );
-        }
-
-        private async Task<IReadOnlyCollection<Customer>> ReadCustomerModel(CustomerId id)
-        {
-            return await _queryProcessor.ProcessAsync(
-                new GetCustomersQuery(new List<CustomerId> { id }), CancellationToken.None)
-                .ConfigureAwait(false);
         }
     }
 }

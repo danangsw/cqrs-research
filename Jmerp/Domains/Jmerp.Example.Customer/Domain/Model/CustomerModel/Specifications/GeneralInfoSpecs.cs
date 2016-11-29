@@ -24,11 +24,11 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications
             {
                 if (String.IsNullOrEmpty(obj.OrganizationName))
                 {
-                    yield return $"{nameof(obj.OrganizationName)} Cannot be empty or null.";
+                    yield return $"'{nameof(obj.OrganizationName)}' Cannot be empty or null.";
                 }
                 if (String.IsNullOrEmpty(obj.Phone))
                 {
-                    yield return $"{nameof(obj.Phone)} Cannot be empty or null.";
+                    yield return $"'{nameof(obj.Phone)}' Cannot be empty or null.";
                 }
                 if (!(new Regex(emailRegex, RegexOptions.Compiled).IsMatch(obj.Email)))
                 {
@@ -66,7 +66,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications
             {
                 if (String.IsNullOrEmpty(obj))
                 {
-                    yield return $"{nameof(obj)} Cannot be empty or null.";
+                    yield return $"'{nameof(obj)}' Cannot be empty or null.";
                 }
             }
         }

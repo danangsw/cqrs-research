@@ -55,6 +55,12 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
                 CancellationToken.None);
             var responseUpdateResult = ConvertResponse(responseUpdate.Responses)?.ToList();
 
+            var serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
+            var responseAddAddress = await serviceAddAddress.AddAddressSync(
+                new List<AddressDto>() { CustomerAddressDetails.AddressDto_CS00001 },
+                CancellationToken.None);
+            var responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
+
             //Assert
             responseCreate.Succeeded.Should().BeTrue();
             responseCreate.Errors.Should().HaveCount(0);
@@ -63,6 +69,10 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             responseUpdate.Succeeded.Should().BeTrue();
             responseUpdate.Errors.Should().HaveCount(0);
             responseUpdateResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseAddAddress.Succeeded.Should().BeTrue();
+            responseAddAddress.Errors.Should().HaveCount(0);
+            responseAddAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

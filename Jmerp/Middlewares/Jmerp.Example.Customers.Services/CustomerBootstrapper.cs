@@ -21,6 +21,7 @@ namespace Jmerp.Example.Customers.Middlewares
                 {
                     sr.Register<ICreateGeneralInfoApplicationServices, CreateGeneralInfoApplicationServices>();
                     sr.Register<IUpdateGeneralInfoApplicationServices, UpdateGeneralInfoApplicationServices>();
+                    sr.Register<IAddAddressApplicationServices, AddAddressApplicationServices>();
                 });
         }
     }

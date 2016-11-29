@@ -18,16 +18,29 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 
             AddressDetailSpecs.IsAnyList.ThrowDomainErrorIfNotStatisfied(addressList);
 
-            if (!Addresses.Any())
+            if (Addresses == null || Addresses.Any())
                 Addresses = new List<Address>();
 
             Addresses.AddRange(addressList);
         }
 
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return TestProperty;
+
+            foreach (var item in Addresses.OrderBy(o => o.Id).ToList())
+            {
+                yield return item;
+            }
+        }
+        
         public List<Address> Addresses { get; private set; }
+
+        public int TestProperty { get; private set; }
 
         public AddressDetail SetAsDefaultShippingAddress(AddressId addressId)
         {
+
             return SetAsDefaultFor(addressId, CustomerAddressTypeConstants.ShippingAddress);
         }
 

@@ -4,6 +4,7 @@ using System.Threading;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
 using System;
 using System.Collections.Generic;
+using EventFlow.Core;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Commands
 {
@@ -11,6 +12,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Commands
     { 
         public AddressAddCommand(
             CustomerId aggregateId,
+            ISourceId sourceId,
             List<Address> address)
             : base(aggregateId)
         {

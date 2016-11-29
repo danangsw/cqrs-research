@@ -1,5 +1,7 @@
 ﻿using EventFlow.Entities;
+using EventFlow.Extensions;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
@@ -18,13 +20,13 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
             bool setDefault = false
             ) : base(id)
         {
-            if (customerId == null) throw new ArgumentNullException(nameof(customerId));
-            if (string.IsNullOrEmpty(addressType)) throw new ArgumentNullException(nameof(addressType));
-            if (string.IsNullOrEmpty(addressLine1)) throw new ArgumentNullException(nameof(addressLine1));
-            if (string.IsNullOrEmpty(addressLine2)) throw new ArgumentNullException(nameof(addressLine2));
-            if (string.IsNullOrEmpty(city)) throw new ArgumentNullException(nameof(city));
-            if (string.IsNullOrEmpty(stateProvince)) throw new ArgumentNullException(nameof(stateProvince));
-            if (string.IsNullOrEmpty(postalCode)) throw new ArgumentNullException(nameof(postalCode));
+            AddressDetailSpecs.IsNotNullOrEmptyIdentity.ThrowDomainErrorIfNotStatisfied(customerId);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressType);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressLine1);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressLine2);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(city);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(stateProvince);
+            AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(postalCode);
 
             CustomerId = customerId;
             AddressType = addressType;

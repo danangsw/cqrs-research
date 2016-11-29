@@ -27,4 +27,3 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers.QueryHandlers
         }
     }
 }
-

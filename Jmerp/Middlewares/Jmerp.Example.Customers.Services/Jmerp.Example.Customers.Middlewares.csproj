@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerBootstrapper.cs" />
+    <Compile Include="Services\CustomerBasedServices.cs" />
+    <Compile Include="Services\IAddAddressApplicationServices.cs" />
     <Compile Include="Services\ICreateGeneralInfoApplicationServices.cs" />
     <Compile Include="Mappings\CustomerMapperConfiguration.cs" />
     <Compile Include="Mappings\Profiles\CustomerDtoToDomainModelMappingProfile.cs" />
