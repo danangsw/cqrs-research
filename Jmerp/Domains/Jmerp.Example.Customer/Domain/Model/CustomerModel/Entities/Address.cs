@@ -3,6 +3,7 @@ using EventFlow.Extensions;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System;
+using System.Collections.Generic;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
 {
@@ -46,5 +47,10 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
         public string StateProvince { get; }
         public string PostalCode { get; }
         public bool SetDefault { get; }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return ToString();
+        }
     }
 }

@@ -73,6 +73,15 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
                 CancellationToken.None);
             responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
 
+            var addressUpdate = responseAddAddressResult.FirstOrDefault().AddressDetail.Addresses.FirstOrDefault();
+            addressUpdate.AddressLine1 = "Jl. Kemenyan No.1";
+            addressUpdate.PostalCode = "909090";
+
+            var serviceUpdateAddress = _container.Resolve<IUpdateAddressApplicationServices>();
+            var responseUpdateAddress = await serviceUpdateAddress.UpdateAddressSync(
+                addressUpdate, CancellationToken.None);
+            var responseUpdateAddressResult = ConvertResponse(responseUpdateAddress.Responses)?.ToList();
+
             //Assert
             responseCreate.Succeeded.Should().BeTrue();
             responseCreate.Errors.Should().HaveCount(0);
@@ -85,6 +94,10 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             responseAddAddress.Succeeded.Should().BeTrue();
             responseAddAddress.Errors.Should().HaveCount(0);
             responseAddAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseUpdateAddress.Succeeded.Should().BeTrue();
+            responseUpdateAddress.Errors.Should().HaveCount(0);
+            responseUpdateAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

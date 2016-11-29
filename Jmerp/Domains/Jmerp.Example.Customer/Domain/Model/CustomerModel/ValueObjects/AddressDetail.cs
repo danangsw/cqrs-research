@@ -62,12 +62,12 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                 .Select(a => new Address(
                     a.Id,
                     a.CustomerId,
-                    a.AddressType,
-                    a.AddressLine1,
-                    a.AddressLine2,
-                    a.City,
-                    a.StateProvince,
-                    a.PostalCode));
+                    address.AddressType,
+                    address.AddressLine1,
+                    address.AddressLine2,
+                    address.City,
+                    address.StateProvince,
+                    address.PostalCode));
             addressList.AddRange(updatedAddress);
 
             var otherAddresses = Addresses

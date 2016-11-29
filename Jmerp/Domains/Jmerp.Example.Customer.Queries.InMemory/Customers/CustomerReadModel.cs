@@ -1,4 +1,5 @@
-﻿using EventFlow.Aggregates;
+﻿using System;
+using EventFlow.Aggregates;
 using EventFlow.ReadStores;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Events;
@@ -6,15 +7,24 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 
 namespace Jmerp.Example.Customers.Queries.InMemory.Customers
 {
-    public class CustomerReadModel : IReadModel,
-        IAmReadModelFor<CustomerAggregate, CustomerId, CustomerCreatedEvent>,
-        IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>,
-        IAmReadModelFor<CustomerAggregate, CustomerId, AddressAddedEvent>
+    public class CustomerReadModel : IReadModel
+        ,IAmReadModelFor<CustomerAggregate, CustomerId, CustomerCreatedEvent>
+        ,IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>
+        ,IAmReadModelFor<CustomerAggregate, CustomerId, AddressAddedEvent>
+        ,IAmReadModelFor<CustomerAggregate, CustomerId, AddressUpdatedEvent>
     {
         public CustomerId Id { get; private set; }
         public GeneralInfo GeneralInfo { get; private set; }
 
         public AddressDetail AddressDetail { get; private set; }
+
+        public Customer toCustomer()
+        {
+            return new Customer(
+                Id,
+                GeneralInfo,
+                AddressDetail);
+        }
 
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, CustomerCreatedEvent> domainEvent)
         {
@@ -33,12 +43,9 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
             AddressDetail = domainEvent.AggregateEvent.AddressDetail;
         }
 
-        public Customer toCustomer()
+        public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AddressUpdatedEvent> domainEvent)
         {
-            return new Customer(
-                Id,
-                GeneralInfo,
-                AddressDetail);
+            AddressDetail = domainEvent.AggregateEvent.AddressDetail;
         }
     }
 }
