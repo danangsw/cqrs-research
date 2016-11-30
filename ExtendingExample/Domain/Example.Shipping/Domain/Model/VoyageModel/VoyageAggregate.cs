@@ -17,6 +17,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel
 
         public VoyageAggregate(VoyageId id) : base(id)
         {
+            _state.Init();
             Register(_state);
         }
 
@@ -52,7 +53,7 @@ namespace Example.Shipping.Domain.Model.VoyageModel
                 UpdateScheduleCarrierMovement(carrierMovement);
             });
 
-           
+            Emit(new VoyageScheduleUpdatedEvent(delayedSchedule));
         }
     }
 }

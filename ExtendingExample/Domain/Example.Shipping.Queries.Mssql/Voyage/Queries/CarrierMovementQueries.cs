@@ -10,15 +10,23 @@ using System.Threading.Tasks;
 
 namespace Example.Shipping.Queries.Mssql.Voyage.Queries
 {
+
+    public interface ICarrierMovementQueries
+    {
+        Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection, string inQueryVoyageIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<CarrierMovementReadModel>> GetAllCarrierMovement(IMsSqlConnection _msSqlConnection, CancellationToken cancellationToken);
+    }
+
+
     public class CarrierMovementQueries : ICarrierMovementQueries
     {
-        public async Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection , VoyageId voyageId, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection , string inQueryVoyageIds, CancellationToken cancellationToken)
         {
             var readCarrierMovementModels = await _msSqlConnection.QueryAsync<CarrierMovementReadModel>(
                 Label.Named("mssql-fetch-carriermovement-read-model"),
                 cancellationToken,
-                "SELECT * FROM [CarrierMovement] WHERE AggregateId = @AggregateId",
-                 new { AggregateId = voyageId.Value })
+                "SELECT * FROM [CarrierMovement] WHERE VoyageId in @VoyageIds",
+                 new { VoyageIds = inQueryVoyageIds })
                 .ConfigureAwait(false);
 
             return readCarrierMovementModels;

@@ -17,6 +17,15 @@ namespace Example.Shipping.Domain.Model.VoyageModel
     {
         public Schedule Schedule { get; private set; }
 
+
+        public void Init()
+        {
+            if (Schedule == null)
+            {
+                Schedule = new Schedule();
+            }
+        }
+
         public void Apply(CarrierMovementUpdatedEvent aggregateEvent)
         {
             Schedule = Schedule.UpdateCarrierMovement(aggregateEvent.CarrierMovement);
@@ -29,12 +38,12 @@ namespace Example.Shipping.Domain.Model.VoyageModel
 
         public void Apply(VoyageCreatedEvent aggregateEvent)
         {
-            Schedule = new Schedule();
+            
         }
 
         public void Apply(VoyageScheduleUpdatedEvent aggregateEvent)
         {
-            Schedule = aggregateEvent.Schedule;
+
         }
     }
 }

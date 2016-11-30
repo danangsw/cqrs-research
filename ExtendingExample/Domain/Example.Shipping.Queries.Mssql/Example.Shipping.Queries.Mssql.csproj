@@ -65,14 +65,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cargo\CargoReadModel.cs" />
+    <Compile Include="Cargos\CargoReadModel.cs" />
+    <Compile Include="Cargos\Queries\CargoQueries.cs" />
+    <Compile Include="Cargos\QueryHandlers\GetCargosDependentOnVoyageQueryHandler.cs" />
+    <Compile Include="Cargos\QueryHandlers\GetCargosQueryHandler.cs" />
+    <Compile Include="Cargos\TransportLegReadModel.cs" />
     <Compile Include="ExampleShippingQueries.cs" />
     <Compile Include="Locations\LocationReadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Voyage\CarrierMovementReadModel.cs" />
     <Compile Include="Voyage\Queries\CarrierMovementQueries.cs" />
-    <Compile Include="Voyage\Queries\ICarrierMovementQueries.cs" />
-    <Compile Include="Voyage\Queries\IVoyageQueries.cs" />
     <Compile Include="Voyage\Queries\VoyageQueries.cs" />
     <Compile Include="Voyage\QueryHandlers\GetAllVoyagesQueryHandler.cs" />
     <Compile Include="Voyage\QueryHandlers\GetVoyagesQueryHandler.cs" />
@@ -83,6 +85,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Example.General\Example.General.csproj">
+      <Project>{a5a7ca0c-e217-41b6-b28f-e8c8a838b683}</Project>
+      <Name>Example.General</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Shipping\Example.Shipping.csproj">
       <Project>{396247EF-45DB-4A41-A39A-B7F87E26225B}</Project>
       <Name>Example.Shipping</Name>

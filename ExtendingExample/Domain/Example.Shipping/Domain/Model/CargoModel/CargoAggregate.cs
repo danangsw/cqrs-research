@@ -1,5 +1,6 @@
 ﻿using EventFlow.Aggregates;
 using EventFlow.Extensions;
+using Example.Shipping.Domain.Model.CargoModel.Entities;
 using Example.Shipping.Domain.Model.CargoModel.Events;
 using Example.Shipping.Domain.Model.CargoModel.ValueObjects;
 using System;
@@ -16,6 +17,7 @@ namespace Example.Shipping.Domain.Model.CargoModel
 
         public CargoAggregate(CargoId id) : base(id)
         {
+            _state.Init();
             Register(_state);
         }
 
@@ -33,7 +35,17 @@ namespace Example.Shipping.Domain.Model.CargoModel
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
             Route.Specification().ThrowDomainErrorIfNotStatisfied(itinerary);
 
+            foreach (var transportLeg in itinerary.TransportLegs)
+            {
+                AddTransportLeg(transportLeg);
+            }
+
             Emit(new CargoItinerarySetEvent(itinerary));
+        }
+
+        public void AddTransportLeg(TransportLeg transportLeg)
+        {
+            Emit(new TransportLegAddedEvent(transportLeg));
         }
     }
 }

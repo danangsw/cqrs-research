@@ -60,8 +60,12 @@
     <Compile Include="Domain\Model\CargoModel\Commands\CargoSetItineraryCommand.cs" />
     <Compile Include="Domain\Model\CargoModel\Entities\TransportLeg.cs" />
     <Compile Include="Domain\Model\CargoModel\Entities\TransportLegId.cs" />
+    <Compile Include="Domain\Model\CargoModel\Entities\TransportLegLocator.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\CargoBookedEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\CargoItinerarySetEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Events\TransportLegAddedEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Queries\GetCargoQuery.cs" />
+    <Compile Include="Domain\Model\CargoModel\Queries\GetCargosDependentOnVoyageQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Specifications\RouteSpecification.cs" />
     <Compile Include="Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecification.cs" />
     <Compile Include="Domain\Model\CargoModel\ValueObjects\Itinerary.cs" />
@@ -99,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Model\CargoModel\Jobs\" />
-    <Folder Include="Domain\Model\CargoModel\Queries\" />
     <Folder Include="Domain\Model\CargoModel\Subscribers\" />
   </ItemGroup>
   <ItemGroup>
