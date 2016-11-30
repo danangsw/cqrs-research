@@ -1,16 +1,17 @@
 ﻿using EventFlow.Aggregates;
 using EventFlow.EventStores;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Events
 {
-    [EventVersion("AddressAsMailingDefaultUpdated", 1)]
-    public class AddressAsMailingDefaultUpdatedEvent : AggregateEvent<CustomerAggregate, CustomerId>
+    [EventVersion("AddressAsBillingDefaultUpdated", 1)]
+    public class AddressAsBillingDefaultUpdatedEvent : AggregateEvent<CustomerAggregate, CustomerId>
     {
-        public AddressId AddressId { get; }
-        public AddressAsMailingDefaultUpdatedEvent(AddressId addressId)
+        public AddressDetail AddressDetail { get; private set; }
+        public AddressAsBillingDefaultUpdatedEvent(AddressDetail addressDetail)
         {
-            AddressId = addressId;
+            AddressDetail = addressDetail;
         }
     }
 }

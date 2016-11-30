@@ -8,11 +8,9 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.Commands;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System.Collections.Generic;
 using EventFlow.Queries;
-using Jmerp.Example.Customers.Domain.Model.CustomerModel.Queries;
 using System.Linq;
-using System;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
-using EventFlow.Core;
+using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
@@ -61,7 +59,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             var customerReadModel = customerQuery.ToList();
 
             if (customerReadModel?.FirstOrDefault()?.Id != customerIdentity)
-                return ResponseResult.Failed("Customer is not found");
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
             await _commandBus.PublishAsync(
                 new GeneralInfoUpdateCommand(customerIdentity, _commandSourceId, 
@@ -72,7 +70,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             customerReadModel = customerQuery.ToList();
 
             if (customerReadModel?.FirstOrDefault()?.GeneralInfo != generalInfo)
-                return ResponseResult.Failed("Failed created.");
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00002, customerIdentity.Value));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

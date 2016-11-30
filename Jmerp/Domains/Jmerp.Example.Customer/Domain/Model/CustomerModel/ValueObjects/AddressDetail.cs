@@ -11,6 +11,10 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 {
     public class AddressDetail : ValueObject
     {
+        public List<Address> Addresses { get; private set; }
+
+        public int TestProperty { get; private set; }
+
         public AddressDetail(
             IEnumerable<Address> addresses)
         {
@@ -21,31 +25,36 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
             Addresses = addressList;
         }
 
-        public AddressDetail Add(IEnumerable<Address> addresses)
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return TestProperty;
+            yield return Addresses;
+        }
+
+        public AddressDetail AddAddress(IEnumerable<Address> addresses)
         {
             var addressList = Addresses ?? new List<Address>();
             addressList.AddRange(addresses);
             return new AddressDetail(addressList);
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        public AddressDetail RemoveAddress(AddressId addressId)
         {
-            yield return TestProperty;
-            yield return Addresses;
-        }
-        
-        public List<Address> Addresses { get; private set; }
+            var addressList = Addresses ?? new List<Address>();
+            var itemRemove = Addresses.SingleOrDefault(i => i.Id == addressId);
+            addressList.Remove(itemRemove);
 
-        public int TestProperty { get; private set; }
+            return new AddressDetail(addressList);
+        }
 
         public AddressDetail SetAsDefaultShippingAddress(AddressId addressId)
         {
             return SetAsDefaultFor(addressId, CustomerAddressTypeConstants.ShippingAddress);
         }
 
-        public AddressDetail SetAsDefaultMailingAddress(AddressId addressId)
+        public AddressDetail SetAsDefaultBillingAddress(AddressId addressId)
         {
-            return SetAsDefaultFor(addressId, CustomerAddressTypeConstants.MailingAddress);
+            return SetAsDefaultFor(addressId, CustomerAddressTypeConstants.BillingAddress);
         }
 
         public AddressDetail UpdateAddress(Address address)

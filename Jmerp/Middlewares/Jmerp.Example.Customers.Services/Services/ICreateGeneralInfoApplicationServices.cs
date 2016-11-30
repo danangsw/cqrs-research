@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using EventFlow.Queries;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Queries;
 using System.Linq;
+using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
@@ -51,7 +52,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             var customerReadModel = customerQuery.ToList();
 
             if (customerReadModel?.FirstOrDefault()?.Id != customerModel?.Id)
-                return ResponseResult.Failed("Failed created.");
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00001, customerModel?.Id.Value));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

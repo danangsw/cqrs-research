@@ -7,14 +7,11 @@ namespace Jmerp.Example.Customers.Middlewares
 {
     public static class CustomerBootstrapper
     {
-        //public static Assembly Assembly { get; } = typeof(CustomerConfiguration).Assembly;
-
         public static IEventFlowOptions CustomerBootstrapperConfiguration(this IEventFlowOptions options)
         {
             CustomerMapperConfiguration.Configure();
 
             return options
-                //.AddDefaults(Assembly)
                 .CustomerConfigurationDomain()
                 .ConfigureCustomerQueriesInMemory()
                 .RegisterServices(sr =>
@@ -24,6 +21,7 @@ namespace Jmerp.Example.Customers.Middlewares
                     sr.Register<IAddAddressApplicationServices, AddAddressApplicationServices>();
                     sr.Register<IUpdateAddressApplicationServices, UpdateAddressApplicationServices>();
                     sr.Register<ISetAddressAsDefaultApplicationServices, SetAddressAsDefaultApplicationServices>();
+                    sr.Register<IRemoveAddressApplicationServices, RemoveAddressApplicationServices>();
                 });
         }
     }

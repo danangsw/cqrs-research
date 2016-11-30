@@ -18,30 +18,78 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
     {
         public GeneralInfo GeneralInfo { get; private set; }
         public AddressDetail AddressDetail { get; private set; }
+        public AccountingDetail AccountingDetail { get; private set; }
 
         public CustomerAggregate(CustomerId id) : base(id)
         {
         }
 
-        public void SetAddressDetail(
-            List<Address> addresses)
+        #region Accounts Added
+        public void AddAccounts(List<Account> accounts)
         {
-            var addressDetailNew = new AddressDetail(addresses);
-            Emit(new AddressDetailSetEvent(addressDetailNew));
+            Emit(new AccountAddedEvent(accounts));
         }
+
+        public void Apply(AccountAddedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+            var accounts = AccountingDetail.AddAccount(e.Accounts);
+            AccountingDetail = accounts;
+        }
+        #endregion
+
+        #region Account Updated
+        public void UpdateAccount(Account account)
+        {
+            Emit(new AccountUpdatedEvent(account));
+        }
+
+        public void Apply(AccountUpdatedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+            var accounts = AccountingDetail.UpdateAccount(e.Account);
+            AccountingDetail = accounts;
+        }
+        #endregion
+
+        #region Accounts Removed
+        public void RemoveAccounts(List<AccountId> accountIds)
+        {
+            Emit(new AccountRemovedEvent(accountIds));
+        }
+
+        public void Apply(AccountRemovedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+            var accounts = AccountingDetail.RemoveAccount(e.AccountIds);
+            AccountingDetail = accounts;
+        }
+        #endregion
 
         #region Address Set as Default
         public void SetAsDefault(
             AddressId addressId, string addressType)
         {
-            var updatedAddressDetail = (addressType == CustomerAddressTypeConstants.MailingAddress)
-                ? AddressDetail.SetAsDefaultMailingAddress(addressId)
-                : AddressDetail.SetAsDefaultShippingAddress(addressId);
-
-            Emit(new AddressAsDefaultSetEvent(updatedAddressDetail));
+            if (addressType == CustomerAddressTypeConstants.BillingAddress)
+            {
+                var updatedAddressDetail = AddressDetail.SetAsDefaultBillingAddress(addressId);
+                Emit(new AddressAsBillingDefaultUpdatedEvent(updatedAddressDetail));
+            }
+            else if (addressType == CustomerAddressTypeConstants.ShippingAddress)
+            {
+                var updatedAddressDetail = AddressDetail.SetAsDefaultShippingAddress(addressId);
+                Emit(new AddressAsShippingDefaultUpdatedEvent(updatedAddressDetail));
+            }
         }
 
-        public void Apply(AddressAsDefaultSetEvent e)
+        public void Apply(AddressAsBillingDefaultUpdatedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+
+            AddressDetail = e.AddressDetail;
+        }
+
+        public void Apply(AddressAsShippingDefaultUpdatedEvent e)
         {
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
 
@@ -114,13 +162,30 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
 
             if (AddressDetail != null)
             {
-                addressDetailNew = AddressDetail.Add(addresses);
+                addressDetailNew = AddressDetail.AddAddress(addresses);
             }
 
             Emit(new AddressAddedEvent(addressDetailNew));
         }
 
         public void Apply(AddressAddedEvent e)
+        {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
+
+            AddressDetail = e.AddressDetail;
+        }
+        #endregion
+
+        #region Address Detail Removed
+        public void RemoveAddress(
+            AddressId addressId)
+        {
+            var addressDetailRemove = AddressDetail.RemoveAddress(addressId);
+
+            Emit(new AddressRemovedEvent(addressDetailRemove));
+        }
+
+        public void Apply(AddressRemovedEvent e)
         {
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
 

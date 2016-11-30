@@ -8,12 +8,10 @@ using Jmerp.Example.Customers.Domain.Model.CustomerModel.Commands;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System.Collections.Generic;
 using EventFlow.Queries;
-using Jmerp.Example.Customers.Domain.Model.CustomerModel.Queries;
 using System.Linq;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
-using System;
-using EventFlow.Core;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
+using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
@@ -52,7 +50,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             var customerReadModel = customerQuery.ToList();
 
             if (customerReadModel?.FirstOrDefault()?.Id != customerIdentity)
-                return ResponseResult.Failed("Customer is not found");
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
             var addressDetail = new AddressDetail(addressList);
 
@@ -65,7 +63,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             var latestAddressDetail = customerReadModel?.FirstOrDefault()?.AddressDetail;
 
             if (!latestAddressDetail.Addresses.Contains(addressList.FirstOrDefault()))
-                return ResponseResult.Failed("Failed created.");
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00001, addressList.ToString()));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

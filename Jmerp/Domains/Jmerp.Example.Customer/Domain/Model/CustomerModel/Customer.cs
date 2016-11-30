@@ -9,7 +9,8 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
         public Customer(
             CustomerId id,
             GeneralInfo generalInfo,
-            AddressDetail addressDetail = null
+            AddressDetail addressDetail = null,
+            AccountingDetail accountingDetail = null
             ) 
             : base(id)
         {
@@ -17,9 +18,11 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
 
             GeneralInfo = generalInfo;
             AddressDetail = addressDetail;
+            AccountingDetail = accountingDetail;
         }
 
         public GeneralInfo GeneralInfo { get; private set; }
         public AddressDetail AddressDetail { get; private set; }
+        public AccountingDetail AccountingDetail { get; private set; }
     }
 }

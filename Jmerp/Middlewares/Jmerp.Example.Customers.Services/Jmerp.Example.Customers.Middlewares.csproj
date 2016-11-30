@@ -61,7 +61,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerBootstrapper.cs" />
+    <Compile Include="Resources\CustomerMiddlewareMessageResources.Designer.cs">
+      <DependentUpon>CustomerMiddlewareMessageResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Services\CustomerBasedServices.cs" />
+    <Compile Include="Services\IRemoveAddressApplicationServices.cs" />
     <Compile Include="Services\ISetAddressAsDefaultApplicationServices.cs" />
     <Compile Include="Services\IUpdateAddressApplicationServices.cs" />
     <Compile Include="Services\IAddAddressApplicationServices.cs" />
@@ -97,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mappings\Resolvers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\CustomerMiddlewareMessageResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomerMiddlewareMessageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
