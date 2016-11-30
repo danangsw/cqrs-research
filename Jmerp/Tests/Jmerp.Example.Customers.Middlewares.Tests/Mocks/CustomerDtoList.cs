@@ -1,10 +1,9 @@
-﻿using Jmerp.Example.Customers.Middlewares.Models;
-using System;
+﻿using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Helpers;
+using Jmerp.Example.Customers.Middlewares.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
 {
@@ -47,5 +46,56 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
                                                                 Email = "john@infoblabla.wordpress.org",
                                                                 Web = "http://infoblabla.wordpress.org"
                                                                 };
+    }
+
+    public static class CustomerAddressDetails
+    {
+        public static readonly AddressDto AddressDto1_CS00001 = new AddressDto() {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.ShippingAddress,
+            AddressLine1 = "Jl. Mawar",
+            AddressLine2 = "Cilandak",
+            City = "Jakarta Selatan",
+            StateProvince = "DKI Jakarta",
+            PostalCode = "120345",
+            SetDefault = false
+        };
+        public static readonly AddressDto AddressDto2_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressLine1 = "Jl. Mawar",
+            AddressLine2 = "Cilandak",
+            City = "Jakarta Selatan",
+            StateProvince = "DKI Jakarta",
+            PostalCode = "120345",
+            SetDefault = true
+        };
+        public static readonly AddressDto AddressDto3_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.ShippingAddress,
+            AddressLine1 = "Jl. Melati",
+            AddressLine2 = "Cinere",
+            City = "Depok",
+            StateProvince = "Jawa Barat",
+            PostalCode = "345678",
+            SetDefault = true
+        };
+        public static readonly AddressDto AddressDto4_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressLine1 = "Jl. Tokek",
+            AddressLine2 = "Cibubur",
+            City = "Jakarta Timur",
+            StateProvince = "DKI Jakarta",
+            PostalCode = "140014",
+            SetDefault = false
+        };
     }
 }

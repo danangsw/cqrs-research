@@ -5,15 +5,14 @@ using Jmerp.Example.Customers.Middlewares;
 
 namespace Jmerp.Middlewares.Boostrappers
 {
-    public static class MiddlewaresBootrappers
+    public static class MiddlewaresEventFlowAutoFacExtensions
     {
-        public static IContainer MiddlewaresStartUp(this ContainerBuilder containerBuilder)
+        public static IContainer BuildServices(this ContainerBuilder containerBuilder)
         {
             var container = EventFlowOptions.New
                            .UseAutofacContainerBuilder(containerBuilder) // Must be the first line!
                            .CustomerBootstrapperConfiguration()
                            .CreateContainer();
-
             return container;
         }
     }

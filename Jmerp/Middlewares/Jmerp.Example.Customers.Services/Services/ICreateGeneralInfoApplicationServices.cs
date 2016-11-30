@@ -39,7 +39,8 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             //validate General info input
             strErrors.AddRange(GeneralInfoSpecs.IsValidInput.WhyIsNotSatisfiedBy(customerModel.GeneralInfo));
 
-            if (strErrors.Count > 0) return ResponseResult.Failed(strErrors.ToArray());
+            if (strErrors.Count > 0)
+                return ResponseResult.Failed(strErrors.ToArray());
 
             await _commandBus.PublishAsync(
                 new CustomerCreateCommand(customerModel.Id, customerModel.GeneralInfo), cancellationToken);
@@ -49,11 +50,12 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 .ConfigureAwait(false);
             var customerReadModel = customerQuery.ToList();
 
-            if (customerReadModel?.FirstOrDefault()?.Id != customerModel?.Id) return ResponseResult.Failed("Failed created.");
+            if (customerReadModel?.FirstOrDefault()?.Id != customerModel?.Id)
+                return ResponseResult.Failed("Failed created.");
 
-            var responseModel = AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel);
-
-            return ResponseResult.Succeed(responseModel);
+            return ResponseResult.Succeed(
+                AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)
+                );
         }
     }
 }

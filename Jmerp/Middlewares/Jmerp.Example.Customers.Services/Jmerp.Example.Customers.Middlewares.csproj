@@ -61,12 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerBootstrapper.cs" />
+    <Compile Include="Services\CustomerBasedServices.cs" />
+    <Compile Include="Services\ISetAddressAsDefaultApplicationServices.cs" />
+    <Compile Include="Services\IUpdateAddressApplicationServices.cs" />
+    <Compile Include="Services\IAddAddressApplicationServices.cs" />
     <Compile Include="Services\ICreateGeneralInfoApplicationServices.cs" />
-    <Compile Include="Mappings\MapperConfiguration.cs" />
+    <Compile Include="Mappings\CustomerMapperConfiguration.cs" />
     <Compile Include="Mappings\Profiles\CustomerDtoToDomainModelMappingProfile.cs" />
     <Compile Include="Mappings\Profiles\CustomerDomainModelToDtoMappingProfile.cs" />
     <Compile Include="Models\CustomerDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IUpdateGeneralInfoApplicationServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Domains\Jmerp.Example.Customer.Queries.InMemory\Jmerp.Example.Customers.Queries.InMemory.csproj">

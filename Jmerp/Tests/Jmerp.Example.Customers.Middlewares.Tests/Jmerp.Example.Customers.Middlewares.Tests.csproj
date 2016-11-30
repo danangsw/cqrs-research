@@ -83,13 +83,18 @@
     <Compile Include="IntegrationTests\Scenarios.cs" />
     <Compile Include="Mocks\CustomerDtoList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest\CreateGeneralInfoApplicationServicesTest.cs" />
+    <Compile Include="UnitTest\Services\CreateGeneralInfoApplicationServicesTest.cs" />
+    <Compile Include="UnitTest\Services\UpdateGeneralInfoApplicationServicesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Domains\Jmerp.Example.Customer\Jmerp.Example.Customers.csproj">
+      <Project>{2E65EB85-386E-4CCE-AC60-55968E9F43FF}</Project>
+      <Name>Jmerp.Example.Customers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Frameworks\Jmerp.Common\Jmerp.Commons.csproj">
       <Project>{10BB28AC-EED8-40F4-9564-3362C020543A}</Project>
       <Name>Jmerp.Commons</Name>

@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customers\CustomerAddressReadModel.cs" />
     <Compile Include="Customers\CustomerReadModel.cs" />
     <Compile Include="Customers\QueryHandlers\GetAllCustomersQueryHandler.cs" />
     <Compile Include="Customers\QueryHandlers\GetCustomersQueryHandler.cs" />
+    <Compile Include="Customers\ReadModelLocators\CustomerAddressReadModelLocator.cs" />
     <Compile Include="QueriesConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

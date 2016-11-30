@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 {
-    public class AccountDetail : ValueObject
+    public class AccountingDetail : ValueObject
     {
-        public AccountDetail(
+        public AccountingDetail(
             IEnumerable<Account> accounts)
         {
             var accountList = (accounts ?? Enumerable.Empty<Account>()).ToList();
