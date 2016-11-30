@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Example.Shipping.Queries.Mssql.Cargo
+namespace Example.Shipping.Queries.Mssql.Cargos
 {
     [Table("Cargo")]
     public class CargoReadModel : MssqlReadModel,
@@ -32,6 +32,15 @@ namespace Example.Shipping.Queries.Mssql.Cargo
 
         }
 
+
+        public Domain.Model.CargoModel.Cargo ToCargo(CargoId AggregateId, Route Route, Itinerary Itinerary)
+        {
+            return new Domain.Model.CargoModel.Cargo(
+               AggregateId,
+               Route,
+               Itinerary
+            );
+        }
 
     }
 }

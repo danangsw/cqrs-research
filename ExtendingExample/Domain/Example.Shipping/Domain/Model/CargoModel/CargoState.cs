@@ -11,10 +11,19 @@ namespace Example.Shipping.Domain.Model.CargoModel
 {
     public class CargoState : AggregateState<CargoAggregate, CargoId, CargoState>,
         IApply<CargoBookedEvent>,
+        IApply<TransportLegAddedEvent>,
         IApply<CargoItinerarySetEvent>
     {
         public Route Route { get; private set; }
         public Itinerary Itinerary { get; private set; }
+
+        public void Init()
+        {
+            if (Itinerary == null)
+            {
+                Itinerary = new Itinerary();
+            }
+        }
 
         public void Apply(CargoBookedEvent aggregateEvent)
         {
@@ -23,7 +32,12 @@ namespace Example.Shipping.Domain.Model.CargoModel
 
         public void Apply(CargoItinerarySetEvent aggregateEvent)
         {
-            Itinerary = aggregateEvent.Itinerary;
+            
+        }
+
+        public void Apply(TransportLegAddedEvent aggregateEvent)
+        {
+            Itinerary = Itinerary.AddTransportLeg(aggregateEvent.TransportLeg);
         }
     }
 }

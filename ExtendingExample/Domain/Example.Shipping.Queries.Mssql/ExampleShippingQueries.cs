@@ -2,7 +2,7 @@
 using EventFlow.Extensions;
 using EventFlow.MsSql.Extensions;
 using Example.Shipping.Domain.Model.VoyageModel.Entities;
-using Example.Shipping.Queries.Mssql.Cargo;
+using Example.Shipping.Queries.Mssql.Cargos;
 using Example.Shipping.Queries.Mssql.Locations;
 using Example.Shipping.Queries.Mssql.Voyage;
 using Example.Shipping.Queries.Mssql.Voyage.Queries;

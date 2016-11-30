@@ -13,6 +13,11 @@ namespace Example.Shipping.Domain.Model.CargoModel.ValueObjects
 {
     public class Itinerary : ValueObject
     {
+        public Itinerary()
+        {
+            TransportLegs = Enumerable.Empty<TransportLeg>().ToList();
+        }
+
         public Itinerary(
             IEnumerable<TransportLeg> transportLegs)
         {
@@ -49,6 +54,17 @@ namespace Example.Shipping.Domain.Model.CargoModel.ValueObjects
         protected override IEnumerable<object> GetEqualityComponents()
         {
             return TransportLegs;
+        }
+
+        public Itinerary AddTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = new List<TransportLeg>();
+            if (TransportLegs != null)
+            {
+                newListTransportLeg.AddRange(TransportLegs);
+            }
+            newListTransportLeg.Add(transportLeg);
+            return new Itinerary(newListTransportLeg);
         }
     }
 }
