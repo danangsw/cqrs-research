@@ -51,6 +51,7 @@
     <Compile Include="Application\CustomerApplicationService.cs" />
     <Compile Include="Application\ICustomersApplicationService.cs" />
     <Compile Include="CustomerConfiguration.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AddressAsDefaultSetCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressUpdateCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressAddCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\GeneralInfoUpdateCommand.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Domain\Model\CustomerModel\Entities\AccountId.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\Address.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\AddressId.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsDefaultSetEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingAddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingDefaultUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressRemovedEvent.cs" />

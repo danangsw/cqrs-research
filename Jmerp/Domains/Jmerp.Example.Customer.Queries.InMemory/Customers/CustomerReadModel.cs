@@ -12,6 +12,7 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
         ,IAmReadModelFor<CustomerAggregate, CustomerId, GeneralInfoUpdatedEvent>
         ,IAmReadModelFor<CustomerAggregate, CustomerId, AddressAddedEvent>
         ,IAmReadModelFor<CustomerAggregate, CustomerId, AddressUpdatedEvent>
+        ,IAmReadModelFor<CustomerAggregate,CustomerId, AddressAsDefaultSetEvent>
     {
         public CustomerId Id { get; private set; }
         public GeneralInfo GeneralInfo { get; private set; }
@@ -44,6 +45,11 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
         }
 
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AddressUpdatedEvent> domainEvent)
+        {
+            AddressDetail = domainEvent.AggregateEvent.AddressDetail;
+        }
+
+        public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AddressAsDefaultSetEvent> domainEvent)
         {
             AddressDetail = domainEvent.AggregateEvent.AddressDetail;
         }

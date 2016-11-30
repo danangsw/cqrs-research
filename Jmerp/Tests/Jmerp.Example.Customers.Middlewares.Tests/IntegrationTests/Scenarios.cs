@@ -82,6 +82,24 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
                 addressUpdate, CancellationToken.None);
             var responseUpdateAddressResult = ConvertResponse(responseUpdateAddress.Responses)?.ToList();
 
+            serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
+            responseAddAddress = await serviceAddAddress.AddAddressSync(
+                new List<AddressDto>() { CustomerAddressDetails.AddressDto4_CS00001 },
+                CancellationToken.None);
+            responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
+
+            var addressFirst = responseAddAddressResult?.FirstOrDefault().AddressDetail?.Addresses?.FirstOrDefault();
+            var addressLast = responseAddAddressResult?.FirstOrDefault().AddressDetail?.Addresses?.LastOrDefault();
+
+            var serviceAsDefault = _container.Resolve<ISetAddressAsDefaultApplicationServices>();
+            var responseSetAddress = await serviceAsDefault.SetAsDefaultShippingAddressSync(
+                addressFirst.CustomerId, addressFirst.Id, CancellationToken.None);
+            var responseSetAddressResult = ConvertResponse(responseSetAddress.Responses)?.ToList();
+
+            responseSetAddress = await serviceAsDefault.SetAsDefaultMailingAddressSync(
+                addressLast.CustomerId, addressLast.Id, CancellationToken.None);
+            responseSetAddressResult = ConvertResponse(responseSetAddress.Responses)?.ToList();
+
             //Assert
             responseCreate.Succeeded.Should().BeTrue();
             responseCreate.Errors.Should().HaveCount(0);
@@ -98,6 +116,10 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             responseUpdateAddress.Succeeded.Should().BeTrue();
             responseUpdateAddress.Errors.Should().HaveCount(0);
             responseUpdateAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseSetAddress.Succeeded.Should().BeTrue();
+            responseSetAddress.Errors.Should().HaveCount(0);
+            responseSetAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

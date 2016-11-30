@@ -18,7 +18,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
             string city,
             string stateProvince,
             string postalCode,
-            bool setDefault = false
+            bool setDefault
             ) : base(id)
         {
             AddressDetailSpecs.IsNotNullOrEmptyIdentity.ThrowDomainErrorIfNotStatisfied(customerId);

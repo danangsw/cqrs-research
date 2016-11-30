@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="CustomerBootstrapper.cs" />
     <Compile Include="Services\CustomerBasedServices.cs" />
+    <Compile Include="Services\ISetAddressAsDefaultApplicationServices.cs" />
     <Compile Include="Services\IUpdateAddressApplicationServices.cs" />
     <Compile Include="Services\IAddAddressApplicationServices.cs" />
     <Compile Include="Services\ICreateGeneralInfoApplicationServices.cs" />

@@ -71,7 +71,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             City = "Jakarta Selatan",
             StateProvince = "DKI Jakarta",
             PostalCode = "120345",
-            SetDefault = false
+            SetDefault = true
         };
         public static readonly AddressDto AddressDto3_CS00001 = new AddressDto()
         {
@@ -83,6 +83,18 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             City = "Depok",
             StateProvince = "Jawa Barat",
             PostalCode = "345678",
+            SetDefault = true
+        };
+        public static readonly AddressDto AddressDto4_CS00001 = new AddressDto()
+        {
+            //Id = null,
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressLine1 = "Jl. Tokek",
+            AddressLine2 = "Cibubur",
+            City = "Jakarta Timur",
+            StateProvince = "DKI Jakarta",
+            PostalCode = "140014",
             SetDefault = false
         };
     }

@@ -19,6 +19,8 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
         public CustomerDomainModelToDtoMappingProfile()
         {
             // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)
+            CreateMap<AddressId, string>().ConvertUsing(s => s.Value);
+            CreateMap<CustomerId, string>().ConvertUsing(s => s.Value);
             CreateMap<Customer, CustomerDto>();
             CreateMap<GeneralInfo, GeneralInfoDto>();
             CreateMap<Address, AddressDto>();

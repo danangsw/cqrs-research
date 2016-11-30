@@ -40,7 +40,6 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 
         public AddressDetail SetAsDefaultShippingAddress(AddressId addressId)
         {
-
             return SetAsDefaultFor(addressId, CustomerAddressTypeConstants.ShippingAddress);
         }
 
@@ -53,7 +52,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
         {
             var addressList = new List<Address>();
 
-            var updatedAddress = Addresses
+            addressList.AddRange(Addresses
                 .Where(a => a.Id == address.Id)
                 .Select(a => new Address(
                     a.Id,
@@ -63,10 +62,10 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     address.AddressLine2,
                     address.City,
                     address.StateProvince,
-                    address.PostalCode));
-            addressList.AddRange(updatedAddress);
+                    address.PostalCode,
+                    address.SetDefault)));
 
-            var otherAddresses = Addresses
+            addressList.AddRange(Addresses
                 .Where(a => a.Id != address.Id)
                 .Select(a => new Address(
                     a.Id,
@@ -76,8 +75,8 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     a.AddressLine2,
                     a.City,
                     a.StateProvince,
-                    a.PostalCode));
-            addressList.AddRange(otherAddresses);
+                    a.PostalCode,
+                    a.SetDefault)));
 
             return new AddressDetail(addressList);
         }
@@ -86,7 +85,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
         {
             var addressList = new List<Address>();
 
-            var defaultAddresses = Addresses
+            addressList.AddRange(Addresses
                 .Where(a => a.Id == addressId && a.AddressType == asAddressType)
                 .Select(a => new Address(
                     a.Id,
@@ -97,10 +96,9 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     a.City,
                     a.StateProvince,
                     a.PostalCode,
-                    true));
-            addressList.AddRange(defaultAddresses);
+                    true)));
 
-            var otherAddresses = Addresses
+            addressList.AddRange(Addresses
                 .Where(a => a.Id != addressId && a.AddressType == asAddressType)
                 .Select(a => new Address(
                     a.Id,
@@ -111,8 +109,20 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     a.City,
                     a.StateProvince,
                     a.PostalCode,
-                    false));
-            addressList.AddRange(otherAddresses);
+                    false)));
+
+            addressList.AddRange(Addresses
+                .Where(a => a.Id != addressId && a.AddressType != asAddressType)
+                .Select(a => new Address(
+                    a.Id,
+                    a.CustomerId,
+                    a.AddressType,
+                    a.AddressLine1,
+                    a.AddressLine2,
+                    a.City,
+                    a.StateProvince,
+                    a.PostalCode,
+                    a.SetDefault)));
 
             return new AddressDetail(addressList);
         }

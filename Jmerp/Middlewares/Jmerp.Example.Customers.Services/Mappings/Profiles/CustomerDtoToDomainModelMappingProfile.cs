@@ -20,6 +20,14 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
         public CustomerDtoToDomainModelMappingProfile()
         {
             // Use CreateMap... Etc.. here (Profile methods are the same as configuration methods)
+            CreateMap<string, CustomerId>()
+                .ConstructUsing(s => new CustomerId(s));
+            CreateMap<string, AddressId>()
+                .ConstructUsing(s =>
+                new AddressId(
+                    string.IsNullOrEmpty(s)
+                    ? AddressId.New.Value : s)
+                    );
             CreateMap<GeneralInfoDto, GeneralInfo>()
                 .ConstructUsing(s => new GeneralInfo(
                     s.OrganizationName,
@@ -30,8 +38,8 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                     s.Web
                     ));
             CreateMap<CustomerDto, Customer>()
-                .ConstructUsing(s=>
-                new Customer(new CustomerId(s.Id), 
+                .ConstructUsing(s =>
+                new Customer(new CustomerId(s.Id),
                 new GeneralInfo(
                     s.GeneralInfo.OrganizationName,
                     s.GeneralInfo.ContactPerson,
@@ -43,7 +51,7 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
             CreateMap<AddressDto, Address>()
                 .ConstructUsing(s =>
                 new Address(new AddressId(
-                    string.IsNullOrEmpty(s.Id) ? AddressId.New.Value : s.Id),
+                string.IsNullOrEmpty(s.Id) ? AddressId.New.Value : s.Id),
                 new CustomerId(s.CustomerId),
                 s.AddressType,
                 s.AddressLine1,
@@ -53,7 +61,7 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                 s.PostalCode,
                 s.SetDefault));
             CreateMap<AddressDetailDto, AddressDetail>()
-                .ConstructUsing(s => 
+                .ConstructUsing(s =>
                 new AddressDetail(
                     Mapper.Map<List<AddressDto>, List<Address>>(s.Addresses))
                     );

@@ -4,6 +4,7 @@ using EventFlow.Extensions;
 using Jmerp.Commons;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Events;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Helpers;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects;
 using Jmerp.Example.Shipping.Domain;
@@ -29,17 +30,25 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
             Emit(new AddressDetailSetEvent(addressDetailNew));
         }
 
-        public void SetAsDefaultShipping(
-            AddressId addressId)
+        #region Address Set as Default
+        public void SetAsDefault(
+            AddressId addressId, string addressType)
         {
+            var updatedAddressDetail = (addressType == CustomerAddressTypeConstants.MailingAddress)
+                ? AddressDetail.SetAsDefaultMailingAddress(addressId)
+                : AddressDetail.SetAsDefaultShippingAddress(addressId);
 
+            Emit(new AddressAsDefaultSetEvent(updatedAddressDetail));
         }
 
-        public void SetAsDefaultMailing(
-            AddressId addressId)
+        public void Apply(AddressAsDefaultSetEvent e)
         {
+            Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
 
+            AddressDetail = e.AddressDetail;
         }
+
+        #endregion
 
         #region Customer Created
         public void Create(
