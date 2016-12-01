@@ -64,10 +64,13 @@
     <Compile Include="Domain\Model\CargoModel\Events\CargoBookedEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\CargoItinerarySetEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\TransportLegAddedEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Jobs\VerifyCargoItineraryJob.cs" />
+    <Compile Include="Domain\Model\CargoModel\Jobs\VerifyCargosForVoyageJob.cs" />
     <Compile Include="Domain\Model\CargoModel\Queries\GetCargoQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Queries\GetCargosDependentOnVoyageQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Specifications\RouteSpecification.cs" />
     <Compile Include="Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecification.cs" />
+    <Compile Include="Domain\Model\CargoModel\Subscribers\ScheduleChangedSubscriber.cs" />
     <Compile Include="Domain\Model\CargoModel\ValueObjects\Itinerary.cs" />
     <Compile Include="Domain\Model\CargoModel\ValueObjects\Route.cs" />
     <Compile Include="Domain\Model\LocationModel\Events\LocationCreatedEvent.cs" />
@@ -93,6 +96,8 @@
     <Compile Include="Domain\Model\VoyageModel\VoyageAggregate.cs" />
     <Compile Include="Domain\Model\VoyageModel\VoyageId.cs" />
     <Compile Include="Domain\Model\VoyageModel\VoyageState.cs" />
+    <Compile Include="Domain\Services\IUpdateItineraryService.cs" />
+    <Compile Include="Domain\Services\UpdateItineraryService.cs" />
     <Compile Include="Domain\Specs.cs" />
     <Compile Include="ExampleShipping.cs" />
     <Compile Include="Extensions\CarrierMovementExtensions.cs" />
@@ -101,10 +106,7 @@
     <Compile Include="ExternalServices\Routing\RoutingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\Model\CargoModel\Jobs\" />
-    <Folder Include="Domain\Model\CargoModel\Subscribers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
