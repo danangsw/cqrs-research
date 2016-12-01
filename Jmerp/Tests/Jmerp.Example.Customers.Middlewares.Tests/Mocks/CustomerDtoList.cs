@@ -65,7 +65,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
         {
             //Id = null,
             CustomerId = CustomerDtoList.Customer_CS00001.Id,
-            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressType = CustomerAddressTypeConstants.BillingAddress,
             AddressLine1 = "Jl. Mawar",
             AddressLine2 = "Cilandak",
             City = "Jakarta Selatan",
@@ -89,7 +89,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
         {
             //Id = null,
             CustomerId = CustomerDtoList.Customer_CS00001.Id,
-            AddressType = CustomerAddressTypeConstants.MailingAddress,
+            AddressType = CustomerAddressTypeConstants.BillingAddress,
             AddressLine1 = "Jl. Tokek",
             AddressLine2 = "Cibubur",
             City = "Jakarta Timur",

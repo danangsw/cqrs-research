@@ -11,49 +11,29 @@ using EventFlow.Queries;
 using System.Linq;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Helpers;
+using System;
 using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
-    public interface ISetAddressAsDefaultApplicationServices
+    public interface IRemoveAddressApplicationServices
     {
-        Task<ResponseResult> SetAsDefaultShippingAddressSync(
-            string customerId, string addressId, 
-            CancellationToken cancellationToken);
-        Task<ResponseResult> SetAsDefaultBillingAddressSync(
+        Task<ResponseResult> RemoveAddressSync(
             string customerId, string addressId, 
             CancellationToken cancellationToken);
     }
 
-    public class SetAddressAsDefaultApplicationServices :  CustomerBasedServices,
-        ISetAddressAsDefaultApplicationServices
+    public class RemoveAddressApplicationServices :  CustomerBasedServices,
+        IRemoveAddressApplicationServices
     {
-        public SetAddressAsDefaultApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public RemoveAddressApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
                         : base(commandBus, queryProcessor)
         {
         }
 
-        public async Task<ResponseResult> SetAsDefaultBillingAddressSync(
-            string customerId, string addressId, 
+        public async Task<ResponseResult> RemoveAddressSync(
+            string customerId, string addressId,
             CancellationToken cancellationToken)
-        {
-            return await SetAsDefaultSync(
-                CustomerAddressTypeConstants.BillingAddress, 
-                customerId, addressId, cancellationToken);
-        }
-
-        public async Task<ResponseResult> SetAsDefaultShippingAddressSync(
-            string customerId, string addressId, 
-            CancellationToken cancellationToken)
-        {
-            return await SetAsDefaultSync(
-                CustomerAddressTypeConstants.ShippingAddress, 
-                customerId, addressId, cancellationToken);
-        }
-
-        private async Task<ResponseResult> SetAsDefaultSync(
-            string addressType, string customerId, 
-            string addressId, CancellationToken cancellationToken)
         {
             var strErrors = new List<string>();
             var setAddressId = AutoMapper.Mapper.Map<string, AddressId>(addressId);
@@ -77,20 +57,16 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
             var sourceId = await _commandBus.PublishAsync(
-                new AddressAsDefaultSetCommand(customerIdentity, _commandSourceId, setAddressId, addressType)
+                new AddressRemoveCommand(customerIdentity, _commandSourceId, setAddressId)
                 , cancellationToken).ConfigureAwait(false);
 
             customerQuery = await ReadCustomerModel(customerIdentity);
             customerReadModel = customerQuery.ToList();
             var latestAddress = customerReadModel?.FirstOrDefault()?
-                .AddressDetail?.Addresses.Where(i => 
-                i.Id.Value.Contains(setAddressId.Value)
-                ).FirstOrDefault();
+                .AddressDetail?.Addresses?.ToList();
 
-            if (!(latestAddress?.Id == setAddressId
-                && latestAddress?.SetDefault == true
-                && latestAddress?.AddressType == addressType))
-                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00003, setAddressId.Value));
+            if (latestAddress.Any(a => a.Id == setAddressId))
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00004, setAddressId.Value));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

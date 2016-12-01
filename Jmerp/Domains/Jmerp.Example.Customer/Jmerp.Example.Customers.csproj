@@ -51,6 +51,10 @@
     <Compile Include="Application\CustomerApplicationService.cs" />
     <Compile Include="Application\ICustomersApplicationService.cs" />
     <Compile Include="CustomerConfiguration.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AccountRemoveCommand.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AccountUpdateCommand.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AccountAddCommand.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Commands\AddressRemoveCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressAsDefaultSetCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressUpdateCommand.cs" />
     <Compile Include="Domain\Model\CustomerModel\Commands\AddressAddCommand.cs" />
@@ -63,11 +67,11 @@
     <Compile Include="Domain\Model\CustomerModel\Entities\AccountId.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\Address.cs" />
     <Compile Include="Domain\Model\CustomerModel\Entities\AddressId.cs" />
-    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsDefaultSetEvent.cs" />
-    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingAddressUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AccountRemovedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AccountUpdatedEvent.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Events\AccountAddedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsMailingDefaultUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressRemovedEvent.cs" />
-    <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingAddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAsShippingDefaultUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAddedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressUpdatedEvent.cs" />
@@ -78,6 +82,12 @@
     <Compile Include="Domain\Model\CustomerModel\Helpers\CustomerConstant.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetAllCustomersQuery.cs" />
     <Compile Include="Domain\Model\CustomerModel\Queries\GetCustomersQuery.cs" />
+    <Compile Include="Domain\Model\CustomerModel\Resources\CustomerDomainMessageResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerDomainMessageResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Domain\Model\CustomerModel\Specifications\AccountingDetailSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\AddressDetailSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\CustomerSpecs.cs" />
     <Compile Include="Domain\Model\CustomerModel\Specifications\GeneralInfoSpecs.cs" />
@@ -100,6 +110,12 @@
   <ItemGroup>
     <Folder Include="Domain\Model\CustomerModel\Jobs\" />
     <Folder Include="Domain\Model\CustomerModel\Subscribers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Domain\Model\CustomerModel\Resources\CustomerDomainMessageResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomerDomainMessageResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,7 +29,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications
         private class IsValidInputSpecification : Specification<Address>
         {
             protected override IEnumerable<string> IsNotSatisfiedBecause(Address obj)
-            {
+            {                
                 if (obj.CustomerId == null) yield return $"'{nameof(obj.CustomerId)}' Cannot be empty or null.";
                 if (string.IsNullOrEmpty(obj.AddressType)) yield return $"'{nameof(obj.AddressType)}' Cannot be empty or null.";
                 if (string.IsNullOrEmpty(obj.AddressLine1)) yield return $"'{nameof(obj.AddressLine1)}' Cannot be empty or null.";

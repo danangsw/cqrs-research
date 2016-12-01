@@ -21,7 +21,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
             bool setDefault
             ) : base(id)
         {
-            AddressDetailSpecs.IsNotNullOrEmptyIdentity.ThrowDomainErrorIfNotStatisfied(customerId);
+            CustomerSpecs.IsNotNullOrEmptyIdentity.ThrowDomainErrorIfNotStatisfied(customerId);
             AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressType);
             AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressLine1);
             AddressDetailSpecs.IsNotNullOrEmptyInput.ThrowDomainErrorIfNotStatisfied(addressLine2);
