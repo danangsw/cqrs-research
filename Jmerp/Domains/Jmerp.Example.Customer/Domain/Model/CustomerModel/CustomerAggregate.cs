@@ -33,7 +33,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel
         public void Apply(AccountAddedEvent e)
         {
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
-            var accounts = AccountingDetail.AddAccount(e.Accounts);
+            var accounts = AccountingDetail ?? new AccountingDetail(e.Accounts);
             AccountingDetail = accounts;
         }
         #endregion

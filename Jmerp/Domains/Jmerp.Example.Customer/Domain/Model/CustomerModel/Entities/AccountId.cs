@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities
 {
     [JsonConverter(typeof(SingleValueObjectConverter))]
-    public class AccountId : Identity<AccountId>
+    public class AccountId : SingleValueObject<string>, IIdentity
     {
         public AccountId(
             string value

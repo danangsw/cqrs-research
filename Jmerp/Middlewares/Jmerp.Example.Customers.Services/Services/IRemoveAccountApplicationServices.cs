@@ -67,7 +67,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 .AccountingDetail?.Accounts?.Select(a => a.Id);
 
             if (latestAccount.Intersect(accountIdList).Any())
-                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00004, accountIdList.ToString()));
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00004, string.Join(",", accountIdList.Select(x => x).ToList())));
 
             return ResponseResult.Succeed(
                AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

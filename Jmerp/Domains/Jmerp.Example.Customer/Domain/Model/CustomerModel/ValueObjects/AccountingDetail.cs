@@ -27,24 +27,24 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
 
         public AccountingDetail AddAccount(IEnumerable<Account> accounts)
         {
-            var AccountList = Accounts ?? new List<Account>();
-            AccountList.AddRange(accounts);
-            return new AccountingDetail(AccountList);
+            var accountList = Accounts ?? new List<Account>();
+            accountList.AddRange(accounts);
+            return new AccountingDetail(accountList);
         }
 
         public AccountingDetail RemoveAccount(IEnumerable<AccountId> accountIds)
         {
-            var AccountList = Accounts ?? new List<Account>();
-            AccountList.RemoveAll(a => accountIds.Contains(a.Id));
+            var accountList = Accounts ?? new List<Account>();
+            accountList.RemoveAll(a => accountIds.Contains(a.Id));
 
-            return new AccountingDetail(AccountList);
+            return new AccountingDetail(accountList);
         }
 
         public AccountingDetail UpdateAccount(Account account)
         {
-            var AccountList = new List<Account>();
+            var accountList = new List<Account>();
 
-            AccountList.AddRange(Accounts
+            accountList.AddRange(Accounts
                 .Where(a => a.Id == account.Id)
                 .Select(a => new Account(
                     a.Id,
@@ -56,7 +56,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     account.LastName,
                     account.AccountBalance)));
 
-            AccountList.AddRange(Accounts
+            accountList.AddRange(Accounts
                 .Where(a => a.Id != account.Id)
                 .Select(a => new Account(
                     a.Id,
@@ -68,7 +68,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
                     a.LastName,
                     a.AccountBalance)));
 
-            return new AccountingDetail(AccountList);
+            return new AccountingDetail(accountList);
         }
     }
 }
