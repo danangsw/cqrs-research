@@ -16,32 +16,33 @@ using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
-    public interface IRemoveAddressApplicationServices
+    public interface IRemoveAccountApplicationServices
     {
         Task<ResponseResult> RemoveAsync(
-            string customerId, string addressId, 
+            string customerId, List<string> accountIds, 
             CancellationToken cancellationToken);
     }
 
-    public class RemoveAddressApplicationServices :  CustomerBasedServices,
-        IRemoveAddressApplicationServices
+    public class RemoveAccountApplicationServices :  CustomerBasedServices,
+        IRemoveAccountApplicationServices
     {
-        public RemoveAddressApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public RemoveAccountApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
                         : base(commandBus, queryProcessor)
         {
         }
 
-        public async Task<ResponseResult> RemoveAsync(
-            string customerId, string addressId,
-            CancellationToken cancellationToken)
+        public async Task<ResponseResult> RemoveAsync(string customerId, List<string> accountIds, CancellationToken cancellationToken)
         {
             var strErrors = new List<string>();
-            var setAddressId = AutoMapper.Mapper.Map<string, AddressId>(addressId);
+            var accountIdList = AutoMapper.Mapper.Map<List<string>, List<AccountId>>(accountIds);
             var customerIdentity = AutoMapper.Mapper.Map<string, CustomerId>(customerId);
 
             //validate Ids
-            strErrors.AddRange(AddressDetailSpecs.IsNotNullOrEmptyInput.WhyIsNotSatisfiedBy(customerId));
-            strErrors.AddRange(AddressDetailSpecs.IsNotNullOrEmptyInput.WhyIsNotSatisfiedBy(addressId));
+            strErrors.AddRange(AccountingDetailSpecs.IsNotNullOrEmptyInput.WhyIsNotSatisfiedBy(customerId));
+            foreach (var item in accountIdList)
+            {
+                strErrors.AddRange(AccountingDetailSpecs.IsNotNullOrEmptyIdentity.WhyIsNotSatisfiedBy(item));
+            }
 
             if (strErrors.Count > 0)
             {
@@ -57,20 +58,20 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
             var sourceId = await _commandBus.PublishAsync(
-                new AddressRemoveCommand(customerIdentity, _commandSourceId, setAddressId)
-                , cancellationToken).ConfigureAwait(false);
+               new AccountRemoveCommand(customerIdentity, _commandSourceId, accountIdList)
+               , cancellationToken).ConfigureAwait(false);
 
             customerQuery = await ReadCustomerModel(customerIdentity);
             customerReadModel = customerQuery.ToList();
-            var latestAddress = customerReadModel?.FirstOrDefault()?
-                .AddressDetail?.Addresses?.ToList();
+            var latestAccount = customerReadModel?.FirstOrDefault()?
+                .AccountingDetail?.Accounts?.Select(a => a.Id);
 
-            if (latestAddress.Any(a => a.Id == setAddressId))
-                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00004, setAddressId.Value));
+            if (latestAccount.Intersect(accountIdList).Any())
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00004, accountIdList.ToString()));
 
             return ResponseResult.Succeed(
-                AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)
-                );
+               AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)
+               );
         }
     }
 }

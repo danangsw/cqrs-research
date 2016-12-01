@@ -67,8 +67,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Services\CustomerBasedServices.cs" />
+    <Compile Include="Services\IAddAccountApplicationServices.cs" />
+    <Compile Include="Services\IRemoveAccountApplicationServices.cs" />
     <Compile Include="Services\IRemoveAddressApplicationServices.cs" />
     <Compile Include="Services\ISetAddressAsDefaultApplicationServices.cs" />
+    <Compile Include="Services\IUpdateAccountApplicationServices.cs" />
     <Compile Include="Services\IUpdateAddressApplicationServices.cs" />
     <Compile Include="Services\IAddAddressApplicationServices.cs" />
     <Compile Include="Services\ICreateGeneralInfoApplicationServices.cs" />

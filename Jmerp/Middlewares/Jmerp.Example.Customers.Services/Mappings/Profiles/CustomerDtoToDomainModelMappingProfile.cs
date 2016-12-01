@@ -28,6 +28,12 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                     string.IsNullOrEmpty(s)
                     ? AddressId.New.Value : s)
                     );
+            CreateMap<string, AccountId>()
+                .ConstructUsing(s =>
+                new AccountId(
+                    string.IsNullOrEmpty(s)
+                    ? AccountId.New.Value : s)
+                    );
             CreateMap<GeneralInfoDto, GeneralInfo>()
                 .ConstructUsing(s => new GeneralInfo(
                     s.OrganizationName,
@@ -60,10 +66,26 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                 s.StateProvince,
                 s.PostalCode,
                 s.SetDefault));
+            CreateMap<AccountDto, Account>()
+                .ConstructUsing(s =>
+                new Account(new AccountId(
+                string.IsNullOrEmpty(s.Id) ? AccountId.New.Value : s.Id),
+                new CustomerId(s.CustomerId),
+                s.AccountNumber,
+                s.AccountType,
+                s.AccountDescription,
+                s.FirstName,
+                s.LastName,
+                s.AccountBalance));
             CreateMap<AddressDetailDto, AddressDetail>()
                 .ConstructUsing(s =>
                 new AddressDetail(
                     Mapper.Map<List<AddressDto>, List<Address>>(s.Addresses))
+                    );
+            CreateMap<AccountingDetailDto, AccountingDetail>()
+                .ConstructUsing(s =>
+                new AccountingDetail(
+                    Mapper.Map<List<AccountDto>, List<Account>>(s.Accounts))
                     );
         }
     }

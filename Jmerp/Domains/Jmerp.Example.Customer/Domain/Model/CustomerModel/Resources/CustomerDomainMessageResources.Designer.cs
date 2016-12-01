@@ -78,5 +78,14 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.Resources {
                 return ResourceManager.GetString("MSG00002", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; is not a valid accounting code..
+        /// </summary>
+        internal static string MSG00003 {
+            get {
+                return ResourceManager.GetString("MSG00003", resourceCulture);
+            }
+        }
     }
 }

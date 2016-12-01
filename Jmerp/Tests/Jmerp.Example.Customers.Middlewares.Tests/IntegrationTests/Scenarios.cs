@@ -56,19 +56,19 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             var responseUpdateResult = ConvertResponse(responseUpdate.Responses)?.ToList();
 
             var serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
-            var responseAddAddress = await serviceAddAddress.AddAddressSync(
+            var responseAddAddress = await serviceAddAddress.AddAsync(
                 new List<AddressDto>() { CustomerAddressDetails.AddressDto1_CS00001 },
                 CancellationToken.None);
             var responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
 
             serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
-            responseAddAddress = await serviceAddAddress.AddAddressSync(
+            responseAddAddress = await serviceAddAddress.AddAsync(
                 new List<AddressDto>() { CustomerAddressDetails.AddressDto2_CS00001 },
                 CancellationToken.None);
             responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
 
             serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
-            responseAddAddress = await serviceAddAddress.AddAddressSync(
+            responseAddAddress = await serviceAddAddress.AddAsync(
                 new List<AddressDto>() { CustomerAddressDetails.AddressDto3_CS00001 },
                 CancellationToken.None);
             responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
@@ -78,12 +78,12 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             addressUpdate.PostalCode = "909090";
 
             var serviceUpdateAddress = _container.Resolve<IUpdateAddressApplicationServices>();
-            var responseUpdateAddress = await serviceUpdateAddress.UpdateAddressSync(
+            var responseUpdateAddress = await serviceUpdateAddress.UpdateAsync(
                 addressUpdate, CancellationToken.None);
             var responseUpdateAddressResult = ConvertResponse(responseUpdateAddress.Responses)?.ToList();
 
             serviceAddAddress = _container.Resolve<IAddAddressApplicationServices>();
-            responseAddAddress = await serviceAddAddress.AddAddressSync(
+            responseAddAddress = await serviceAddAddress.AddAsync(
                 new List<AddressDto>() { CustomerAddressDetails.AddressDto4_CS00001 },
                 CancellationToken.None);
             responseAddAddressResult = ConvertResponse(responseAddAddress.Responses)?.ToList();
@@ -93,16 +93,16 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             var addressDelete = responseAddAddressResult?.FirstOrDefault().AddressDetail?.Addresses?.FirstOrDefault();
 
             var serviceAsDefault = _container.Resolve<ISetAddressAsDefaultApplicationServices>();
-            var responseSetAddress = await serviceAsDefault.SetAsDefaultShippingAddressSync(
+            var responseSetAddress = await serviceAsDefault.SetAsDefaultShippingAddressAsync(
                 addressFirst.CustomerId, addressFirst.Id, CancellationToken.None);
             var responseSetAddressResult = ConvertResponse(responseSetAddress.Responses)?.ToList();
 
-            responseSetAddress = await serviceAsDefault.SetAsDefaultBillingAddressSync(
+            responseSetAddress = await serviceAsDefault.SetAsDefaultBillingAddressAsync(
                 addressLast.CustomerId, addressLast.Id, CancellationToken.None);
             responseSetAddressResult = ConvertResponse(responseSetAddress.Responses)?.ToList();
 
             var serviceRemove = _container.Resolve<IRemoveAddressApplicationServices>();
-            var responseRemoveAddress = await serviceRemove.RemoveAddressSync(
+            var responseRemoveAddress = await serviceRemove.RemoveAsync(
                 addressDelete.CustomerId, addressDelete.Id, CancellationToken.None);
             var responseRemoveAddressResult = ConvertResponse(responseRemoveAddress.Responses)?.ToList();
 
