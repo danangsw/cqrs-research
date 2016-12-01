@@ -33,6 +33,14 @@ namespace Example.Shipping.Queries.Mssql.Cargos
         }
 
 
+        public Route ToRoute()
+        {
+            return new Route(new Domain.Model.LocationModel.LocationId(OriginLocationId),
+                            new Domain.Model.LocationModel.LocationId(DestinationLocationId),
+                            DepartureTime,
+                            ArrivalDeadline);
+        }
+
         public Domain.Model.CargoModel.Cargo ToCargo(CargoId AggregateId, Route Route, Itinerary Itinerary)
         {
             return new Domain.Model.CargoModel.Cargo(

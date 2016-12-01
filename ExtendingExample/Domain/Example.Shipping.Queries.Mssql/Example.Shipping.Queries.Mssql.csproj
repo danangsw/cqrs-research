@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Cargos\CargoReadModel.cs" />
     <Compile Include="Cargos\Queries\CargoQueries.cs" />
+    <Compile Include="Cargos\Queries\TransportLegQueries.cs" />
     <Compile Include="Cargos\QueryHandlers\GetCargosDependentOnVoyageQueryHandler.cs" />
     <Compile Include="Cargos\QueryHandlers\GetCargosQueryHandler.cs" />
     <Compile Include="Cargos\TransportLegReadModel.cs" />

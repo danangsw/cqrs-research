@@ -65,12 +65,13 @@ namespace Example.Db.Migrations
                         UnloadLocation = c.String(),
                         LoadTime = c.DateTimeOffset(nullable: false, precision: 7),
                         UnloadTime = c.DateTimeOffset(nullable: false, precision: 7),
-                        VoyageId = c.String(),
+                        VoyageId = c.String(maxLength: 64),
                         CarrierMovementId = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.CargoId)
-                .Index(t => t.TransportLegId, unique: true);
+                .Index(t => t.TransportLegId, unique: true)
+                .Index(t => t.VoyageId);
             
             CreateTable(
                 "dbo.Voyage",
@@ -90,6 +91,7 @@ namespace Example.Db.Migrations
         public override void Down()
         {
             DropIndex("dbo.Voyage", new[] { "AggregateId" });
+            DropIndex("dbo.TransportLeg", new[] { "VoyageId" });
             DropIndex("dbo.TransportLeg", new[] { "TransportLegId" });
             DropIndex("dbo.TransportLeg", new[] { "CargoId" });
             DropIndex("dbo.Location", new[] { "AggregateId" });

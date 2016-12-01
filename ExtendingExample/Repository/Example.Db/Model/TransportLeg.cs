@@ -24,6 +24,8 @@ namespace Example.Db.Model
         public DateTimeOffset LoadTime { get; set; }
         public DateTimeOffset UnloadTime { get; set; }
 
+        [StringLength(64)]
+        [Index(IsUnique = false, Order = 3)]
         public string VoyageId { get; set; }
         public string CarrierMovementId { get; set; }
 
