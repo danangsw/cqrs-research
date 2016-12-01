@@ -17,7 +17,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
 {
     public interface IAddAddressApplicationServices
     {
-        Task<ResponseResult> AddAddressSync(List<AddressDto> addresses, CancellationToken cancellationToken);
+        Task<ResponseResult> AddAsync(List<AddressDto> addresses, CancellationToken cancellationToken);
     }
 
     public class AddAddressApplicationServices :  CustomerBasedServices, 
@@ -28,7 +28,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
         {
         }
 
-        public async Task<ResponseResult> AddAddressSync(List<AddressDto> addresses, CancellationToken cancellationToken)
+        public async Task<ResponseResult> AddAsync(List<AddressDto> addresses, CancellationToken cancellationToken)
         {
             var strErrors = new List<string>();
             var addressList = AutoMapper.Mapper.Map<List<AddressDto>, List<Address>>(addresses);
@@ -52,8 +52,6 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             if (customerReadModel?.FirstOrDefault()?.Id != customerIdentity)
                 return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
-            var addressDetail = new AddressDetail(addressList);
-
             var sourceId = await _commandBus.PublishAsync(
                 new AddressAddCommand(customerIdentity, _commandSourceId, addressList)
                 ,cancellationToken).ConfigureAwait(false);
@@ -62,7 +60,8 @@ namespace Jmerp.Example.Customers.Middlewares.Services
             customerReadModel = customerQuery.ToList();
             var latestAddressDetail = customerReadModel?.FirstOrDefault()?.AddressDetail;
 
-            if (!latestAddressDetail.Addresses.Contains(addressList.FirstOrDefault()))
+
+            if (!latestAddressDetail.Addresses.Intersect(addressList).Any())
                 return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00001, addressList.ToString()));
 
             return ResponseResult.Succeed(

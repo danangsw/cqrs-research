@@ -98,4 +98,41 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             SetDefault = false
         };
     }
+
+    public static class CustomerAccountingDetails
+    {
+        public static readonly AccountDto AccountDto1_CS00001 = new AccountDto()
+        {
+            Id = "12345678910",
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AccountNumber = "111",
+            AccountType = CustomerAccountTypeConstants.PersonalAccounts,
+            AccountDescription = "Bank Mandiri a/c",
+            FirstName = "Wak",
+            LastName = "Doyok",
+            AccountBalance = 100000000M
+        };
+        public static readonly AccountDto AccountDto2_CS00001 = new AccountDto()
+        {
+            Id = "12345678911",
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AccountNumber = "222",
+            AccountType = CustomerAccountTypeConstants.RealAccounts,
+            AccountDescription = "Cash a/c",
+            FirstName = "Wak",
+            LastName = "Doyok",
+            AccountBalance = 200000000M
+        };
+        public static readonly AccountDto AccountDto3_CS00001 = new AccountDto()
+        {
+            Id = "12345678912",
+            CustomerId = CustomerDtoList.Customer_CS00001.Id,
+            AccountNumber = "222",
+            AccountType = CustomerAccountTypeConstants.NominalAccounts,
+            AccountDescription = "Profit on sale of Asset a/c",
+            FirstName = "Wak",
+            LastName = "Doyok",
+            AccountBalance = 300000000M
+        };
+    }
 }

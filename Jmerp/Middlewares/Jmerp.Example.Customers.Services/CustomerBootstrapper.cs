@@ -22,6 +22,9 @@ namespace Jmerp.Example.Customers.Middlewares
                     sr.Register<IUpdateAddressApplicationServices, UpdateAddressApplicationServices>();
                     sr.Register<ISetAddressAsDefaultApplicationServices, SetAddressAsDefaultApplicationServices>();
                     sr.Register<IRemoveAddressApplicationServices, RemoveAddressApplicationServices>();
+                    sr.Register<IAddAccountApplicationServices, AddAccountApplicationServices>();
+                    sr.Register<IUpdateAccountApplicationServices, UpdateAccountApplicationServices>();
+                    sr.Register<IRemoveAccountApplicationServices, RemoveAccountApplicationServices>();
                 });
         }
     }

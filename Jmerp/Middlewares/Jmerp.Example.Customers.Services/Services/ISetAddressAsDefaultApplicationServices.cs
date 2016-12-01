@@ -17,10 +17,10 @@ namespace Jmerp.Example.Customers.Middlewares.Services
 {
     public interface ISetAddressAsDefaultApplicationServices
     {
-        Task<ResponseResult> SetAsDefaultShippingAddressSync(
+        Task<ResponseResult> SetAsDefaultShippingAddressAsync(
             string customerId, string addressId, 
             CancellationToken cancellationToken);
-        Task<ResponseResult> SetAsDefaultBillingAddressSync(
+        Task<ResponseResult> SetAsDefaultBillingAddressAsync(
             string customerId, string addressId, 
             CancellationToken cancellationToken);
     }
@@ -33,7 +33,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
         {
         }
 
-        public async Task<ResponseResult> SetAsDefaultBillingAddressSync(
+        public async Task<ResponseResult> SetAsDefaultBillingAddressAsync(
             string customerId, string addressId, 
             CancellationToken cancellationToken)
         {
@@ -42,7 +42,7 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 customerId, addressId, cancellationToken);
         }
 
-        public async Task<ResponseResult> SetAsDefaultShippingAddressSync(
+        public async Task<ResponseResult> SetAsDefaultShippingAddressAsync(
             string customerId, string addressId, 
             CancellationToken cancellationToken)
         {

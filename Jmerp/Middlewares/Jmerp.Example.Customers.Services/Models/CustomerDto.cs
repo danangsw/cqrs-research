@@ -7,6 +7,7 @@ namespace Jmerp.Example.Customers.Middlewares.Models
         public string Id { get; set; }
         public GeneralInfoDto GeneralInfo { get; set; }
         public AddressDetailDto AddressDetail { get; set; }
+        public AccountingDetailDto AccountingDetail { get; set; }
     }
 
     public class GeneralInfoDto
@@ -35,5 +36,22 @@ namespace Jmerp.Example.Customers.Middlewares.Models
     public class AddressDetailDto
     {
         public List<AddressDto> Addresses { get; set; }
+    }
+
+    public class AccountingDetailDto
+    {
+        public List<AccountDto> Accounts { get; set; }
+    }
+
+    public class AccountDto
+    {
+        public string Id { get; set; }
+        public string CustomerId { get; set; }
+        public string AccountNumber { get; set; }
+        public string AccountType { get; set; }
+        public string AccountDescription { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public decimal AccountBalance { get; set; }
     }
 }

@@ -14,33 +14,33 @@ using Jmerp.Example.Customers.Middlewares.Resources;
 
 namespace Jmerp.Example.Customers.Middlewares.Services
 {
-    public interface IUpdateAddressApplicationServices
+    public interface IUpdateAccountApplicationServices
     {
-        Task<ResponseResult> UpdateAsync(AddressDto address, CancellationToken cancellationToken);
+        Task<ResponseResult> UpdateAsync(AccountDto account, CancellationToken cancellationToken);
     }
 
-    public class UpdateAddressApplicationServices :  CustomerBasedServices,
-        IUpdateAddressApplicationServices
+    public class UpdateAccountApplicationServices :  CustomerBasedServices,
+        IUpdateAccountApplicationServices
     {
-        public UpdateAddressApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
+        public UpdateAccountApplicationServices(ICommandBus commandBus, IQueryProcessor queryProcessor)
                         : base(commandBus, queryProcessor)
         {
         }
 
-        public async Task<ResponseResult> UpdateAsync(AddressDto address, CancellationToken cancellationToken)
+        public async Task<ResponseResult> UpdateAsync(AccountDto account, CancellationToken cancellationToken)
         {
             var strErrors = new List<string>();
-            var addressUpdate = AutoMapper.Mapper.Map<AddressDto, Address>(address);
+            var accountUpdate = AutoMapper.Mapper.Map<AccountDto, Account>(account);
 
             //validate address code
-            strErrors.AddRange(AddressDetailSpecs.IsValidInput.WhyIsNotSatisfiedBy(addressUpdate));
+            strErrors.AddRange(AccountingDetailSpecs.IsValidInput.WhyIsNotSatisfiedBy(accountUpdate));
 
             if (strErrors.Count > 0)
             {
                 return ResponseResult.Failed(strErrors.ToArray());
             }
 
-            var customerIdentity = addressUpdate.CustomerId;
+            var customerIdentity = accountUpdate.CustomerId;
 
             var customerQuery = await ReadCustomerModel(customerIdentity);
             var customerReadModel = customerQuery.ToList();
@@ -49,15 +49,15 @@ namespace Jmerp.Example.Customers.Middlewares.Services
                 return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00005, customerIdentity.Value));
 
             var sourceId = await _commandBus.PublishAsync(
-                new AddressUpdateCommand(customerIdentity, _commandSourceId, addressUpdate)
+                new AccountUpdateCommand(customerIdentity, _commandSourceId, accountUpdate)
                 ,cancellationToken).ConfigureAwait(false);
 
             customerQuery = await ReadCustomerModel(customerIdentity);
             customerReadModel = customerQuery.ToList();
-            var latestAddressDetail = customerReadModel?.FirstOrDefault()?.AddressDetail;
+            var latestAccountDetail = customerReadModel?.FirstOrDefault()?.AccountingDetail;
 
-            if (!latestAddressDetail.Addresses.Contains(addressUpdate))
-                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00002, addressUpdate.Id.Value));
+            if (!latestAccountDetail.Accounts.Contains(accountUpdate))
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00002, accountUpdate.Id.Value));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

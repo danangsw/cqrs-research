@@ -123,4 +123,7 @@
   <data name="MSG00002" xml:space="preserve">
     <value>'{0}' Cannot be Null or Empty list.</value>
   </data>
+  <data name="MSG00003" xml:space="preserve">
+    <value>'{0}' is not a valid accounting code.</value>
+  </data>
 </root>
