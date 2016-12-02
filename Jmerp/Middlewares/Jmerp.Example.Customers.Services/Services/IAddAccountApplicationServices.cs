@@ -59,10 +59,10 @@ namespace Jmerp.Example.Customers.Middlewares.Services
 
             customerQuery = await ReadCustomerModel(customerIdentity);
             customerReadModel = customerQuery.ToList();
-            var latestAddressDetail = customerReadModel?.FirstOrDefault()?.AccountingDetail;
+            var latestAccountingDetail = customerReadModel?.FirstOrDefault()?.AccountingDetail;
 
-            if (!latestAddressDetail.Accounts.Intersect(accountList).Any())
-                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00001, accountList.ToString()));
+            if (!latestAccountingDetail.Accounts.Intersect(accountList).Any())
+                return ResponseResult.Failed(string.Format(CustomerMiddlewareMessageResources.MSG00001, string.Join(",", accountList.Select(x => x.Id).ToList())));
 
             return ResponseResult.Succeed(
                 AutoMapper.Mapper.Map<List<Customer>, List<CustomerDto>>(customerReadModel)

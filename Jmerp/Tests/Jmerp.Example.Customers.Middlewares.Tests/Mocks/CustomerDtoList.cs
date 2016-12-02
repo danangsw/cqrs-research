@@ -110,7 +110,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             AccountDescription = "Bank Mandiri a/c",
             FirstName = "Wak",
             LastName = "Doyok",
-            AccountBalance = 100000000M
+            AccountBalance = 100000000.0M
         };
         public static readonly AccountDto AccountDto2_CS00001 = new AccountDto()
         {
@@ -121,7 +121,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             AccountDescription = "Cash a/c",
             FirstName = "Wak",
             LastName = "Doyok",
-            AccountBalance = 200000000M
+            AccountBalance = 200000000.0M
         };
         public static readonly AccountDto AccountDto3_CS00001 = new AccountDto()
         {
@@ -132,7 +132,7 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.Mocks
             AccountDescription = "Profit on sale of Asset a/c",
             FirstName = "Wak",
             LastName = "Doyok",
-            AccountBalance = 300000000M
+            AccountBalance = 300000000.0M
         };
     }
 }

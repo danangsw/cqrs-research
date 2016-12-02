@@ -106,6 +106,32 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
                 addressDelete.CustomerId, addressDelete.Id, CancellationToken.None);
             var responseRemoveAddressResult = ConvertResponse(responseRemoveAddress.Responses)?.ToList();
 
+            var serviceAccountsAdd = _container.Resolve<IAddAccountApplicationServices>();
+            var responseAccountsAdd = await serviceAccountsAdd.AddAsync(
+                new List<AccountDto> {
+                    CustomerAccountingDetails.AccountDto1_CS00001,
+                    CustomerAccountingDetails.AccountDto2_CS00001,
+                    CustomerAccountingDetails.AccountDto3_CS00001,
+                }, CancellationToken.None);
+            var responseAccountsAddResult = ConvertResponse(responseAccountsAdd.Responses)?.ToList();
+
+            var updateAccount = CustomerAccountingDetails.AccountDto2_CS00001;
+            updateAccount.AccountBalance -= 555555;
+            updateAccount.LastName = "Kadoor";
+            var serviceAccountsUpdate = _container.Resolve<IUpdateAccountApplicationServices>();
+            var responseAccountsUpdate = await serviceAccountsUpdate.UpdateAsync(
+                updateAccount, CancellationToken.None);
+            var responseAccountsUpdateResult = ConvertResponse(responseAccountsAdd.Responses)?.ToList();
+
+            var serviceAccountsRemove = _container.Resolve<IRemoveAccountApplicationServices>();
+            var responseAccountsRemove = await serviceAccountsRemove.RemoveAsync(
+                CustomerAccountingDetails.AccountDto1_CS00001.CustomerId,
+                new List<string> {
+                    CustomerAccountingDetails.AccountDto1_CS00001.Id,
+                    CustomerAccountingDetails.AccountDto3_CS00001.Id,
+                }, CancellationToken.None);
+            var responseAccountsRemoveResult = ConvertResponse(responseAccountsRemove.Responses)?.ToList();
+
             //Assert
             responseCreate.Succeeded.Should().BeTrue();
             responseCreate.Errors.Should().HaveCount(0);
@@ -130,6 +156,18 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
             responseRemoveAddress.Succeeded.Should().BeTrue();
             responseRemoveAddress.Errors.Should().HaveCount(0);
             responseRemoveAddressResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseAccountsAdd.Succeeded.Should().BeTrue();
+            responseAccountsAdd.Errors.Should().HaveCount(0);
+            responseAccountsAddResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseAccountsUpdate.Succeeded.Should().BeTrue();
+            responseAccountsUpdate.Errors.Should().HaveCount(0);
+            responseAccountsUpdateResult.Should().BeOfType(typeof(List<CustomerDto>));
+
+            responseAccountsRemove.Succeeded.Should().BeTrue();
+            responseAccountsRemove.Errors.Should().HaveCount(0);
+            responseAccountsRemoveResult.Should().BeOfType(typeof(List<CustomerDto>));
         }
 
         private IEnumerable<CustomerDto> ConvertResponse(IEnumerable<object> objects)

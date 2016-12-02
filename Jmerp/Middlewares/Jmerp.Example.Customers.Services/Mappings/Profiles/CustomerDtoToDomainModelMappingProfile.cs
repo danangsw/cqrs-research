@@ -30,10 +30,7 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                     );
             CreateMap<string, AccountId>()
                 .ConstructUsing(s =>
-                new AccountId(
-                    string.IsNullOrEmpty(s)
-                    ? AccountId.New.Value : s)
-                    );
+                new AccountId(s));
             CreateMap<GeneralInfoDto, GeneralInfo>()
                 .ConstructUsing(s => new GeneralInfo(
                     s.OrganizationName,
@@ -68,8 +65,7 @@ namespace Jmerp.Example.Customers.Middlewares.Mappings.Profiles
                 s.SetDefault));
             CreateMap<AccountDto, Account>()
                 .ConstructUsing(s =>
-                new Account(new AccountId(
-                string.IsNullOrEmpty(s.Id) ? AccountId.New.Value : s.Id),
+                new Account(new AccountId(s.Id),
                 new CustomerId(s.CustomerId),
                 s.AccountNumber,
                 s.AccountType,
