@@ -79,7 +79,6 @@ namespace Example.Shipping.Tests.IntegrationTests
                 CancellationToken.None)
                 .ConfigureAwait(true);
 
-
         }
 
 

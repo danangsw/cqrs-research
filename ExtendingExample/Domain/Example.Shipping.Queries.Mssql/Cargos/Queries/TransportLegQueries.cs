@@ -12,13 +12,14 @@ namespace Example.Shipping.Queries.Mssql.Cargos.Queries
     public interface ITransportLegQueries
     {
         Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByVoyageId(IMsSqlConnection _msSqlConnection, string voyageId, CancellationToken cancellationToken);
-        Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoIds(IMsSqlConnection _msSqlConnection, string cargoIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoIds(IMsSqlConnection _msSqlConnection, string[] cargoIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoId(IMsSqlConnection _msSqlConnection, string cargoId, CancellationToken cancellationToken);
 
     }
 
     public class TransportLegQueries : ITransportLegQueries
     {
-        public async Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoIds(IMsSqlConnection _msSqlConnection, string cargoIds, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoIds(IMsSqlConnection _msSqlConnection, string[] cargoIds, CancellationToken cancellationToken)
         {
             var readTransportLegModels = await _msSqlConnection.QueryAsync<TransportLegReadModel>(
                Label.Named("mssql-fetch-transportlegs-read-model"),
@@ -29,6 +30,19 @@ namespace Example.Shipping.Queries.Mssql.Cargos.Queries
 
             return readTransportLegModels;
         }
+
+        public async Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByCargoId(IMsSqlConnection _msSqlConnection, string cargoId, CancellationToken cancellationToken)
+        {
+            var readTransportLegModels = await _msSqlConnection.QueryAsync<TransportLegReadModel>(
+               Label.Named("mssql-fetch-transportlegs-read-model"),
+               cancellationToken,
+               "SELECT * FROM [TransportLeg] WHERE CargoId = @CargoId",
+                new { CargoId = cargoId })
+               .ConfigureAwait(false);
+
+            return readTransportLegModels;
+        }
+
 
         public async Task<IReadOnlyCollection<TransportLegReadModel>> GetTransportLegsByVoyageId(IMsSqlConnection _msSqlConnection, string voyageId, CancellationToken cancellationToken)
         {

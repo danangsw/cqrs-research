@@ -12,7 +12,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage.Queries
 
     public interface IVoyageQueries
     {
-        Task<IReadOnlyCollection<VoyageReadModel>> GetVoyagesByIds(IMsSqlConnection msSqlConnection, string inQueryVoyageIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<VoyageReadModel>> GetVoyagesByIds(IMsSqlConnection msSqlConnection, string[] inQueryVoyageIds, CancellationToken cancellationToken);
         Task<IReadOnlyCollection<VoyageReadModel>> GetAllVoyages(IMsSqlConnection _msSqlConnection, CancellationToken cancellationToken);
     }
 
@@ -20,7 +20,7 @@ namespace Example.Shipping.Queries.Mssql.Voyage.Queries
     public class VoyageQueries : IVoyageQueries
     {
 
-        public async Task<IReadOnlyCollection<VoyageReadModel>> GetVoyagesByIds(IMsSqlConnection msSqlConnection, string inQueryVoyageIds, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<VoyageReadModel>> GetVoyagesByIds(IMsSqlConnection msSqlConnection, string[] inQueryVoyageIds, CancellationToken cancellationToken)
         {
             var readVoyageModels = await msSqlConnection.QueryAsync<VoyageReadModel>(
                 Label.Named("mssql-fetch-voyages-read-model"),

@@ -1,8 +1,10 @@
 ﻿using EventFlow;
 using EventFlow.Extensions;
 using EventFlow.MsSql.Extensions;
+using Example.Shipping.Domain.Model.CargoModel.Entities;
 using Example.Shipping.Domain.Model.VoyageModel.Entities;
 using Example.Shipping.Queries.Mssql.Cargos;
+using Example.Shipping.Queries.Mssql.Cargos.Queries;
 using Example.Shipping.Queries.Mssql.Locations;
 using Example.Shipping.Queries.Mssql.Voyage;
 using Example.Shipping.Queries.Mssql.Voyage.Queries;
@@ -27,12 +29,17 @@ namespace Example.Shipping.Queries.Mssql
                     sr.RegisterType(typeof(CarrierMovementLocator));
                     sr.Register<IVoyageQueries, VoyageQueries>();
                     sr.Register<ICarrierMovementQueries, CarrierMovementQueries>();
-                 })
+                    sr.RegisterType(typeof(TransportLegLocator));
+                    sr.Register<ICargoQueries, CargoQueries>();
+                    sr.Register<ITransportLegQueries, TransportLegQueries>();
+                })
                 .AddQueryHandlers(Assembly)
                 .UseMssqlReadModel<LocationReadModel>()
                 .UseMssqlReadModel<VoyageReadModel>()
+                .UseMssqlReadModel<CarrierMovementReadModel, CarrierMovementLocator>()
                 .UseMssqlReadModel<CargoReadModel>()
-                .UseMssqlReadModel<CarrierMovementReadModel, CarrierMovementLocator>();
+                .UseMssqlReadModel<TransportLegReadModel>()
+                .UseMssqlReadModel<TransportLegReadModel, TransportLegLocator>();
         }
 
     }

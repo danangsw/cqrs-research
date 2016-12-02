@@ -1,6 +1,7 @@
 ﻿using EventFlow;
 using EventFlow.Extensions;
 using Example.Shipping.Application;
+using Example.Shipping.Domain.Services;
 using Example.Shipping.ExternalServices.Routing;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,9 @@ namespace Example.Shipping
                 .AddDefaults(Assembly)
                 .RegisterServices(sr =>
                 {
-                    sr.Register<IScheduleApplicationService, ScheduleApplicationService>();
                     sr.Register<IBookingApplicationService, BookingApplicationService>();
+                    sr.Register<IScheduleApplicationService, ScheduleApplicationService>();
+                    sr.Register<IUpdateItineraryService, UpdateItineraryService>();
                     sr.Register<IRoutingService, RoutingService>();
                 });
         }

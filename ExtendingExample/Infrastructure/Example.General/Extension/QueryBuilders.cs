@@ -9,15 +9,10 @@ namespace Example.General.Extension
 {
     public static class QueryBuilders
     {
-        public static string CreateInQueryFromListId(this List<string> list)
+        public static string[] CreateInQueryFromListId(this List<string> list)
         {
             string valuesId = string.Empty;
-            foreach (var item in list)
-            {
-                valuesId = valuesId + "'"+ item +"',";
-            }
-
-            return string.Format("({0})", valuesId.TrimEnd(','));
+            return list.Distinct().ToArray();
         }
     }
 }

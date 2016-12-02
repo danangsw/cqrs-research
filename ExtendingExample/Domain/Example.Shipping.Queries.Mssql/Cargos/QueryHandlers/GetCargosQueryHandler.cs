@@ -41,7 +41,7 @@ namespace Example.Shipping.Queries.Mssql.Cargos.QueryHandlers
             return getCargosByCargoIds.Result.Select(x =>
                 x.ToCargo(new CargoId(x.AggregateId),
                 x.ToRoute(),
-                new Itinerary(getTransportLegsByCargoIds.Result.Where(y => y.CargoId == x.AggregateId)
+                new Itinerary(getTransportLegsByCargoIds.Result.Where(y => y.CargoId == x.AggregateId).OrderBy(y => y.UnloadTime)
                                .Select(z => z.ToTransportLeg()).ToList())
               )).ToList();
         }

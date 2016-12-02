@@ -11,12 +11,26 @@ namespace Example.Shipping.Queries.Mssql.Cargos.Queries
 {
     public interface ICargoQueries
     {
-        Task<IReadOnlyCollection<CargoReadModel>> GetCargosByCargoIds(IMsSqlConnection _msSqlConnection, string cargoIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<CargoReadModel>> GetCargosByCargoIds(IMsSqlConnection _msSqlConnection, string[] cargoIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<CargoReadModel>> GetCargoByCargoId(IMsSqlConnection _msSqlConnection, string cargoId, CancellationToken cancellationToken);
+
     }
 
     public class CargoQueries : ICargoQueries
     {
-        public async Task<IReadOnlyCollection<CargoReadModel>> GetCargosByCargoIds(IMsSqlConnection _msSqlConnection, string cargoIds, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<CargoReadModel>> GetCargoByCargoId(IMsSqlConnection _msSqlConnection, string cargoId, CancellationToken cancellationToken)
+        {
+            var readCargoModels = await _msSqlConnection.QueryAsync<CargoReadModel>(
+                Label.Named("mssql-fetch-cargo-read-model"),
+                cancellationToken,
+                "SELECT * FROM [Cargo] WHERE AggregateId = @AggregateId",
+                 new { AggregateId = cargoId })
+                .ConfigureAwait(false);
+
+            return readCargoModels;
+        }
+
+        public async Task<IReadOnlyCollection<CargoReadModel>> GetCargosByCargoIds(IMsSqlConnection _msSqlConnection, string[] cargoIds, CancellationToken cancellationToken)
         {
             var readCargoModels = await _msSqlConnection.QueryAsync<CargoReadModel>(
                 Label.Named("mssql-fetch-cargos-read-model"),

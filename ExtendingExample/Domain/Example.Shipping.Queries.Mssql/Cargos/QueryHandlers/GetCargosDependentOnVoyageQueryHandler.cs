@@ -33,14 +33,18 @@ namespace Example.Shipping.Queries.Mssql.Cargos.QueryHandlers
         public async Task<IReadOnlyCollection<Cargo>> ExecuteQueryAsync(GetCargosDependentOnVoyageQuery query, CancellationToken cancellationToken)
         {
             IReadOnlyCollection<TransportLegReadModel> getTransportLegsByVoyageId = await _transportLegQueries.GetTransportLegsByVoyageId(_msSqlConnection, query.VoyageId.Value , cancellationToken);
-            var inCargoQuery = getTransportLegsByVoyageId.Select(x => x.CargoId).ToList().CreateInQueryFromListId();
-            IReadOnlyCollection<CargoReadModel> getCargosByCargoIds = await _cargoQueries.GetCargosByCargoIds(_msSqlConnection, inCargoQuery, cancellationToken);
+            string getCargoId = getTransportLegsByVoyageId.First().CargoId;
 
-            return getCargosByCargoIds.Select(x =>
+            Task<IReadOnlyCollection<CargoReadModel>> getCargo = _cargoQueries.GetCargoByCargoId(_msSqlConnection, getCargoId , cancellationToken);
+            Task<IReadOnlyCollection<TransportLegReadModel>> getTransportLeg = _transportLegQueries.GetTransportLegsByCargoId(_msSqlConnection, getCargoId , cancellationToken);
+
+            await Task.WhenAll(getCargo, getTransportLeg);
+
+            return getCargo.Result.Select(x =>
                 x.ToCargo(new CargoId(x.AggregateId),
                 x.ToRoute(),
-                new Itinerary(getTransportLegsByVoyageId.Where(y=> y.CargoId == x.AggregateId)
-                               .Select(z=>z.ToTransportLeg()).ToList())
+                new Itinerary(getTransportLeg.Result.Where(y=> y.CargoId == x.AggregateId).OrderBy(y=> y.UnloadTime)
+                               .Select(z=> z.ToTransportLeg()).ToList())
               )).ToList();
 
         }

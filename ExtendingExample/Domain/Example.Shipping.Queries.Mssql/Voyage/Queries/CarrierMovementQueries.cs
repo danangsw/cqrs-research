@@ -13,14 +13,14 @@ namespace Example.Shipping.Queries.Mssql.Voyage.Queries
 
     public interface ICarrierMovementQueries
     {
-        Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection, string inQueryVoyageIds, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection, string[] inQueryVoyageIds, CancellationToken cancellationToken);
         Task<IReadOnlyCollection<CarrierMovementReadModel>> GetAllCarrierMovement(IMsSqlConnection _msSqlConnection, CancellationToken cancellationToken);
     }
 
 
     public class CarrierMovementQueries : ICarrierMovementQueries
     {
-        public async Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection , string inQueryVoyageIds, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<CarrierMovementReadModel>> GetCarrierMovementByAggregateId(IMsSqlConnection _msSqlConnection , string[] inQueryVoyageIds, CancellationToken cancellationToken)
         {
             var readCarrierMovementModels = await _msSqlConnection.QueryAsync<CarrierMovementReadModel>(
                 Label.Named("mssql-fetch-carriermovement-read-model"),
