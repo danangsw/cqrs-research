@@ -19,7 +19,8 @@ namespace Example.Shipping.Queries.Mssql.Cargos
 {
     [Table("TransportLeg")]
     public class TransportLegReadModel : IReadModel,
-        IAmReadModelFor<CargoAggregate, CargoId, TransportLegAddedEvent>
+        IAmReadModelFor<CargoAggregate, CargoId, TransportLegAddedEvent>,
+        IAmReadModelFor<CargoAggregate, CargoId, TransportLegUpdatedEvent>
     {
 
         public string CargoId { get; set; }
@@ -56,6 +57,17 @@ namespace Example.Shipping.Queries.Mssql.Cargos
                new VoyageId(VoyageId),
                new CarrierMovementId(CarrierMovementId)
             );
+        }
+
+        public void Apply(IReadModelContext context, IDomainEvent<CargoAggregate, CargoId, TransportLegUpdatedEvent> domainEvent)
+        {
+            var TransportLeg = domainEvent.AggregateEvent.TransportLeg;
+            LoadLocation = TransportLeg.LoadLocation.Value;
+            UnloadLocation = TransportLeg.UnloadLocation.Value;
+            LoadTime = TransportLeg.LoadTime;
+            UnloadTime = TransportLeg.LoadTime;
+            VoyageId = TransportLeg.VoyageId.Value;
+            CarrierMovementId = TransportLeg.CarrierMovementId.Value;
         }
     }
 }

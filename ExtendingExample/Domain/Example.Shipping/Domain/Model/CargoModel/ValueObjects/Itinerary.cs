@@ -1,5 +1,6 @@
 ﻿using EventFlow.Extensions;
 using EventFlow.ValueObjects;
+using Example.General.Extension;
 using Example.Shipping.Domain.Model.CargoModel.Entities;
 using Example.Shipping.Domain.Model.CargoModel.Specifications;
 using Example.Shipping.Domain.Model.LocationModel;
@@ -58,13 +59,32 @@ namespace Example.Shipping.Domain.Model.CargoModel.ValueObjects
 
         public Itinerary AddTransportLeg(TransportLeg transportLeg)
         {
-            var newListTransportLeg = new List<TransportLeg>();
-            if (TransportLegs != null)
-            {
-                newListTransportLeg.AddRange(TransportLegs);
-            }
-            newListTransportLeg.Add(transportLeg);
+            var newListTransportLeg = TransportLegs.AddList<TransportLeg, TransportLegId>(transportLeg);
             return new Itinerary(newListTransportLeg);
+        }
+
+        public Itinerary UpdateTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = TransportLegs.UpdateList<TransportLeg, TransportLegId>(transportLeg);
+            return new Itinerary(newListTransportLeg);
+        }
+
+        public Itinerary DeleteTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = TransportLegs.DeleteFromList<TransportLeg, TransportLegId>(transportLeg);
+
+            if(newListTransportLeg.Count != 0)
+            {
+                return new Itinerary(newListTransportLeg);
+            }
+
+            return new Itinerary();
+            
+        }
+
+        public List<TransportLeg> GetTransportLegsNotInCurrentCollectionBasedOnId(Itinerary intenary)
+        {
+            return TransportLegs.Except(intenary.TransportLegs, new GenericCompare<TransportLeg>(x => x.Id)).ToList();
         }
     }
 }

@@ -64,8 +64,11 @@
     <Compile Include="Domain\Model\CargoModel\Events\CargoBookedEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\CargoItinerarySetEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Events\TransportLegAddedEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Events\TransportLegDeletedEvent.cs" />
+    <Compile Include="Domain\Model\CargoModel\Events\TransportLegUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CargoModel\Jobs\VerifyCargoItineraryJob.cs" />
     <Compile Include="Domain\Model\CargoModel\Jobs\VerifyCargosForVoyageJob.cs" />
+    <Compile Include="Domain\Model\CargoModel\Queries\DeleteTransportLegQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Queries\GetCargoQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Queries\GetCargosDependentOnVoyageQuery.cs" />
     <Compile Include="Domain\Model\CargoModel\Specifications\RouteSpecification.cs" />
@@ -111,6 +114,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Example.General\Example.General.csproj">
+      <Project>{A5A7CA0C-E217-41B6-B28F-E8C8A838B683}</Project>
+      <Name>Example.General</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Repository\Example.Db\Example.Db.csproj">
       <Project>{1E41B627-DDD6-4A98-BB92-3D70BF379188}</Project>
       <Name>Example.Db</Name>
