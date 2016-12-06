@@ -82,9 +82,9 @@ namespace Example.Shipping.Domain.Model.CargoModel.ValueObjects
             
         }
 
-        public List<TransportLeg> GetTransportLegsNotInCurrentCollectionBasedOnId(Itinerary intenary)
+        public List<TransportLeg> GetTransportLegsNotInCurrentCollectionBasedOnId(Itinerary itinerary)
         {
-            return TransportLegs.Except(intenary.TransportLegs, new GenericCompare<TransportLeg>(x => x.Id)).ToList();
+            return TransportLegs.GetDataFromCollectionCompareWithInputBasedOnId<TransportLeg, TransportLegId>(itinerary.TransportLegs);
         }
     }
 }

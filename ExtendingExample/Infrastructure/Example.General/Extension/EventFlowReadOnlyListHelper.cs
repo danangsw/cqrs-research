@@ -58,6 +58,21 @@ namespace Example.General.Extension
 
         }
 
+        public static List<T> GetDataFromCollectionCompareWithInputBasedOnId<T, Z>(this IReadOnlyList<T> oldList, IReadOnlyList<T> inputsValue) where Z : IIdentity where T : Entity<Z>
+        {
+            var newList = new List<T>();
+
+            foreach (var item in oldList)
+            {
+                if (!inputsValue.Contains(item, new GenericCompare<T>(x => x.Id)))
+                {
+                    newList.Add(item);
+                }
+            }
+
+            return newList;
+        }
+
 
     }
 }

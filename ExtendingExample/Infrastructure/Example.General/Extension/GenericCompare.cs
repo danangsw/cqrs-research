@@ -26,5 +26,6 @@ namespace Example.General.Extension
         {
             return obj.GetHashCode();
         }
+        
     }
 }
