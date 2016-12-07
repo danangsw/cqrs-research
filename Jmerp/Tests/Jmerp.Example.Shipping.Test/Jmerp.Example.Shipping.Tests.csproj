@@ -121,6 +121,10 @@
       <Project>{f5451bea-4445-4135-ab3e-ec68ebfe6ada}</Project>
       <Name>Jmerp.Example.Shipping.Queries.InMemory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Domains\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
+      <Project>{9500b65d-1a89-43de-a666-cc634abcdc69}</Project>
+      <Name>Jmerp.Example.Shipping.Queries.Mssql</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domains\Jmerp.Example.Shipping\Jmerp.Example.Shipping.csproj">
       <Project>{7a2ddc1c-0128-44c3-bee8-e9211f515201}</Project>
       <Name>Jmerp.Example.Shipping</Name>
@@ -132,10 +136,6 @@
     <ProjectReference Include="..\..\Jmerp.Db\Jmerp.Db.csproj">
       <Project>{0837de29-78b8-4b79-88d3-9f7ea89529aa}</Project>
       <Name>Jmerp.Db</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
-      <Project>{9500B65D-1A89-43DE-A666-CC634ABCDC69}</Project>
-      <Name>Jmerp.Example.Shipping.Queries.Mssql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

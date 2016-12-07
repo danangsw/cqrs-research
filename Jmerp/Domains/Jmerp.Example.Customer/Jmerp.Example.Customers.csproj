@@ -76,7 +76,6 @@
     <Compile Include="Domain\Model\CustomerModel\Events\AddressAddedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\AddressUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\CustomerCreatedEvent.cs" />
-    <Compile Include="Domain\Model\CustomerModel\Events\AddressDetailSetEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Events\GeneralInfoUpdatedEvent.cs" />
     <Compile Include="Domain\Model\CustomerModel\Helpers\AddressDetailBuilder.cs" />
     <Compile Include="Domain\Model\CustomerModel\Helpers\CustomerConstant.cs" />
