@@ -3,10 +3,10 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "angular": "1.5.8",
-    "jquery": "3.1.1",
+    "angular": "^1.5.9",
+    "jquery": "^3.1.1",
     "bootstrap": "3.3.7",
-    "admin-lte": "2.3.6",
+    "admin-lte": "^2.3.8",
     "jquery-validation": "1.15.1",
     "jquery-validation-unobtrusive": "3.2.6",
     "font-awesome": "4.6.3",
@@ -21,8 +21,6 @@
     "icheck": "1.0.2",
     "angular-validation": "1.4.2",
     "typescript-collections": "1.2.3"
-
-
   },
   "devDependencies": {
     "gulp": "3.9.1",

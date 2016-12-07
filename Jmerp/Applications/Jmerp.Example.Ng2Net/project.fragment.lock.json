@@ -1,0 +1,127 @@
+{
+  "version": 2,
+  "exports": {
+    "Jmerp.Commons/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.Commons.dll": {}
+      },
+      "runtime": {
+        "../../packages/Autofac.4.2.1/lib/net45/Autofac.dll": {},
+        "bin/Debug/Jmerp.Commons.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.Commons.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Jmerp.Example.Customers.Middlewares/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.Example.Customers.Middlewares.dll": {}
+      },
+      "runtime": {
+        "../../packages/AutoMapper.5.2.0/lib/net45/AutoMapper.dll": {},
+        "../../packages/Autofac.4.2.1/lib/net45/Autofac.dll": {},
+        "../../packages/EventFlow.0.37.2424/lib/net451/EventFlow.dll": {},
+        "../../packages/EventFlow.Autofac.0.37.2424/lib/net451/EventFlow.Autofac.dll": {},
+        "../../packages/Newtonsoft.Json.9.0.2-beta1/lib/net45/Newtonsoft.Json.dll": {},
+        "bin/Debug/Jmerp.Example.Customers.Middlewares.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.Example.Customers.Middlewares.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Jmerp.Example.Shipping.Middlewares/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.Example.Shipping.Middlewares.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Jmerp.Example.Shipping.Middlewares.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.Example.Shipping.Middlewares.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "EventFlow.TestHelpers/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.EventFlow.TestHelpers.dll": {}
+      },
+      "runtime": {
+        "../../packages/AutoFixture.3.50.2/lib/net40/Ploeh.AutoFixture.dll": {},
+        "../../packages/AutoFixture.AutoMoq.3.50.2/lib/net40/Ploeh.AutoFixture.AutoMoq.dll": {},
+        "../../packages/Autofac.4.2.1/lib/net45/Autofac.dll": {},
+        "../../packages/Castle.Core.4.0.0-beta002/lib/net45/Castle.Core.dll": {},
+        "../../packages/EventFlow.0.37.2424/lib/net451/EventFlow.dll": {},
+        "../../packages/FluentAssertions.4.17.0/lib/net45/FluentAssertions.Core.dll": {},
+        "../../packages/FluentAssertions.4.17.0/lib/net45/FluentAssertions.dll": {},
+        "../../packages/Moq.4.6.38-alpha/lib/net45/Moq.dll": {},
+        "../../packages/NUnit.3.5.0/lib/net45/nunit.framework.dll": {},
+        "../../packages/Newtonsoft.Json.9.0.2-beta1/lib/net45/Newtonsoft.Json.dll": {},
+        "bin/Debug/Jmerp.EventFlow.TestHelpers.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.EventFlow.TestHelpers.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Jmerp.Example.Customers/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.Example.Customers.dll": {}
+      },
+      "runtime": {
+        "../../packages/EventFlow.0.37.2424/lib/net451/EventFlow.dll": {},
+        "../../packages/Newtonsoft.Json.9.0.2-beta1/lib/net45/Newtonsoft.Json.dll": {},
+        "bin/Debug/Jmerp.Example.Customers.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.Example.Customers.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Jmerp.Example.Customers.Queries.InMemory/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/Jmerp.Example.Customers.Queries.InMemory.dll": {}
+      },
+      "runtime": {
+        "../../packages/EventFlow.0.37.2424/lib/net451/EventFlow.dll": {},
+        "../../packages/Newtonsoft.Json.9.0.2-beta1/lib/net45/Newtonsoft.Json.dll": {},
+        "bin/Debug/Jmerp.Example.Customers.Queries.InMemory.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Jmerp.Example.Customers.Queries.InMemory.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

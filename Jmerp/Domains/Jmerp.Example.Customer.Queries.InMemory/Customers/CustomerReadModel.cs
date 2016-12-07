@@ -72,8 +72,21 @@ namespace Jmerp.Example.Customers.Queries.InMemory.Customers
 
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AccountAddedEvent> domainEvent)
         {
-            var accounts = new AccountingDetail(domainEvent.AggregateEvent.Accounts);
-            AccountingDetail = accounts;
+            AddAccounts(domainEvent);
+        }
+
+        private void AddAccounts(IDomainEvent<CustomerAggregate, CustomerId, AccountAddedEvent> domainEvent)
+        {
+            if (AccountingDetail == null)
+            {
+                var accounts = new AccountingDetail(domainEvent.AggregateEvent.Accounts);
+                AccountingDetail = accounts;
+            }
+            else
+            {
+                var accounts = AccountingDetail.AddAccount(domainEvent.AggregateEvent.Accounts);
+                AccountingDetail = accounts;
+            }
         }
 
         public void Apply(IReadModelContext context, IDomainEvent<CustomerAggregate, CustomerId, AccountUpdatedEvent> domainEvent)

@@ -1,5 +1,7 @@
-﻿using EventFlow.ValueObjects;
+﻿using EventFlow.Extensions;
+using EventFlow.ValueObjects;
 using Jmerp.Example.Customers.Domain.Model.CustomerModel.Entities;
+using Jmerp.Example.Customers.Domain.Model.CustomerModel.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace Jmerp.Example.Customers.Domain.Model.CustomerModel.ValueObjects
         {
             var accountList = (accounts ?? Enumerable.Empty<Account>()).ToList();
 
-            if (!accountList.Any()) throw new ArgumentException(nameof(accounts));
+            AccountingDetailSpecs.IsAnyList.ThrowDomainErrorIfNotStatisfied(accountList);
 
             Accounts = accountList;
         }

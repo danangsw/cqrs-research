@@ -132,6 +132,14 @@ namespace Jmerp.Example.Customers.Middlewares.Tests.UnitTests.Services
                 }, CancellationToken.None);
             var responseAccountsRemoveResult = ConvertResponse(responseAccountsRemove.Responses)?.ToList();
 
+            serviceAccountsAdd = _container.Resolve<IAddAccountApplicationServices>();
+            responseAccountsAdd = await serviceAccountsAdd.AddAsync(
+                new List<AccountDto> {
+                    CustomerAccountingDetails.AccountDto1_CS00001,
+                    CustomerAccountingDetails.AccountDto3_CS00001,
+                }, CancellationToken.None);
+            responseAccountsAddResult = ConvertResponse(responseAccountsAdd.Responses)?.ToList();
+
             //Assert
             responseCreate.Succeeded.Should().BeTrue();
             responseCreate.Errors.Should().HaveCount(0);
