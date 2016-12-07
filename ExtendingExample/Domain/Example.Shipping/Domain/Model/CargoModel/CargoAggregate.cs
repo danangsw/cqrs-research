@@ -1,5 +1,6 @@
 ﻿using EventFlow.Aggregates;
 using EventFlow.Extensions;
+using Example.General.Extension;
 using Example.Shipping.Domain.Model.CargoModel.Entities;
 using Example.Shipping.Domain.Model.CargoModel.Events;
 using Example.Shipping.Domain.Model.CargoModel.ValueObjects;
@@ -35,9 +36,24 @@ namespace Example.Shipping.Domain.Model.CargoModel
             Specs.AggregateIsCreated.ThrowDomainErrorIfNotStatisfied(this);
             Route.Specification().ThrowDomainErrorIfNotStatisfied(itinerary);
 
+
+            var listTransportLeg = Itinerary.GetTransportLegsNotInCurrentCollectionBasedOnId(itinerary);
+
+            foreach (var transportLeg in listTransportLeg)
+            {
+                DeleteTransportLeg(transportLeg);
+            }
+
+
             foreach (var transportLeg in itinerary.TransportLegs)
             {
-                AddTransportLeg(transportLeg);
+                if(Itinerary.TransportLegs.Contains(transportLeg, new GenericCompare<TransportLeg>(x => x.Id)))
+                {
+                    UpdateTransportLeg(transportLeg);
+                }else
+                {
+                    AddTransportLeg(transportLeg);
+                }
             }
 
             Emit(new CargoItinerarySetEvent(itinerary));
@@ -46,6 +62,16 @@ namespace Example.Shipping.Domain.Model.CargoModel
         public void AddTransportLeg(TransportLeg transportLeg)
         {
             Emit(new TransportLegAddedEvent(transportLeg));
+        }
+
+        public void UpdateTransportLeg(TransportLeg transportLeg)
+        {
+            Emit(new TransportLegUpdatedEvent(transportLeg));  
+        }
+
+        public void DeleteTransportLeg(TransportLeg transportLeg)
+        {
+            Emit(new TransportLegDeletedEvent(transportLeg));
         }
     }
 }

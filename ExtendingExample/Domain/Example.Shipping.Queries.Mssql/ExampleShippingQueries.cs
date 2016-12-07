@@ -5,6 +5,7 @@ using Example.Shipping.Domain.Model.CargoModel.Entities;
 using Example.Shipping.Domain.Model.VoyageModel.Entities;
 using Example.Shipping.Queries.Mssql.Cargos;
 using Example.Shipping.Queries.Mssql.Cargos.Queries;
+using Example.Shipping.Queries.Mssql.Cargos.Subscriber;
 using Example.Shipping.Queries.Mssql.Locations;
 using Example.Shipping.Queries.Mssql.Voyage;
 using Example.Shipping.Queries.Mssql.Voyage.Queries;
@@ -34,6 +35,7 @@ namespace Example.Shipping.Queries.Mssql
                     sr.Register<ITransportLegQueries, TransportLegQueries>();
                 })
                 .AddQueryHandlers(Assembly)
+                .AddSubscribers(typeof(TransportLegDeleteSubscriber))
                 .UseMssqlReadModel<LocationReadModel>()
                 .UseMssqlReadModel<VoyageReadModel>()
                 .UseMssqlReadModel<CarrierMovementReadModel, CarrierMovementLocator>()

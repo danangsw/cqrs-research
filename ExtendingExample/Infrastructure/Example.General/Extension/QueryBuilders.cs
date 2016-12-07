@@ -11,7 +11,6 @@ namespace Example.General.Extension
     {
         public static string[] CreateInQueryFromListId(this List<string> list)
         {
-            string valuesId = string.Empty;
             return list.Distinct().ToArray();
         }
     }

@@ -12,6 +12,8 @@ namespace Example.Shipping.Domain.Model.CargoModel
     public class CargoState : AggregateState<CargoAggregate, CargoId, CargoState>,
         IApply<CargoBookedEvent>,
         IApply<TransportLegAddedEvent>,
+        IApply<TransportLegUpdatedEvent>,
+        IApply<TransportLegDeletedEvent>,
         IApply<CargoItinerarySetEvent>
     {
         public Route Route { get; private set; }
@@ -38,6 +40,16 @@ namespace Example.Shipping.Domain.Model.CargoModel
         public void Apply(TransportLegAddedEvent aggregateEvent)
         {
             Itinerary = Itinerary.AddTransportLeg(aggregateEvent.TransportLeg);
+        }
+
+        public void Apply(TransportLegUpdatedEvent aggregateEvent)
+        {
+            Itinerary = Itinerary.UpdateTransportLeg(aggregateEvent.TransportLeg);
+        }
+
+        public void Apply(TransportLegDeletedEvent aggregateEvent)
+        {
+            Itinerary = Itinerary.DeleteTransportLeg(aggregateEvent.TransportLeg);
         }
     }
 }

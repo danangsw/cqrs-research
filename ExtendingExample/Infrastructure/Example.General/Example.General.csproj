@@ -60,6 +60,8 @@
     <Compile Include="Database\BaseAggregate.cs" />
     <Compile Include="Database\BaseEntity.cs" />
     <Compile Include="Database\HelperMigration.cs" />
+    <Compile Include="Extension\EventFlowReadOnlyListHelper.cs" />
+    <Compile Include="Extension\GenericCompare.cs" />
     <Compile Include="Extension\QueryBuilders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

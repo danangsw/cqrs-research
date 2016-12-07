@@ -1,4 +1,5 @@
 ﻿using EventFlow.ValueObjects;
+using Example.General.Extension;
 using Example.Shipping.Domain.Model.VoyageModel.Entities;
 using System;
 using System.Collections.Generic;
@@ -42,36 +43,17 @@ namespace Example.Shipping.Domain.Model.VoyageModel.ValueObjects
 
         public Schedule AddCarrierMovement(CarrierMovement carrierMovement)
         {
-            var newListCarrierMovement = new List<CarrierMovement>();
-
-            if (CarrierMovements != null)
-            {
-                newListCarrierMovement.AddRange(CarrierMovements);
-            }
-
-            newListCarrierMovement.Add(carrierMovement);
-
+            var newListCarrierMovement = CarrierMovements.AddList<CarrierMovement, CarrierMovementId>(carrierMovement);
             return new Schedule(newListCarrierMovement);
         }
 
         public Schedule UpdateCarrierMovement(CarrierMovement carrierMovement)
         {
-            var newListCarrierMovement = new List<CarrierMovement>();
-
-            if (CarrierMovements != null)
-            {
-                newListCarrierMovement.AddRange(CarrierMovements);
-            }
-
-            var indexOld = newListCarrierMovement.IndexOf(carrierMovement);
-            if (indexOld != -1) {
-                newListCarrierMovement[indexOld] = carrierMovement;
-            }
-
+            var newListCarrierMovement = CarrierMovements.UpdateList<CarrierMovement, CarrierMovementId>(carrierMovement);
             return new Schedule(newListCarrierMovement);
         }
 
-
+        
 
     }
 }
