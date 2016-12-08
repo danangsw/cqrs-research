@@ -25,8 +25,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.Commands
     {
         public override Task ExecuteAsync(CargoAggregate aggregate, CargoBookCommand command, CancellationToken cancellationToken)
         {
-            aggregate.BookRoute(command.Route);
-
+            aggregate.Book(command.Route);
             return Task.FromResult(0);
         }
     }

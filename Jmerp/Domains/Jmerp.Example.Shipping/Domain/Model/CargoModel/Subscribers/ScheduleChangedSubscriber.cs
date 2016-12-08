@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.Subscribers
 {
-     public class ScheduleChangedSubscriber :
-         ISubscribeSynchronousTo<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent>
-     {
-         private readonly IJobScheduler _jobScheduler;
+    public class ScheduleChangedSubscriber :
+       ISubscribeSynchronousTo<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent>
+    {
+        private readonly IJobScheduler _jobScheduler;
 
-         public ScheduleChangedSubscriber(
-             IJobScheduler jobScheduler)
-         {
-             _jobScheduler = jobScheduler;
-         }
+        public ScheduleChangedSubscriber(
+            IJobScheduler jobScheduler)
+        {
+            _jobScheduler = jobScheduler;
+        }
 
-         public Task HandleAsync(IDomainEvent<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent> domainEvent, CancellationToken cancellationToken)
-         {
-             var job = new VerifyCargosForVoyageJob(
-                 domainEvent.AggregateIdentity);
-             return _jobScheduler.ScheduleNowAsync(job, cancellationToken);
-         }
-     }
+        public Task HandleAsync(IDomainEvent<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent> domainEvent, CancellationToken cancellationToken)
+        {
+            var job = new VerifyCargosForVoyageJob(
+                domainEvent.AggregateIdentity);
+            return _jobScheduler.ScheduleNowAsync(job, cancellationToken);
+        }
+    }
 }

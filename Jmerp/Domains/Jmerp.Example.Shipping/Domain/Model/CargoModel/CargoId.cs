@@ -11,6 +11,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel
     {
         public CargoId(string value) : base(value)
         {
+
         }
     }
 }

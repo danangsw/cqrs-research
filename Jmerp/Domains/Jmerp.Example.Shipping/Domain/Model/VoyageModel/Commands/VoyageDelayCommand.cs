@@ -9,7 +9,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel.Commands
     {
         public VoyageDelayCommand(
             VoyageId aggregateId,
-            TimeSpan delay) 
+            TimeSpan delay)
             : base(aggregateId)
         {
             Delay = delay;

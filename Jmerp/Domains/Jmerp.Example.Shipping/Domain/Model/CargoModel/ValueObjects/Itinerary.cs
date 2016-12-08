@@ -6,24 +6,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using EventFlow.Extensions;
+using Jmerp.Commons.Extension;
 
 namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.ValueObjects
 {
     public class Itinerary : ValueObject
     {
+        public Itinerary()
+        {
+            TransportLegs = Enumerable.Empty<TransportLeg>().ToList();
+        }
+
         public Itinerary(
             IEnumerable<TransportLeg> transportLegs)
         {
             var legsList = (transportLegs ?? Enumerable.Empty<TransportLeg>()).ToList();
 
             if (!legsList.Any()) throw new ArgumentException(nameof(transportLegs));
-
             (new TransportLegsAreConnectedSpecification()).ThrowDomainErrorIfNotStatisfied(legsList);
 
             TransportLegs = legsList;
         }
 
-        public IReadOnlyList<TransportLeg> TransportLegs { get; private set; }
+        public IReadOnlyList<TransportLeg> TransportLegs { get; }
+
         public LocationId DepartureLocation()
         {
             return TransportLegs.First().LoadLocation;
@@ -47,6 +53,36 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.ValueObjects
         protected override IEnumerable<object> GetEqualityComponents()
         {
             return TransportLegs;
+        }
+
+        public Itinerary AddTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = TransportLegs.AddList<TransportLeg, TransportLegId>(transportLeg);
+            return new Itinerary(newListTransportLeg);
+        }
+
+        public Itinerary UpdateTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = TransportLegs.UpdateList<TransportLeg, TransportLegId>(transportLeg);
+            return new Itinerary(newListTransportLeg);
+        }
+
+        public Itinerary DeleteTransportLeg(TransportLeg transportLeg)
+        {
+            var newListTransportLeg = TransportLegs.DeleteFromList<TransportLeg, TransportLegId>(transportLeg);
+
+            if (newListTransportLeg.Count != 0)
+            {
+                return new Itinerary(newListTransportLeg);
+            }
+
+            return new Itinerary();
+
+        }
+
+        public List<TransportLeg> GetTransportLegsNotInCurrentCollectionBasedOnId(Itinerary itinerary)
+        {
+            return TransportLegs.GetDataFromCollectionCompareWithInputBasedOnId<TransportLeg, TransportLegId>(itinerary.TransportLegs);
         }
     }
 }

@@ -66,11 +66,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cargos\CargoReadModel.cs" />
+    <Compile Include="Cargos\QueriesSql\CargoQueries.cs" />
+    <Compile Include="Cargos\QueriesSql\TransportLegQueries.cs" />
+    <Compile Include="Cargos\QueryHandlers\DeleteTransportLegQueryHandler.cs" />
     <Compile Include="Cargos\QueryHandlers\GetCargosDependentOnVoyageQueryHandler.cs" />
     <Compile Include="Cargos\QueryHandlers\GetCargosQueryHandler.cs" />
+    <Compile Include="Cargos\Subscriber\TransportLegDeleteSubscriber.cs" />
+    <Compile Include="Cargos\TransportLegReadModel.cs" />
+    <Compile Include="Locations\LocationReadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueriesConfig.cs" />
-    <Compile Include="ShippingMigrator.cs" />
+    <Compile Include="Voyages\CarrierMovementReadModel.cs" />
+    <Compile Include="Voyages\QueriesSql\CarrierMovementQueries.cs" />
+    <Compile Include="Voyages\QueriesSql\VoyageQueries.cs" />
     <Compile Include="Voyages\QueryHandlers\GetAllVoyagesQueryHandler.cs" />
     <Compile Include="Voyages\QueryHandlers\GetVoyagesQueryHandler.cs" />
     <Compile Include="Voyages\VoyageReadModel.cs" />
@@ -80,13 +88,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Frameworks\Jmerp.Common\Jmerp.Commons.csproj">
+      <Project>{10BB28AC-EED8-40F4-9564-3362C020543A}</Project>
+      <Name>Jmerp.Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jmerp.Example.Shipping\Jmerp.Example.Shipping.csproj">
       <Project>{7a2ddc1c-0128-44c3-bee8-e9211f515201}</Project>
       <Name>Jmerp.Example.Shipping</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Jmerp.Db\Jmerp.Db.csproj">
-      <Project>{0837de29-78b8-4b79-88d3-9f7ea89529aa}</Project>
-      <Name>Jmerp.Db</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

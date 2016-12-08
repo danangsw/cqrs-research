@@ -51,32 +51,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Infrastructure\DbFactory.cs" />
-    <Compile Include="Infrastructure\Disposable.cs" />
-    <Compile Include="Infrastructure\IDbFactory.cs" />
-    <Compile Include="Infrastructure\IReadModelRepository.cs" />
-    <Compile Include="Infrastructure\IUnitOfWork.cs" />
-    <Compile Include="Infrastructure\ReadModelRepositoryBase.cs" />
-    <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="JmerpMigrator.cs" />
     <Compile Include="JmrepContext.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\BaseEntity.cs" />
     <Compile Include="Model\Cargo.cs" />
     <Compile Include="Model\CarrierMovement.cs" />
-    <Compile Include="Model\IReadModelEntity.cs" />
-    <Compile Include="Model\Itinerary.cs" />
-    <Compile Include="Model\Route.cs" />
-    <Compile Include="Model\Schedule.cs" />
+    <Compile Include="Model\Location.cs" />
     <Compile Include="Model\TransportLeg.cs" />
     <Compile Include="Model\Voyage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\CargoRepository.cs" />
-    <Compile Include="Repository\VoyageRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Frameworks\Jmerp.Common\Jmerp.Commons.csproj">
+      <Project>{10BB28AC-EED8-40F4-9564-3362C020543A}</Project>
+      <Name>Jmerp.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,11 +8,9 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel.Events
     public class VoyageCreatedEvent : AggregateEvent<VoyageAggregate, VoyageId>
     {
         public VoyageCreatedEvent(
-            Schedule schedule)
+            )
         {
-            Schedule = schedule;
-        }
 
-        public Schedule Schedule { get; private set; }
+        }
     }
 }

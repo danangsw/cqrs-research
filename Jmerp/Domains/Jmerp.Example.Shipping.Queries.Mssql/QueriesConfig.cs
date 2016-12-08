@@ -1,8 +1,14 @@
 ﻿using EventFlow;
 using EventFlow.Extensions;
 using EventFlow.MsSql.Extensions;
+using Jmerp.Example.Shipping.Domain.Model.CargoModel.Entities;
+using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Entities;
 using Jmerp.Example.Shipping.Queries.Mssql.Cargos;
+using Jmerp.Example.Shipping.Queries.Mssql.Cargos.QueriesSql;
+using Jmerp.Example.Shipping.Queries.Mssql.Cargos.Subscriber;
+using Jmerp.Example.Shipping.Queries.Mssql.Locations;
 using Jmerp.Example.Shipping.Queries.Mssql.Voyages;
+using Jmerp.Example.Shipping.Queries.Mssql.Voyages.QueriesSql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,22 +26,22 @@ namespace Jmerp.Example.Shipping.Queries.Mssql
             this IEventFlowOptions eventFlowOptions)
         {
             return eventFlowOptions
+                .RegisterServices(sr => {
+                    sr.RegisterType(typeof(CarrierMovementLocator));
+                    sr.Register<IVoyageQueries, VoyageQueries>();
+                    sr.Register<ICarrierMovementQueries, CarrierMovementQueries>();
+                    sr.RegisterType(typeof(TransportLegLocator));
+                    sr.Register<ICargoQueries, CargoQueries>();
+                    sr.Register<ITransportLegQueries, TransportLegQueries>();
+                })
                 .AddQueryHandlers(Assembly)
+                .AddSubscribers(typeof(TransportLegDeleteSubscriber))
+                .UseMssqlReadModel<LocationReadModel>()
                 .UseMssqlReadModel<VoyageReadModel>()
-                .UseMssqlReadModel<CargoReadModel>();
+                .UseMssqlReadModel<CarrierMovementReadModel, CarrierMovementLocator>()
+                .UseMssqlReadModel<CargoReadModel>()
+                .UseMssqlReadModel<TransportLegReadModel>()
+                .UseMssqlReadModel<TransportLegReadModel, TransportLegLocator>();
         }
-
-        //public static IEventFlowOptions ConfigureShippingRepository(this IEventFlowOptions eventFlowOptions)
-        //{
-        //    return eventFlowOptions
-        //         .AddDefaults(Assembly)
-        //         .RegisterServices(sr =>
-        //         {
-        //             sr.Register<IDbFactory, DbFactory>();
-        //             sr.Register<IUnitOfWork, UnitOfWork>();
-        //             sr.Register<ICargoRepository, CargoRepository>();
-        //             sr.Register<IVoyageRepository, VoyageRepository>();
-        //         });
-        //}
     }
 }

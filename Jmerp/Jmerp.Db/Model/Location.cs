@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jmerp.Commons.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Jmerp.Db.Model
 {
-    [ComplexType]
-    public class Itinerary
+    [Table("Location")]
+    public class Location : BaseAggregate
     {
-        public virtual ICollection<TransportLeg> TransportLegs { get; set; }
+        public string Name { get; set; }
     }
 }

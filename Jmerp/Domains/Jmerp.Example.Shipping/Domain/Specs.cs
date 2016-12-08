@@ -17,7 +17,7 @@ namespace Jmerp.Example.Shipping.Domain
             {
                 if (obj.IsNew)
                 {
-                    yield return $"Aggregate '{obj.Name}' with ID '{obj.GetIdentity()}' is New.";
+                    yield return $"Aggregate '{obj.Name}' with ID '{obj.GetIdentity()}' is new";
                 }
             }
         }

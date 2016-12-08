@@ -26,7 +26,6 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.Commands
         public override Task ExecuteAsync(CargoAggregate aggregate, CargoSetItineraryCommand command, CancellationToken cancellationToken)
         {
             aggregate.SetItinerary(command.Itinerary);
-
             return Task.FromResult(0);
         }
     }

@@ -101,9 +101,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\ScenarioHelper.cs" />
-    <Compile Include="IntegrationTests\Scenarios.cs" />
-    <Compile Include="IntegrationTests\ScenariosMssql.cs" />
+    <Compile Include="IntegrationTests\IntegrationLocationTest.cs" />
+    <Compile Include="IntegrationTests\IntegrationTest.cs" />
+    <Compile Include="IntegrationTests\IntegrationVoyageTest.cs" />
+    <Compile Include="Locations.cs" />
     <Compile Include="Mocks\Locations.cs" />
     <Compile Include="Mocks\Routes.cs" />
     <Compile Include="Mocks\Voyages.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\RouteSpecificationTest.cs" />
     <Compile Include="UnitTests\Domain\Model\CargoModel\Specifications\TransportLegsAreConnectedSpecificationTests.cs" />
     <Compile Include="UnitTests\ExternalServices\Routing\RoutingServiceTests.cs" />
+    <Compile Include="Voyages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

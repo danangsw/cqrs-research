@@ -3,11 +3,18 @@ using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Jmerp.Commons.Extension;
 
 namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel.ValueObjects
 {
     public class Schedule : ValueObject
     {
+
+        public Schedule()
+        {
+            CarrierMovements = new List<CarrierMovement>();
+        }
+
         public Schedule(
             IEnumerable<CarrierMovement> carrierMovements)
         {
@@ -31,5 +38,21 @@ namespace Jmerp.Example.Shipping.Domain.Model.VoyageModel.ValueObjects
                     m.ArrivalTime + delay));
             return new Schedule(carrierMovements);
         }
+
+
+        public Schedule AddCarrierMovement(CarrierMovement carrierMovement)
+        {
+            var newListCarrierMovement = CarrierMovements.AddList<CarrierMovement, CarrierMovementId>(carrierMovement);
+            return new Schedule(newListCarrierMovement);
+        }
+
+        public Schedule UpdateCarrierMovement(CarrierMovement carrierMovement)
+        {
+            var newListCarrierMovement = CarrierMovements.UpdateList<CarrierMovement, CarrierMovementId>(carrierMovement);
+            return new Schedule(newListCarrierMovement);
+        }
+
+
+
     }
 }

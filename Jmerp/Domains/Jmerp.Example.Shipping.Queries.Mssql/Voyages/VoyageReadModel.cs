@@ -3,65 +3,33 @@ using EventFlow.MsSql.ReadStores;
 using EventFlow.MsSql.ReadStores.Attributes;
 using EventFlow.ReadStores;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
+using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Entities;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Events;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Jmerp.Example.Shipping.Queries.Mssql.Voyages
 {
-    public class VoyageReadModel : IMssqlReadModel,
-        IAmReadModelFor<VoyageAggregate, VoyageId, VoyageCreatedEvent>,
-        IAmReadModelFor<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent>
+    [Table("Voyage")]
+    public class VoyageReadModel : MssqlReadModel,
+         IAmReadModelFor<VoyageAggregate, VoyageId, VoyageCreatedEvent>
     {
-        public string AggregateId
+        public void Apply(IReadModelContext context, IDomainEvent<VoyageAggregate, VoyageId, VoyageCreatedEvent> domainEvent)
         {
-            get; set;
+
         }
 
-        public DateTimeOffset CreateTime
+        public Domain.Model.VoyageModel.Voyage ToVoyage(VoyageId AggregateId, Schedule Schedule)
         {
-            get; set;
-        }
-
-        [MsSqlReadModelIdentityColumn]
-        public VoyageId Id { get; private set; }
-
-        public int LastAggregateSequenceNumber
-        {
-            get; set;
-        }
-
-        public int MsSqlReadModelVersionColumn { get; private set; }
-
-
-        public Schedule Schedule { get; private set; }
-
-        public DateTimeOffset UpdatedTime
-        {
-            get; set;
-        }
-
-        public void Apply(IReadModelContext context, IDomainEvent<VoyageAggregate, VoyageId, VoyageCreatedEvent> e)
-        {
-            Id = e.AggregateIdentity;
-            Schedule = e.AggregateEvent.Schedule;
-            
-        }
-
-        public void Apply(IReadModelContext context, IDomainEvent<VoyageAggregate, VoyageId, VoyageScheduleUpdatedEvent> domainEvent)
-        {
-            Schedule = domainEvent.AggregateEvent.Schedule;
-        }
-
-        public Voyage ToVoyage()
-        {
-            return new Voyage(
-                Id,
-                Schedule);
+            return new Domain.Model.VoyageModel.Voyage(
+               AggregateId,
+               Schedule
+            );
         }
     }
 }

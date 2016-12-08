@@ -16,61 +16,42 @@ using System.Threading.Tasks;
 
 namespace Jmerp.Example.Shipping.Queries.Mssql.Cargos
 {
-    public class CargoReadModel : IMssqlReadModel,
-        IAmReadModelFor<CargoAggregate, CargoId, CargoItinerarySetEvent>,
+    [Table("Cargo")]
+    public class CargoReadModel : MssqlReadModel,
         IAmReadModelFor<CargoAggregate, CargoId, CargoBookedEvent>
     {
+        public string OriginLocationId { get; set; }
+        public string DestinationLocationId { get; set; }
+        public DateTimeOffset DepartureTime { get; set; }
+        public DateTimeOffset ArrivalDeadline { get; set; }
 
-        [MsSqlReadModelIdentityColumn]
-        public CargoId Id { get; private set; }
-
-        public int MsSqlReadModelVersionColumn { get; private set; }
-
-        public HashSet<VoyageId> DependentVoyageIds { get; } = new HashSet<VoyageId>();
-        public Itinerary Itinerary { get; private set; }
-        public Route Route { get; private set; }
-
-        public string AggregateId
-        {
-            get; set;
-        }
-
-        public DateTimeOffset CreateTime
-        {
-            get; set;
-        }
-
-        public DateTimeOffset UpdatedTime
-        {
-            get; set;
-        }
-
-        public int LastAggregateSequenceNumber
-        {
-            get; set;
-        }
 
         public void Apply(IReadModelContext context, IDomainEvent<CargoAggregate, CargoId, CargoBookedEvent> domainEvent)
         {
-            Id = domainEvent.AggregateIdentity;
-            Route = domainEvent.AggregateEvent.Route;
+            OriginLocationId = domainEvent.AggregateEvent.Route.OriginLocationId.Value;
+            DestinationLocationId = domainEvent.AggregateEvent.Route.DestinationLocationId.Value;
+            DepartureTime = domainEvent.AggregateEvent.Route.DepartureTime;
+            ArrivalDeadline = domainEvent.AggregateEvent.Route.ArrivalDeadline;
+
         }
 
-        public void Apply(IReadModelContext context, IDomainEvent<CargoAggregate, CargoId, CargoItinerarySetEvent> domainEvent)
+
+        public Route ToRoute()
         {
-            Itinerary = domainEvent.AggregateEvent.Itinerary;
-            foreach (var transportLeg in domainEvent.AggregateEvent.Itinerary.TransportLegs)
-            {
-                DependentVoyageIds.Add(transportLeg.VoyageId);
-            }
+            return new Route(new Domain.Model.LocationModel.LocationId(OriginLocationId),
+                            new Domain.Model.LocationModel.LocationId(DestinationLocationId),
+                            DepartureTime,
+                            ArrivalDeadline);
         }
 
-        public Cargo ToCargo()
+        public Domain.Model.CargoModel.Cargo ToCargo(CargoId AggregateId, Route Route, Itinerary Itinerary)
         {
-            return new Cargo(
-                Id,
-                Route,
-                Itinerary);
+            return new Domain.Model.CargoModel.Cargo(
+               AggregateId,
+               Route,
+               Itinerary
+            );
         }
+
     }
 }

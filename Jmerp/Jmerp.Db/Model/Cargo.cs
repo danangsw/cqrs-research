@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jmerp.Commons.Database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,18 +8,12 @@ using System.Threading.Tasks;
 
 namespace Jmerp.Db.Model
 {
-    public class Cargo : BaseEntity, IReadModelEntity
+    [Table("Cargo")]
+    public class Cargo : BaseAggregate
     {
-        public string Id { get; set; }
-        public long Voyage_Index { get; set; }
-
-        public Itinerary Itinerary { get; set; }
-
-        public Route Route { get; set; }
-
-        [ForeignKey("Voyage_Index")]
-        public Voyage Voyage { get; set; }
-
-        public int? MsSqlReadModelVersionColumn { get; set; }
+        public string OriginLocationId { get; set; }
+        public string DestinationLocationId { get; set; }
+        public DateTimeOffset DepartureTime { get; set; }
+        public DateTimeOffset ArrivalDeadline { get; set; }
     }
 }

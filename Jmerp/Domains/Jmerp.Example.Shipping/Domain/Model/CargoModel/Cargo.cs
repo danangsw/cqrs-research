@@ -10,11 +10,11 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel
         public Cargo(
             CargoId id,
             Route route,
-            Itinerary itenary) 
+            Itinerary itinerary)
             : base(id)
         {
             Route = route;
-            Itinerary = itenary;
+            Itinerary = itinerary;
         }
 
         public Route Route { get; }

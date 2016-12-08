@@ -14,6 +14,7 @@ namespace Jmerp.Example.Shipping.Domain.Model.CargoModel.Jobs
     public class VerifyCargosForVoyageJob : IJob
     {
         public VoyageId VoyageId { get; }
+
         public VerifyCargosForVoyageJob(
             VoyageId voyageId)
         {

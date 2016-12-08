@@ -1,19 +1,16 @@
-﻿using System;
+﻿using Jmerp.Commons.Database;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Jmerp.Db.Model
 {
-    public class Voyage : BaseEntity, IReadModelEntity
+    [Table("Voyage")]
+    public class Voyage : BaseAggregate
     {
-        
-        public string Id { get; set; }
-
-        public int? MsSqlReadModelVersionColumn { get; set; }
-
-        public Schedule Schedule { get; set; }
 
     }
 }
