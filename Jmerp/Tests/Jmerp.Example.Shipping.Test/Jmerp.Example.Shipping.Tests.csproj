@@ -119,10 +119,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Domains\Jmerp.Example.Shipping.Queries.InMemory\Jmerp.Example.Shipping.Queries.InMemory.csproj">
-      <Project>{f5451bea-4445-4135-ab3e-ec68ebfe6ada}</Project>
-      <Name>Jmerp.Example.Shipping.Queries.InMemory</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Domains\Jmerp.Example.Shipping.Queries.Mssql\Jmerp.Example.Shipping.Queries.Mssql.csproj">
       <Project>{9500b65d-1a89-43de-a666-cc634abcdc69}</Project>
       <Name>Jmerp.Example.Shipping.Queries.Mssql</Name>

@@ -51,7 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\JmerpMigrator.cs" />
     <Compile Include="JmrepContext.cs" />
+    <Compile Include="Migrations\201612080919281_initial.cs" />
+    <Compile Include="Migrations\201612080919281_initial.Designer.cs">
+      <DependentUpon>201612080919281_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Cargo.cs" />
     <Compile Include="Model\CarrierMovement.cs" />
     <Compile Include="Model\Location.cs" />
@@ -69,8 +75,11 @@
       <Name>Jmerp.Commons</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <EmbeddedResource Include="Migrations\201612080919281_initial.resx">
+      <DependentUpon>201612080919281_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

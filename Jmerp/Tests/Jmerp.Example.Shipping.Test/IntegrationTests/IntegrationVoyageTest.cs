@@ -7,6 +7,7 @@ using EventFlow.MsSql;
 using EventFlow.MsSql.EventStores;
 using EventFlow.MsSql.Extensions;
 using EventFlow.TestHelpers;
+using Jmerp.Db.Infrastructure;
 using Jmerp.Example.Shipping.Application;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel;
 using Jmerp.Example.Shipping.Domain.Model.VoyageModel.Commands;
@@ -40,7 +41,7 @@ namespace Jmerp.Example.Shipping.Tests.IntegrationTests
                 .ConfigureShippingQueriesMssql()
                 .CreateResolver();
 
-            //ExampleMigrator.Migrate();
+            JmerpMigrator.Migrate();
 
             var msSqlDatabaseMigrator = _resolver.Resolve<IMsSqlDatabaseMigrator>();
             EventFlowEventStoresMsSql.MigrateDatabase(msSqlDatabaseMigrator);
